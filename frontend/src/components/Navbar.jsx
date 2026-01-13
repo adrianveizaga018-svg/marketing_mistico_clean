@@ -23,33 +23,34 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-[#0f1419]/95 backdrop-blur-lg border-b border-[#c9a961]/20 shadow-2xl' : 'bg-transparent'
+      isScrolled ? 'bg-black/95 backdrop-blur-lg shadow-[0_4px_30px_rgba(201,169,97,0.15)]' : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-6 py-3">
+      <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
             <img 
               src="/logo_oficial.png" 
               alt="Marketing Místico" 
-              className="h-8 md:h-10 transition-all transform hover:scale-105"
+              className="h-10 md:h-14 transition-all transform hover:scale-105"
             />
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection('servicios')} className="text-[#c9a961] hover:text-white transition-colors">
-              Servicios
-            </button>
-            <button onClick={() => scrollToSection('videos')} className="text-[#c9a961] hover:text-white transition-colors">
-              Trabajos
-            </button>
-            <button onClick={() => scrollToSection('proceso')} className="text-[#c9a961] hover:text-white transition-colors">
-              Proceso
-            </button>
+          <div className="hidden md:flex items-center gap-8 mt-1">
+            {['Servicios', 'Trabajos', 'Proceso'].map((item) => (
+              <button 
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())} 
+                className="relative text-[#c9a961] hover:text-white transition-colors group py-2 text-xs uppercase tracking-[0.2em] font-bold"
+              >
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c9a961] transition-all duration-300 group-hover:w-full"></span>
+              </button>
+            ))}
             <button 
               onClick={() => scrollToSection('contacto')}
-              className="bg-[#c9a961] hover:bg-[#d4af37] text-[#1a1f2e] font-semibold px-6 py-2 rounded-full transition-all hover:scale-105"
+              className="bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs uppercase tracking-widest px-8 py-3 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_25px_rgba(201,169,97,0.4)]"
             >
               Contactar
             </button>

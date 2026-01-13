@@ -11,47 +11,55 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative flex items-center overflow-hidden mt-20" style={{ height: 'calc(100vh - 80px)' }}>
-      {/* Video Background */}
+    <section id="hero" className="relative flex items-center overflow-hidden min-h-screen bg-black">
+      {/* Video Background - Refined as decorative element */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-y-0 right-0 w-full md:w-[95%] h-full object-cover z-0 opacity-90 transition-all duration-1000 scale-[0.85] md:scale-[0.82] lg:scale-[0.85] origin-right pointer-events-none"
+        style={{ objectPosition: '70% center' }}
       >
         <source src="/video_header.mp4" type="video/mp4" />
       </video>
       
-      {/* Gradient Overlay - creates depth and improves readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/40 z-[1]"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0f1419] via-transparent to-[#0f1419]/30 z-[1]"></div>
+      {/* Gradient Overlay - integrates video with background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent z-[1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-[1]"></div>
       
-      {/* Watermark cover - covers corners where watermarks usually appear */}
-      <div className="absolute bottom-0 right-0 w-48 h-24 bg-gradient-to-tl from-[#0f1419] via-[#0f1419]/80 to-transparent z-[2]"></div>
-      <div className="absolute top-0 right-0 w-48 h-24 bg-gradient-to-bl from-[#0f1419] via-[#0f1419]/60 to-transparent z-[2]"></div>
-
-      {/* Subtle glow effects */}
+      {/* Watermark cover - perfectly integrated with the black background */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-[#7c3aed]/20 rounded-full filter blur-[150px]"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#c9a961]/15 rounded-full filter blur-[120px]"></div>
+        <div className="absolute bottom-[8%] right-[2%] w-[40%] h-[25%] bg-black filter blur-[60px] opacity-95"></div>
+        <div className="absolute bottom-0 right-0 w-[50%] h-[15%] bg-gradient-to-t from-black to-transparent"></div>
+        <div className="absolute inset-y-0 right-0 w-[10%] bg-gradient-to-l from-black to-transparent"></div>
+      </div>
+
+      {/* Cinematic lighting effects */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        {/* Main ambient glow */}
+        <div className="absolute top-1/4 left-[-10%] w-[60%] h-[60%] bg-[#7c3aed]/10 rounded-full filter blur-[120px] animate-ambient"></div>
+        {/* Cyber Cyan accent (matches robot tech) */}
+        <div className="absolute top-1/2 right-[20%] w-[40%] h-[40%] bg-[#00f2ff]/10 rounded-full filter blur-[150px] animate-ambient" style={{ animationDelay: '-5s' }}></div>
+        {/* Warm Gold accent */}
+        <div className="absolute bottom-1/4 left-1/4 w-[35%] h-[35%] bg-[#c9a961]/15 rounded-full filter blur-[100px] animate-ambient" style={{ animationDelay: '-10s' }}></div>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 py-12">
+      <div className="container mx-auto px-6 md:pl-20 lg:pl-32 relative z-10 pt-20 pb-12">
         <div className="max-w-2xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-2.5 rounded-full mb-8 animate-fade-in">
-            <Sparkles size={16} className="text-[#c9a961]" />
-            <span className="text-white/90 text-sm font-medium tracking-wide">Agencia Premium de Marketing Digital</span>
+          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full mb-8 animate-fade-in shadow-[0_0_20px_rgba(201,169,97,0.1)]">
+            <Sparkles size={16} className="text-[#c9a961] animate-pulse" />
+            <span className="text-white/80 text-[10px] uppercase tracking-[0.2em] font-black">Agencia Premium de Marketing Digital</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
-            <span className="text-white drop-shadow-lg" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-8 tracking-tighter">
+            <span className="text-white drop-shadow-2xl">
               {heroData.title}
             </span>
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#c9a961] via-[#e8d5a3] to-[#c9a961] drop-shadow-lg">
+            <span className="block mt-4 text-transparent bg-clip-text bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] drop-shadow-[0_0_15px_rgba(201,169,97,0.3)]">
               con Estrategia
             </span>
           </h1>
@@ -70,10 +78,10 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <button 
               onClick={() => scrollToSection('contacto')}
-              className="group bg-gradient-to-r from-[#c9a961] to-[#d4af37] hover:from-[#d4af37] hover:to-[#e8c547] text-[#0f1419] font-bold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#c9a961]/40 flex items-center justify-center gap-2"
+              className="group bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] text-black font-black text-sm uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] hover:shadow-[0_0_50px_rgba(201,169,97,0.5)] flex items-center justify-center gap-3"
             >
               {heroData.ctaPrimary}
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} />
             </button>
             <button 
               onClick={() => scrollToSection('videos')}
@@ -84,32 +92,30 @@ const Hero = () => {
             </button>
           </div>
 
-          {/* Stats Card */}
-          <div className="flex flex-wrap items-center gap-8 bg-white/5 backdrop-blur-md border border-white/10 px-8 py-5 rounded-2xl w-fit">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-[#c9a961]">+150</div>
-              <div className="text-sm text-white/60 mt-1">Proyectos</div>
+          {/* Stats Card - Upgraded Crystal Effect */}
+          <div className="flex flex-wrap items-center gap-8 bg-white/[0.03] backdrop-blur-xl border border-white/10 px-8 py-6 rounded-3xl w-fit shadow-2xl relative overflow-hidden group hover:border-[#c9a961]/30 transition-all duration-500 animate-float">
+            {/* Subtle glow inside card */}
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-[#c9a961]/10 rounded-full blur-3xl group-hover:bg-[#c9a961]/20 transition-all duration-500"></div>
+            
+            <div className="text-center relative z-10">
+              <div className="text-3xl md:text-4xl font-black text-[#c9a961] tracking-tight">+150</div>
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 mt-1 font-bold">Proyectos</div>
             </div>
-            <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-[#c9a961]">98%</div>
-              <div className="text-sm text-white/60 mt-1">Satisfacción</div>
+            <div className="w-px h-10 bg-white/10 hidden sm:block"></div>
+            <div className="text-center relative z-10">
+              <div className="text-3xl md:text-4xl font-black text-[#c9a961] tracking-tight">98%</div>
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 mt-1 font-bold">Satisfacción</div>
             </div>
-            <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-[#c9a961]">5X</div>
-              <div className="text-sm text-white/60 mt-1">ROI Promedio</div>
+            <div className="w-px h-10 bg-white/10 hidden sm:block"></div>
+            <div className="text-center relative z-10">
+              <div className="text-3xl md:text-4xl font-black text-[#c9a961] tracking-tight">5X</div>
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/50 mt-1 font-bold">ROI Promedio</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-        <div className="w-7 h-11 border-2 border-white/40 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-[#c9a961] rounded-full animate-pulse"></div>
-        </div>
-      </div>
+
     </section>
   );
 };

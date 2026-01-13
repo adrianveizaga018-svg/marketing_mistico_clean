@@ -6,13 +6,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0d0f14] border-t border-[#c9a961]/20">
+    <footer className="bg-black border-t border-[#c9a961]/20">
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Logo & Tagline */}
           <div>
             <img 
-              src="https://customer-assets.emergentagent.com/job_32f5d8f9-4e80-40fc-9c34-5b1dae9795e6/artifacts/e497axof_Marketing%20mistico_Mesa%20de%20trabajo%201.png" 
+              src="/logo_oficial.png" 
               alt="Marketing Místico" 
               className="h-12 mb-4"
             />

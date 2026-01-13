@@ -22,30 +22,43 @@ export const autorityData = {
 export const videosData = [
   {
     id: 1,
-    title: "Campaña para E-commerce de Moda",
-    description: "Incremento del 340% en ventas online",
-    category: "Facebook Ads",
-    thumbnail: "https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    results: "+340% ventas, -45% costo por adquisición"
+    title: "Pasión Criolla - Estrategia TikTok",
+    description: "Campaña de video vertical diseñada para captar atención inmediata y generar deseo gastronómico.",
+    category: "TikTok Ads",
+    thumbnail: "/thumb_pasion_1.png",
+    videoUrl: "https://player.vimeo.com/video/1154010752?badge=0&autopause=0&player_id=0&app_id=58479",
+    results: "+200% interacción en redes",
+    aspect: "vertical"
   },
   {
     id: 2,
-    title: "Lanzamiento de Producto Tech",
-    description: "500K impresiones en 30 días",
-    category: "TikTok Ads",
-    thumbnail: "https://images.pexels.com/photos/66134/pexels-photo-66134.jpeg",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    results: "500K impresiones, 15K leads generados"
+    title: "CENEFCO - Cursos Profesionales",
+    description: "Producción audiovisual de alta calidad para plataformas de educación y formación empresarial.",
+    category: "Contenido Educativo",
+    thumbnail: "/thumb_cenefco.png",
+    videoUrl: "https://player.vimeo.com/video/1154013061?badge=0&autopause=0&player_id=0&app_id=58479",
+    results: "Marca posicionada como autoridad",
+    aspect: "horizontal"
   },
   {
     id: 3,
-    title: "Marca Personal - Coach",
-    description: "Posicionamiento como autoridad",
-    category: "Video + Ads",
-    thumbnail: "https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    results: "2M alcance orgánico, +80% engagement"
+    title: "Pasión Criolla - Spot Publicitario",
+    description: "Highlight de platillos estrella con edición rítmica para maximizar conversiones en pauta.",
+    category: "Spot Gastronómico",
+    thumbnail: "/thumb_pasion_2.png",
+    videoUrl: "https://player.vimeo.com/video/1154011401?badge=0&autopause=0&player_id=0&app_id=58479",
+    results: "Incremento directo en pedidos",
+    aspect: "vertical"
+  },
+  {
+    id: 4,
+    title: "Colegio de Abogados de La Paz",
+    description: "Desarrollo de plataforma institucional completa y sistema de gestión para colegiados (ICALP).",
+    category: "Plataforma Web",
+    thumbnail: "/thumb_icalp.png",
+    externalUrl: "https://icalp.org.bo",
+    results: "Digitalización institucional completa",
+    aspect: "horizontal"
   }
 ];
 
