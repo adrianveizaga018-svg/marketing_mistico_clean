@@ -1,6 +1,7 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import LeadsDashboard from "./pages/LeadsDashboard";
 import { Toaster } from "./components/ui/sonner";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/gestion-leads" element={<LeadsDashboard />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
