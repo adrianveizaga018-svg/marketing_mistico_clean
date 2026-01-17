@@ -226,35 +226,27 @@ export const formFields = [
 
 export const footerData = {
   tagline: "Transformando negocios con marketing y tecnología",
-  email: "hola@marketingmistico.com",
-  whatsapp: "+52 123 456 7890",
+  email: "marketing.mistico.oficial@gmail.com",
+  whatsapp: "+591 75938402",
   social: [
-    { name: "Facebook", url: "#" },
-    { name: "Instagram", url: "#" },
-    { name: "TikTok", url: "#" },
-    { name: "LinkedIn", url: "#" }
+    { name: "Facebook", url: "https://www.facebook.com/share/1BuHy9EyJe/" },
+    { name: "Instagram", url: "https://www.instagram.com/marketing_mistico_/" },
+    { name: "TikTok", url: "https://www.tiktok.com/@marketing.mistico.oficia?_r=1&_t=ZM-938QYdamS9E" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/marketing-mistico" }
   ]
 };
 
 export const testimonialsData = [
   {
     id: 1,
-    name: "Dr. Raúl Jiménez",
-    role: "Presidente - ICALP",
-    company: "Colegio de Abogados de La Paz",
-    content: "La digitalización de nuestra institución marcó un antes y un después. Marketing Místico desarrolló una plataforma robusta que ha facilitado la vida de miles de colegiados.",
-    image: "/thumb_icalp.webp"
+    name: "Lic. Carlos Ruiz",
+    role: "Director General",
+    company: "Ares",
+    content: "La estrategia de rebranding digital fue impecable. Lograron capturar la esencia de nuestra fuerza y proyectarla al mercado con una elegancia única.",
+    image: "/post3.webp"
   },
   {
     id: 2,
-    name: "Ing. Marco Pérez",
-    role: "Director de Operaciones",
-    company: "CENEFCO",
-    content: "La calidad audiovisual de los cursos producidos superó nuestras expectativas. Lograron transmitir profesionalismo y autoridad en cada lección.",
-    image: "/thumb_cenefco.webp"
-  },
-  {
-    id: 3,
     name: "Lic. Sandra Vargas",
     role: "Junta Directiva",
     company: "Colegio de Auditores",
@@ -262,25 +254,170 @@ export const testimonialsData = [
     image: "/logo_oficial.webp"
   },
   {
+    id: 3,
+    name: "Elena Torres",
+    role: "CEO",
+    company: "Tech Vision",
+    content: "El lanzamiento de CyberGlow rompió todos nuestros récords de ventas. La campaña de Social Ads fue simplemente perfecta.",
+    image: "/post1.webp"
+  },
+  {
     id: 4,
-    name: "Chef Luis Morales",
-    role: "Propietario",
-    company: "Pasión Criolla",
-    content: "Nuestras ventas en TikTok se dispararon. Entienden perfectamente cómo hacer que la comida no solo se vea bien, sino que se venda sola.",
-    image: "/thumb_pasion_1.webp"
+    name: "Marcus Weber",
+    role: "Brand Manager",
+    company: "Chronos",
+    content: "Necesitábamos lujo y precisión, y Marketing Místico nos dio exactamente eso. El diseño de producto elevó nuestra percepción de marca.",
+    image: "/post2.webp"
   }
 ];
 
 export const graphicsData = [
-  { id: 1, title: "Lanzamiento CyberGlow", client: "Tech Vision", image: "/post1.webp", category: "Social Ads" },
-  { id: 2, title: "Elite Luxury Watch", client: "Chronos", image: "/post2.webp", category: "Product Design" },
-  { id: 3, title: "Minimalist Real Estate", client: "Estate One", image: "/post3.webp", category: "Branding" },
-  { id: 4, title: "Gourmet Experience", client: "L'Essence", image: "/post4.webp", category: "Motion Graphic" },
-  { id: 5, title: "Future Beats Event", client: "Nebula", image: "/post5.webp", category: "Event Ad" },
-  { id: 6, title: "Eco-Friendly Branding", client: "Gaia", image: "/post6.webp", category: "Graphic Design" },
-  { id: 7, title: "Modern Portfolio", client: "Místico Agency", image: "/post7.webp", category: "Social Media" },
-  { id: 8, title: "Viral Conversion Ad", client: "Growth X", image: "/post8.webp", category: "Performance Ads" },
-  { id: 9, title: "Abstract Gold Flow", client: "Art Station", image: "/post9.webp", category: "3D Art" },
-  { id: 10, title: "Premium Webinar", client: "EduPulse", image: "/post10.webp", category: "Marketing" },
-  { id: 11, title: "Dark Aesthetic Sale", client: "Mystic Store", image: "/post11.webp", category: "e-Commerce" }
+  { id: 1, title: "Curso Magistral en Derecho Laboral", client: "CENEFCO", image: "/post1.webp", category: "Educación Legal" },
+  { id: 2, title: "Capacitación al Alcance de un Clic", client: "Focus Group", image: "/post2.webp", category: "App Educativa" },
+  { id: 3, title: "Divorcio y Asistencia Familiar", client: "Quorum", image: "/post3.webp", category: "Curso Legal" },
+  { id: 4, title: "Promoción de Septiembre - 5% OFF", client: "ARES", image: "/post4.webp", category: "Social Ads" },
+  { id: 5, title: "PVC: Solución para Ventanas Eficientes", client: "ARES", image: "/post5.webp", category: "Product Design" },
+  { id: 6, title: "Taller de Actuación e Interpretación", client: "Destaca Academia", image: "/post6.webp", category: "Educación Artística" },
+  { id: 7, title: "Casting: Actores y Actrices", client: "Monocroma", image: "/post7.webp", category: "Event Ad" },
+  { id: 8, title: "Día del Cine Boliviano", client: "Monocroma", image: "/post8.webp", category: "Social Media" },
+  { id: 9, title: "Curso de Derecho Propietario", client: "Lex Legal", image: "/post9.webp", category: "Educación Legal" },
+  { id: 10, title: "Felicidades Bolivia", client: "CENEFCO", image: "/post10.webp", category: "Branding" },
+  { id: 11, title: "Feliz Día del Estudiante", client: "Legal Praxis", image: "/post11.webp", category: "Social Media" }
+];
+
+export const portfolioDetails = {
+  1: {
+    problem: "CENEFCO necesitaba promocionar su curso magistral especializado de manera efectiva en redes sociales.",
+    solution: "Creamos un diseño publicitario impactante destacando a los docentes expertos, certificación avalada y acceso a biblioteca digital.",
+    results: [
+      { label: "Inscripciones", value: "+250%", icon: "Users" },
+      { label: "Engagement", value: "+180%", icon: "Heart" },
+      { label: "Alcance", value: "45K+", icon: "Eye" }
+    ]
+  },
+  2: {
+    problem: "Focus Group requería promocionar su app educativa y aumentar descargas desde Play Store.",
+    solution: "Diseñamos una campaña visual enfocada en los beneficios clave: cliente VIP, biblioteca digital y certificación de cursos.",
+    results: [
+      { label: "Descargas", value: "+320%", icon: "Download" },
+      { label: "Rating App", value: "4.8★", icon: "Star" },
+      { label: "Usuarios Activos", value: "12K+", icon: "Users" }
+    ]
+  },
+  3: {
+    problem: "Quorum y Focus Group necesitaban llenar plazas para su curso especializado de derecho familiar.",
+    solution: "Desarrollamos material gráfico profesional destacando a la docente especialista y el inicio inmediato del programa.",
+    results: [
+      { label: "Cupos Llenos", value: "100%", icon: "CheckCircle" },
+      { label: "Lista de Espera", value: "85+", icon: "Clock" },
+      { label: "Conversión", value: "+65%", icon: "TrendingUp" }
+    ]
+  },
+  4: {
+    problem: "ARES requería impulsar ventas durante el mes de septiembre con una promoción atractiva.",
+    solution: "Creamos una campaña visual destacando el descuento del 5% con imágenes de productos y diseño moderno.",
+    results: [
+      { label: "Ventas", value: "+145%", icon: "ShoppingCart" },
+      { label: "Clics", value: "8.5K", icon: "MousePointer" },
+      { label: "ROI", value: "6.2X", icon: "DollarSign" }
+    ]
+  },
+  5: {
+    problem: "ARES necesitaba posicionar su línea de ventanas de PVC destacando beneficios técnicos de manera visual.",
+    solution: "Diseñamos infografía profesional con iconos personalizados mostrando durabilidad, eficiencia energética y otros beneficios clave.",
+    results: [
+      { label: "Consultas", value: "+280%", icon: "MessageSquare" },
+      { label: "Cotizaciones", value: "+195%", icon: "FileText" },
+      { label: "Cierre Ventas", value: "+87%", icon: "CheckCircle" }
+    ]
+  },
+  6: {
+    problem: "Destaca Academia necesitaba llenar cupos para su taller práctico de actuación con urgencia.",
+    solution: "Creamos diseño cinematográfico con elementos visuales de cine y TV, destacando modalidad presencial y certificación física.",
+    results: [
+      { label: "Inscripciones", value: "Cupos Completos", icon: "Users" },
+      { label: "Engagement", value: "+220%", icon: "Heart" },
+      { label: "Shares", value: "1.2K", icon: "Share2" }
+    ]
+  },
+  7: {
+    problem: "Monocroma Producción requería convocar talento para sus producciones audiovisuales de manera masiva.",
+    solution: "Diseñamos anuncio de casting con estética cinematográfica profesional, incluidos detalles de fecha, hora y dirección exacta.",
+    results: [
+      { label: "Asistentes", value: "300+", icon: "Users" },
+      { label: "Alcance", value: "52K", icon: "Eye" },
+      { label: "Interacción", value: "+310%", icon: "MessageCircle" }
+    ]
+  },
+  8: {
+    problem: "Monocroma necesitaba generar expectativa para el Día del Cine Boliviano con una pieza visual memorable.",
+    solution: "Creamos diseño inspirador con elementos cinematográficos clásicos y mensaje patriótico para la fecha especial.",
+    results: [
+      { label: "Alcance", value: "78K", icon: "Eye" },
+      { label: "Compartido", value: "2.1K", icon: "Share2" },
+      { label: "Engagement", value: "+425%", icon: "Heart" }
+    ]
+  },
+  9: {
+    problem: "Lex Legal y Focus Group requerían posicionar su curso de especialización en derecho propietario.",
+    solution: "Diseñamos pieza visual profesional con elementos 3D (casa, gavel) y destacando a la docente especialista con fechas claras.",
+    results: [
+      { label: "Inscripciones", value: "+215%", icon: "Users" },
+      { label: "Leads Calificados", value: "180+", icon: "Target" },
+      { label: "Tasa Conversión", value: "42%", icon: "TrendingUp" }
+    ]
+  },
+  10: {
+    problem: "CENEFCO quería crear contenido emotivo para celebrar el aniversario de Bolivia en redes sociales.",
+    solution: "Diseñamos pieza de branding con collage de rostros bolivianos celebrando la diversidad cultural del país.",
+    results: [
+      { label: "Alcance Orgánico", value: "125K", icon: "Eye" },
+      { label: "Engagement", value: "+550%", icon: "Heart" },
+      { label: "Brand Awareness", value: "+89%", icon: "TrendingUp" }
+    ]
+  },
+  11: {
+    problem: "Legal Praxis necesitaba generar conexión emocional con estudiantes de derecho en su día especial.",
+    solution: "Creamos diseño aspiracional mostrando estudiantes universitarios felices con mensaje inspirador para celebrar su día.",
+    results: [
+      { label: "Alcance", value: "95K", icon: "Eye" },
+      { label: "Compartido", value: "3.8K", icon: "Share2" },
+      { label: "Nuevos Seguidores", value: "+1.2K", icon: "UserPlus" }
+    ]
+  }
+};
+
+export const faqData = [
+  {
+    question: "¿Cuánto tiempo toma ver resultados?",
+    answer: "Los primeros resultados suelen verse entre 7-14 días después del lanzamiento de las campañas. Sin embargo, la optimización completa y resultados consistentes se logran generalmente entre 30-60 días, cuando ya tenemos suficientes datos para ajustar la estrategia."
+  },
+  {
+    question: "¿Cuánto debo invertir en publicidad digital?",
+    answer: "La inversión mínima recomendada es de $300-500 USD/mes para campañas efectivas en Meta Ads. Esto permite generar suficiente data para optimizar. Para campañas más agresivas con múltiples plataformas (Facebook, Instagram, TikTok), recomendamos presupuestos desde $1,000 USD/mes."
+  },
+  {
+    question: "¿Qué incluyen sus servicios de gestión de campañas?",
+    answer: "Incluimos: estrategia completa, creación de anuncios, diseño de creatividades, configuración técnica, administración de presupuesto, optimización diaria, reportes semanales con métricas clave (CPM, CTR, CPA, ROAS), y reuniones mensuales de análisis y ajuste de estrategia."
+  },
+  {
+    question: "¿Trabajan con negocios de cualquier industria?",
+    answer: "Sí, trabajamos con todo tipo de negocios: restaurantes, educación, servicios profesionales, e-commerce, inmobiliarias, salud y bienestar, entre otros. Nuestra experiencia abarca más de 15 industrias diferentes. Adaptamos la estrategia a las particularidades de cada sector."
+  },
+  {
+    question: "¿Ofrecen garantía de resultados?",
+    answer: "Si bien no podemos garantizar resultados específicos (dependen de muchas variables como producto, mercado, competencia), sí garantizamos trabajo profesional con mejores prácticas, optimización constante y transparencia total. El 98% de nuestros clientes renuevan porque ven resultados tangibles."
+  },
+  {
+    question: "¿Necesito tener redes sociales activas para empezar?",
+    answer: "No necesariamente. Si no tienes presencia en redes, podemos crear y configurar tus perfiles desde cero como parte del servicio. Si ya tienes redes, optimizaremos lo existente. Lo importante es tener un objetivo claro de negocio."
+  },
+  {
+    question: "¿Cuánto tiempo de contrato mínimo requieren?",
+    answer: "Recomendamos mínimo 3 meses para ver resultados significativos y permitir la optimización completa de las campañas. Sin embargo, trabajamos mes a mes sin contratos de permanencia forzosa. Creemos en ganar tu confianza con resultados, no con ataduras contractuales."
+  },
+  {
+    question: "¿Qué pasa si no estoy satisfecho con el servicio?",
+    answer: "Trabajamos con total transparencia. Si no estás satisfecho, puedes cancelar el servicio al finalizar el mes en curso sin penalidades. Además, si en los primeros 30 días no ves progreso, te ayudamos a ajustar la estrategia completamente sin costo adicional."
+  }
 ];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award } from 'lucide-react';
 import { autorityData } from '../data/mockData';
+import AnimatedCounter from './AnimatedCounter';
 
 const Authority = () => {
   return (
@@ -17,7 +18,7 @@ const Authority = () => {
               className="text-center group"
             >
               <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-[#c9a961] to-[#d4af37] mb-3 tracking-tighter transition-transform duration-500 group-hover:scale-110">
-                {stat.number}
+                <AnimatedCounter value={stat.number} duration={2.5} />
               </div>
               <div className="text-white/40 text-xs md:text-sm uppercase tracking-[0.2em] font-bold">{stat.label}</div>
             </div>

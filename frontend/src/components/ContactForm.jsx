@@ -3,6 +3,7 @@ import { Send, CheckCircle } from 'lucide-react';
 import { formFields, testimonialsData } from '../data/mockData';
 import { useToast } from '../hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import metaPixel from '../lib/metaPixel';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -31,38 +32,40 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // Send data to our FastAPI backend
-      const response = await fetch(`http://${window.location.hostname}:8000/api/leads`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    // Track Lead on Meta Pixel
+    metaPixel.trackLead();
 
-      if (!response.ok) throw new Error('Servidor no respondió correctamente');
+    // 1. Fire-and-forget backend save (Non-blocking)
+    fetch(`http://${window.location.hostname}:8000/api/leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    }).then(response => {
+        if (response.ok) console.log("Lead saved to specialized DB");
+    }).catch(error => {
+        console.warn('Backend connection issue (Non-critical):', error);
+    });
 
-      toast({
-        title: "¡Datos Registrados!",
-        description: "Guardamos tu info. Ahora elige tu horario.",
-      });
-      setStep(2);
-    } catch (error) {
-      console.warn('Backend offline o error:', error);
-      // FALLBACK: Proceed anyway for testing/UX purposes if backend is down
-      toast({
-        title: "Aviso de Conectividad",
-        description: "Continuando a la agenda (Modo de prueba activo).",
-      });
-      setStep(2);
-    } finally {
+    // 2. Simulate "Processing" visualization (1.2s fixed)
+    setTimeout(() => {
       setIsSubmitting(false);
-    }
+      setStep(2);
+      toast({
+        title: "¡Datos Procesados!",
+        description: "Accediendo a la agenda en tiempo real...",
+      });
+    }, 1200);
+  };
+
+  const handleConfirmBooking = () => {
+    metaPixel.trackSchedule();
+    setStep(3);
   };
 
   return (
@@ -116,7 +119,7 @@ const ContactForm = () => {
               </div>
 
               {/* Testimonial - Glass Card (Visible only in step 1 or compact) */}
-              <div className="hidden md:block h-[240px] relative"> {/* Fixed height container */}
+              <div className="hidden md:block h-[240px] relative">
                 <AnimatePresence mode='wait'>
                   <motion.div 
                     key={currentTestimonial}
@@ -129,11 +132,9 @@ const ContactForm = () => {
                     <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#c9a961]/5 rounded-full blur-2xl"></div>
                     <div className="flex items-center gap-4 mb-5 relative z-10">
                       <div className="w-14 h-14 rounded-full p-[2px] bg-gradient-to-br from-[#c9a961] to-[#d4af37]">
-                        <img 
-                           src={testimonialsData[currentTestimonial].image} 
-                           alt={testimonialsData[currentTestimonial].name}
-                           className="w-full h-full rounded-full object-cover border-2 border-black"
-                         />
+                        <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                          <CheckCircle className="text-[#c9a961]" size={24} />
+                        </div>
                       </div>
                       <div>
                         <div className="font-black text-white text-lg">{testimonialsData[currentTestimonial].name}</div>
@@ -169,9 +170,9 @@ const ContactForm = () => {
                           required={field.required}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#c9a961]/50 focus:ring-4 focus:ring-[#c9a961]/10 transition-all appearance-none cursor-pointer font-medium"
                         >
-                          <option value="" className="bg-black">Selecciona un servicio</option>
+                          <option value="" className="bg-black text-white/30">Selecciona un servicio</option>
                           {field.options.map((option) => (
-                            <option key={option} value={option} className="bg-black">{option}</option>
+                            <option key={option} value={option} className="bg-black text-white">{option}</option>
                           ))}
                         </select>
                       ) : (
@@ -181,7 +182,6 @@ const ContactForm = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           required={field.required}
-                          placeholder={field.label}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/10 focus:outline-none focus:border-[#c9a961]/50 focus:ring-4 focus:ring-[#c9a961]/10 transition-all font-medium"
                         />
                       )}
@@ -193,7 +193,7 @@ const ContactForm = () => {
                     disabled={isSubmitting}
                     className="w-full bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] shadow-[0_0_30px_rgba(201,169,97,0.2)] flex items-center justify-center gap-3 disabled:opacity-50"
                   >
-                    {isSubmitting ? 'Procesando Alquimia...' : 'Solicitar Auditoría'}
+                    {isSubmitting ? 'Procesando...' : 'Solicitar Auditoría'}
                     <Send size={20} />
                   </button>
                 </form>
@@ -205,21 +205,19 @@ const ContactForm = () => {
                   </div>
 
                   <div className="w-full h-[450px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/10 group relative">
-                    <div className="absolute inset-0 bg-black/80 flex items-center justify-center group-hover:bg-black/40 transition-all duration-500 z-0">
-                      <p className="text-white font-bold animate-pulse px-10 text-center">Incrustando Agenda de Google...</p>
-                    </div>
                     <iframe
                       src={`https://calendar.app.google/qmCnU7s9NLruyVdRA?gv=true&name=${encodeURIComponent(formData.nombre)}&email=${encodeURIComponent(formData.email)}`}
                       style={{ border: 0 }}
                       width="100%"
                       height="100%"
-                      frameborder="0"
+                      frameBorder="0"
                       className="relative z-10"
+                      title="Google Calendar"
                     ></iframe>
                   </div>
                   
                   <button 
-                    onClick={() => setStep(3)}
+                    onClick={handleConfirmBooking}
                     className="w-full mt-6 bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] shadow-[0_0_30px_rgba(201,169,97,0.3)] flex items-center justify-center gap-3 group"
                   >
                     Confirmar Agendamiento <CheckCircle size={20} />
@@ -240,13 +238,6 @@ const ContactForm = () => {
                   <h3 className="text-3xl font-black text-white mb-4 tracking-tighter">¡Todo Listo, {formData.nombre.split(' ')[0]}!</h3>
                   <p className="text-white/60 text-lg mb-10 font-medium">Tu sesión mística ha sido agendada con éxito. Revisa tu correo para el link de **Google Meet**.</p>
                   
-                  <div className="space-y-4 w-full">
-                    <div className="p-4 bg-white/[0.03] border border-white/10 rounded-2xl text-left">
-                      <p className="text-[10px] uppercase tracking-widest text-[#c9a961] font-black mb-1">Próximos Pasos</p>
-                      <p className="text-white/40 text-xs">Un estratega revisará tu marca antes de la reunión para que la sesión sea 100% accionable.</p>
-                    </div>
-                  </div>
-
                   <button 
                     onClick={() => setStep(1)}
                     className="mt-12 text-[#c9a961] hover:text-white text-[10px] font-black uppercase tracking-[0.3em] transition-colors"

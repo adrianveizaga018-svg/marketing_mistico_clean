@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { graphicsData } from '../data/mockData';
+import PortfolioModal from './PortfolioModal';
 
 const GraphicsCarousel = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (projectId) => {
+    setSelectedProject(projectId);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleNavigate = (projectId) => {
+    setSelectedProject(projectId);
+  };
+
   // We duplicate data 4 times to ensure a seamless infinite loop
   const infiniteData = [...graphicsData, ...graphicsData, ...graphicsData, ...graphicsData];
 
@@ -44,7 +61,8 @@ const GraphicsCarousel = () => {
               <motion.div
                 key={`${item.id}-${index}`}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className="flex-shrink-0 w-[300px] md:w-[350px]"
+                className="flex-shrink-0 w-[300px] md:w-[350px] cursor-pointer"
+                onClick={() => openModal(item.id)}
               >
                 <div className="group relative bg-white/[0.03] border border-white/10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-[#c9a961]/40 shadow-2xl">
                   {/* Image Container */}
@@ -57,6 +75,16 @@ const GraphicsCarousel = () => {
                     />
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                    
+                    {/* Click Indicator */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-16 h-16 rounded-full bg-[#c9a961]/90 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Info Overlay */}
@@ -77,6 +105,14 @@ const GraphicsCarousel = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Portfolio Modal */}
+      <PortfolioModal
+        isOpen={isModalOpen}
+        projectId={selectedProject}
+        onClose={closeModal}
+        onNavigate={handleNavigate}
+      />
     </section>
   );
 };
