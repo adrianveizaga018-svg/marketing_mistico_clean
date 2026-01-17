@@ -40,7 +40,8 @@ const ContactForm = () => {
     metaPixel.trackLead();
 
     // 1. Fire-and-forget backend save (Non-blocking)
-    fetch(`http://${window.location.hostname}:8000/api/leads`, {
+    const apiUrl = process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8000`;
+    fetch(`${apiUrl}/api/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

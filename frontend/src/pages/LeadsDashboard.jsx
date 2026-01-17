@@ -41,7 +41,8 @@ const LeadsDashboard = () => {
   const fetchLeads = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://${window.location.hostname}:8000/api/leads`);
+      const apiUrl = process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8000`;
+      const response = await fetch(`${apiUrl}/api/leads`);
       if (response.ok) {
         const data = await response.json();
         // Sort by timestamp descending
