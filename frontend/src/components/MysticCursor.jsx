@@ -3,6 +3,7 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const MysticCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Mouse position state
   const mouseX = useMotionValue(0);
@@ -14,7 +15,20 @@ const MysticCursor = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Detect mobile by screen size or touch capability
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 1024 || 
+        window.matchMedia("(pointer: coarse)").matches ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      );
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const moveCursor = (e) => {
+      if (isMobile) return;
       mouseX.set(e.clientX - 16); // Center the 32px cursor
       mouseY.set(e.clientY - 16);
       
@@ -28,8 +42,13 @@ const MysticCursor = () => {
     };
 
     window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, [mouseX, mouseY]);
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [mouseX, mouseY, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <>
@@ -37,9 +56,9 @@ const MysticCursor = () => {
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-[#c9a961] rounded-full pointer-events-none z-[100] mix-blend-difference"
         style={{
-          x: mouseX, // Using raw value for instant movement (offset correction needed manually if not using spring)
+          x: mouseX, 
           y: mouseY,
-          translateX: 12, // Re-center based on wrapper offset
+          translateX: 12, 
           translateY: 12 
         }}
       />
