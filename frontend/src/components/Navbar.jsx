@@ -29,9 +29,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <img 
-              src="/logo_oficial.png" 
-              alt="Marketing Místico" 
+            <img
+              src="/logo_oficial.webp"
+              alt="Marketing Místico"
               className="h-10 md:h-14 transition-all transform hover:scale-105"
             />
           </div>
@@ -41,7 +41,10 @@ const Navbar = () => {
             {['Servicios', 'Trabajos', 'Proceso'].map((item) => (
               <button 
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())} 
+                onClick={() => {
+                  const targetId = item === 'Trabajos' ? 'videos' : item.toLowerCase();
+                  scrollToSection(targetId);
+                }} 
                 className="relative text-[#c9a961] hover:text-white transition-colors group py-2 text-xs uppercase tracking-[0.2em] font-bold"
               >
                 {item}

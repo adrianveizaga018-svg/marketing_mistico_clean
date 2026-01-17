@@ -1,0 +1,12 @@
+{
+  "name": "marketing-mistico-root",
+  "version": "1.0.0",
+  "description": "Marketing Místico - Sistema Unificado",
+  "scripts": {
+    "dev": "concurrently \"cd frontend && npm start\" \"cd backend && python -m uvicorn server:app --reload --host 0.0.0.0\"",
+    "install-all": "cd frontend && npm install && cd ../backend && pip install -r requirements.txt"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -3,10 +3,6 @@ import { ArrowRight, Zap } from 'lucide-react';
 import { ctaData } from '../data/mockData';
 
 const CTA = () => {
-  const scrollToContact = () => {
-    document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="py-24 bg-black relative overflow-hidden">
       {/* Premium Background Effects */}
@@ -48,13 +44,15 @@ const CTA = () => {
 
           {/* CTA Button - Maximum Impact */}
           <div className="flex flex-col items-center gap-6">
-            <button 
-              onClick={scrollToContact}
-              className="group bg-[#c9a961] hover:bg-white text-black font-black text-sm md:text-base uppercase tracking-[0.2em] px-16 py-7 rounded-full transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(201,169,97,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] inline-flex items-center gap-4"
+            <a
+              href="https://calendar.app.google/7Kjy2fZJmhGaNFef6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-[#c9a961] hover:bg-white text-black font-black text-sm md:text-base uppercase tracking-[0.2em] px-16 py-7 rounded-full transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(201,169,97,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] inline-flex items-center gap-4 no-underline"
             >
               {ctaData.buttonText}
               <ArrowRight className="group-hover:translate-x-3 transition-transform duration-500" size={24} />
-            </button>
+            </a>
             <p className="text-white/30 text-xs uppercase tracking-widest font-black">
               Resultados reales para marcas con visión de futuro
             </p>

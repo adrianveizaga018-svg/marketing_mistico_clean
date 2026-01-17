@@ -3,11 +3,13 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Authority from '../components/Authority';
 import Videos from '../components/Videos';
+import GraphicsCarousel from '../components/GraphicsCarousel';
 import Services from '../components/Services';
 import Process from '../components/Process';
 import CTA from '../components/CTA';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
+import PromoBanner from '../components/PromoBanner';
 
 const Home = () => {
   return (
@@ -24,7 +26,9 @@ const Home = () => {
         <Hero />
         <Authority />
         <Videos />
+        <GraphicsCarousel />
         <Services />
+        <PromoBanner />
         <Process />
         <CTA />
         <ContactForm />

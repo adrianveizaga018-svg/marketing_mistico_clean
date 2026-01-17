@@ -5,7 +5,8 @@ export const heroData = {
   subtitle: "Marketing, publicidad y tecnología para hacer crecer tu negocio",
   description: "Somos la agencia que transforma tu visión en resultados reales. Estrategia, creatividad y datos para impulsar tu marca.",
   ctaPrimary: "Agenda Asesoría Gratuita",
-  ctaSecondary: "Ver Nuestros Trabajos"
+  ctaSecondary: "Ver Nuestros Trabajos",
+  bookingUrl: "https://calendar.app.google/7Kjy2fZJmhGaNFef6"
 };
 
 export const autorityData = {
@@ -25,7 +26,7 @@ export const videosData = [
     title: "Pasión Criolla - Estrategia TikTok",
     description: "Campaña de video vertical diseñada para captar atención inmediata y generar deseo gastronómico.",
     category: "TikTok Ads",
-    thumbnail: "/thumb_pasion_1.png",
+    thumbnail: "/thumb_pasion_1.webp",
     videoUrl: "https://player.vimeo.com/video/1154010752?badge=0&autopause=0&player_id=0&app_id=58479",
     results: "+200% interacción en redes",
     aspect: "vertical"
@@ -35,7 +36,7 @@ export const videosData = [
     title: "CENEFCO - Cursos Profesionales",
     description: "Producción audiovisual de alta calidad para plataformas de educación y formación empresarial.",
     category: "Contenido Educativo",
-    thumbnail: "/thumb_cenefco.png",
+    thumbnail: "/thumb_cenefco.webp",
     videoUrl: "https://player.vimeo.com/video/1154013061?badge=0&autopause=0&player_id=0&app_id=58479",
     results: "Marca posicionada como autoridad",
     aspect: "horizontal"
@@ -45,7 +46,7 @@ export const videosData = [
     title: "Pasión Criolla - Spot Publicitario",
     description: "Highlight de platillos estrella con edición rítmica para maximizar conversiones en pauta.",
     category: "Spot Gastronómico",
-    thumbnail: "/thumb_pasion_2.png",
+    thumbnail: "/thumb_pasion_2.webp",
     videoUrl: "https://player.vimeo.com/video/1154011401?badge=0&autopause=0&player_id=0&app_id=58479",
     results: "Incremento directo en pedidos",
     aspect: "vertical"
@@ -55,7 +56,7 @@ export const videosData = [
     title: "Colegio de Abogados de La Paz",
     description: "Desarrollo de plataforma institucional completa y sistema de gestión para colegiados (ICALP).",
     category: "Plataforma Web",
-    thumbnail: "/thumb_icalp.png",
+    thumbnail: "/thumb_icalp.webp",
     externalUrl: "https://icalp.org.bo",
     results: "Digitalización institucional completa",
     aspect: "horizontal"
@@ -178,14 +179,39 @@ export const ctaData = {
   buttonText: "Quiero Vender Más"
 };
 
+export const countries = [
+  { code: 'BO', name: 'Bolivia', dial: '+591', flag: '🇧🇴' },
+  { code: 'MX', name: 'México', dial: '+52', flag: '🇲🇽' },
+  { code: 'ES', name: 'España', dial: '+34', flag: '🇪🇸' },
+  { code: 'US', name: 'Estados Unidos', dial: '+1', flag: '🇺🇸' },
+  { code: 'CO', name: 'Colombia', dial: '+57', flag: '🇨🇴' },
+  { code: 'AR', name: 'Argentina', dial: '+54', flag: '🇦🇷' },
+  { code: 'CL', name: 'Chile', dial: '+56', flag: '🇨🇱' },
+  { code: 'PE', name: 'Perú', dial: '+51', flag: '🇵🇪' },
+  { code: 'EC', name: 'Ecuador', dial: '+593', flag: '🇪🇨' },
+  { code: 'PA', name: 'Panamá', dial: '+507', flag: '🇵🇦' },
+  { code: 'CR', name: 'Costa Rica', dial: '+506', flag: '🇨🇷' },
+  { code: 'DO', name: 'Rep. Dominicana', dial: '+1', flag: '🇩🇴' },
+  { code: 'GT', name: 'Guatemala', dial: '+502', flag: '🇬🇹' },
+  { code: 'PY', name: 'Paraguay', dial: '+595', flag: '🇵🇾' },
+  { code: 'UY', name: 'Uruguay', dial: '+598', flag: '🇺🇾' }
+];
+
 export const formFields = [
   { name: "nombre", label: "Nombre completo", type: "text", required: true },
   { name: "email", label: "Email", type: "email", required: true },
-  { name: "whatsapp", label: "WhatsApp", type: "tel", required: true },
-  { 
-    name: "servicio", 
-    label: "Servicio de interés", 
-    type: "select", 
+  {
+    name: "pais",
+    label: "País",
+    type: "select",
+    required: true,
+    options: countries.map(c => `${c.flag} ${c.name} (${c.dial})`)
+  },
+  { name: "whatsapp", label: "WhatsApp (con código)", type: "tel", required: true },
+  {
+    name: "servicio",
+    label: "Servicio de interés",
+    type: "select",
     required: true,
     options: [
       "Publicidad Digital (Facebook/TikTok)",
@@ -209,3 +235,52 @@ export const footerData = {
     { name: "LinkedIn", url: "#" }
   ]
 };
+
+export const testimonialsData = [
+  {
+    id: 1,
+    name: "Dr. Raúl Jiménez",
+    role: "Presidente - ICALP",
+    company: "Colegio de Abogados de La Paz",
+    content: "La digitalización de nuestra institución marcó un antes y un después. Marketing Místico desarrolló una plataforma robusta que ha facilitado la vida de miles de colegiados.",
+    image: "/thumb_icalp.webp"
+  },
+  {
+    id: 2,
+    name: "Ing. Marco Pérez",
+    role: "Director de Operaciones",
+    company: "CENEFCO",
+    content: "La calidad audiovisual de los cursos producidos superó nuestras expectativas. Lograron transmitir profesionalismo y autoridad en cada lección.",
+    image: "/thumb_cenefco.webp"
+  },
+  {
+    id: 3,
+    name: "Lic. Sandra Vargas",
+    role: "Junta Directiva",
+    company: "Colegio de Auditores",
+    content: "Su enfoque estratégico nos permitió modernizar nuestra comunicación y llegar a nuevos asociados de manera efectiva y elegante.",
+    image: "/logo_oficial.webp"
+  },
+  {
+    id: 4,
+    name: "Chef Luis Morales",
+    role: "Propietario",
+    company: "Pasión Criolla",
+    content: "Nuestras ventas en TikTok se dispararon. Entienden perfectamente cómo hacer que la comida no solo se vea bien, sino que se venda sola.",
+    image: "/thumb_pasion_1.webp"
+  }
+];
+
+export const graphicsData = [
+  { id: 1, title: "Lanzamiento CyberGlow", client: "Tech Vision", image: "/post1.webp", category: "Social Ads" },
+  { id: 2, title: "Elite Luxury Watch", client: "Chronos", image: "/post2.webp", category: "Product Design" },
+  { id: 3, title: "Minimalist Real Estate", client: "Estate One", image: "/post3.webp", category: "Branding" },
+  { id: 4, title: "Gourmet Experience", client: "L'Essence", image: "/post4.webp", category: "Motion Graphic" },
+  { id: 5, title: "Future Beats Event", client: "Nebula", image: "/post5.webp", category: "Event Ad" },
+  { id: 6, title: "Eco-Friendly Branding", client: "Gaia", image: "/post6.webp", category: "Graphic Design" },
+  { id: 7, title: "Modern Portfolio", client: "Místico Agency", image: "/post7.webp", category: "Social Media" },
+  { id: 8, title: "Viral Conversion Ad", client: "Growth X", image: "/post8.webp", category: "Performance Ads" },
+  { id: 9, title: "Abstract Gold Flow", client: "Art Station", image: "/post9.webp", category: "3D Art" },
+  { id: 10, title: "Premium Webinar", client: "EduPulse", image: "/post10.webp", category: "Marketing" },
+  { id: 11, title: "Dark Aesthetic Sale", client: "Mystic Store", image: "/post11.webp", category: "e-Commerce" }
+];

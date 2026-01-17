@@ -34,37 +34,41 @@ class StatusCheck(BaseModel):
     client_name: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+class LeadCreate(BaseModel):
+    nombre: str
+    email: str
+    pais: str
+    whatsapp: str
+    servicio: str
 
-# Add your routes to the router instead of directly to app
+class Lead(LeadCreate):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+# API Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Marketing Místico API v1"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
+@api_router.post("/leads", response_model=Lead)
+async def create_lead(input: LeadCreate):
+    lead_dict = input.model_dump()
+    lead_obj = Lead(**lead_dict)
     
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
+    # Store in MongoDB
+    doc = lead_obj.model_dump()
     doc['timestamp'] = doc['timestamp'].isoformat()
     
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
+    await db.leads.insert_one(doc)
+    return lead_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
+@api_router.get("/leads", response_model=List[Lead])
+async def get_leads():
+    leads = await db.leads.find({}, {"_id": 0}).to_list(1000)
+    for lead in leads:
+        if isinstance(lead['timestamp'], str):
+            lead['timestamp'] = datetime.fromisoformat(lead['timestamp'])
+    return leads
 
 # Include the router in the main app
 app.include_router(api_router)

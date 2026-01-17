@@ -11,9 +11,9 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12">
           {/* Logo & Tagline */}
           <div>
-            <img 
-              src="/logo_oficial.png" 
-              alt="Marketing Místico" 
+            <img
+              src="/logo_oficial.webp"
+              alt="Marketing Místico"
               className="h-12 mb-4"
             />
             <p className="text-gray-400 leading-relaxed">

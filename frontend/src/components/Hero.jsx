@@ -12,41 +12,39 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative flex items-center overflow-hidden min-h-screen bg-black">
-      {/* Video Background - Refined as decorative element */}
+      {/* Video Background - Optimized WebM version */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-y-0 right-0 w-full md:w-[95%] h-full object-cover z-0 opacity-90 transition-all duration-1000 scale-[0.85] md:scale-[0.82] lg:scale-[0.85] origin-right pointer-events-none"
+        preload="auto"
+        className="absolute inset-y-0 right-0 w-full md:w-[95%] h-full object-cover z-0 pointer-events-none will-change-transform filter brightness-110 contrast-105"
         style={{ objectPosition: '70% center' }}
       >
         <source src="/video_header.mp4" type="video/mp4" />
       </video>
       
-      {/* Gradient Overlay - integrates video with background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent z-[1]"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-[1]"></div>
+      {/* Gradient Overlay - integrations video with background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-[1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 z-[1]"></div>
       
-      {/* Watermark cover - perfectly integrated with the black background */}
+      {/* Watermark cover / Refined integration */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div className="absolute bottom-[8%] right-[2%] w-[40%] h-[25%] bg-black filter blur-[60px] opacity-95"></div>
-        <div className="absolute bottom-0 right-0 w-[50%] h-[15%] bg-gradient-to-t from-black to-transparent"></div>
-        <div className="absolute inset-y-0 right-0 w-[10%] bg-gradient-to-l from-black to-transparent"></div>
+        <div className="absolute bottom-[8%] right-[2%] w-[40%] h-[25%] bg-black/60 filter blur-[40px]"></div>
+        <div className="absolute bottom-0 right-0 w-[50%] h-[15%] bg-gradient-to-t from-black/80 to-transparent"></div>
+        <div className="absolute inset-y-0 right-0 w-[10%] bg-gradient-to-l from-black/80 to-transparent"></div>
       </div>
 
       {/* Cinematic lighting effects */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
-        {/* Main ambient glow */}
         <div className="absolute top-1/4 left-[-10%] w-[60%] h-[60%] bg-[#7c3aed]/10 rounded-full filter blur-[120px] animate-ambient"></div>
-        {/* Cyber Cyan accent (matches robot tech) */}
         <div className="absolute top-1/2 right-[20%] w-[40%] h-[40%] bg-[#00f2ff]/10 rounded-full filter blur-[150px] animate-ambient" style={{ animationDelay: '-5s' }}></div>
-        {/* Warm Gold accent */}
         <div className="absolute bottom-1/4 left-1/4 w-[35%] h-[35%] bg-[#c9a961]/15 rounded-full filter blur-[100px] animate-ambient" style={{ animationDelay: '-10s' }}></div>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 md:pl-20 lg:pl-32 relative z-10 pt-20 pb-12">
+      <div className="container mx-auto px-6 md:pl-20 lg:pl-32 relative z-10 pt-28 pb-12">
         <div className="max-w-2xl">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full mb-8 animate-fade-in shadow-[0_0_20px_rgba(201,169,97,0.1)]">
@@ -76,13 +74,15 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <button 
-              onClick={() => scrollToSection('contacto')}
-              className="group bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] text-black font-black text-sm uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] hover:shadow-[0_0_50px_rgba(201,169,97,0.5)] flex items-center justify-center gap-3"
+            <a 
+              href={heroData.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] text-black font-black text-sm uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] hover:shadow-[0_0_50px_rgba(201,169,97,0.5)] flex items-center justify-center gap-3 no-underline"
             >
               {heroData.ctaPrimary}
               <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} />
-            </button>
+            </a>
             <button 
               onClick={() => scrollToSection('videos')}
               className="group bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
@@ -92,9 +92,8 @@ const Hero = () => {
             </button>
           </div>
 
-          {/* Stats Card - Upgraded Crystal Effect */}
+          {/* Stats Card */}
           <div className="flex flex-wrap items-center gap-8 bg-white/[0.03] backdrop-blur-xl border border-white/10 px-8 py-6 rounded-3xl w-fit shadow-2xl relative overflow-hidden group hover:border-[#c9a961]/30 transition-all duration-500 animate-float">
-            {/* Subtle glow inside card */}
             <div className="absolute -top-24 -left-24 w-48 h-48 bg-[#c9a961]/10 rounded-full blur-3xl group-hover:bg-[#c9a961]/20 transition-all duration-500"></div>
             
             <div className="text-center relative z-10">
@@ -114,8 +113,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
-
     </section>
   );
 };
