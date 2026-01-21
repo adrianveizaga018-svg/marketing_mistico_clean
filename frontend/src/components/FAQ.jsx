@@ -29,7 +29,7 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
             Preguntas <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Frecuentes</span>
           </h2>
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-medium">

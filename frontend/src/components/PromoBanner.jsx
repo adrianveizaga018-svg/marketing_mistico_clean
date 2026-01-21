@@ -33,7 +33,7 @@ const PromoBanner = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="https://calendar.app.google/7Kjy2fZJmhGaNFef6" 
+                href="https://calendar.app.google/NKQGyQizTe4m4R8a6" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] text-center shadow-lg"

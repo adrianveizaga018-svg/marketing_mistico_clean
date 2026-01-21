@@ -25,12 +25,33 @@ const ContactForm = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+    // Auto-detect Country
+    useEffect(() => {
+      fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(data => {
+            if(data.country_code) {
+                // Find matching option in the select list
+                // Accessing options from the imported formFields
+                const paisField = formFields.find(f => f.name === 'pais');
+                if (paisField) {
+                    const countryOption = paisField.options.find(opt => opt.includes(data.country_name) || opt.includes(data.country_code));
+                    
+                    if (countryOption) {
+                        setFormData(prev => ({ ...prev, pais: countryOption }));
+                    }
+                }
+            }
+        })
+        .catch(err => console.warn("Auto-detect country failed", err));
+    }, []);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +61,8 @@ const ContactForm = () => {
     metaPixel.trackLead();
 
     // 1. Fire-and-forget backend save (Non-blocking)
-    const apiUrl = process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8000`;
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const apiUrl = process.env.REACT_APP_API_URL || (isLocal ? `http://${window.location.hostname}:5000` : 'https://api.marketingmistico.com');
     fetch(`${apiUrl}/api/leads`, {
       method: 'POST',
       headers: {
@@ -76,10 +98,10 @@ const ContactForm = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Side - Info */}
             <div className="animate-fade-in">
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
                 {step === 1 ? (
                   <>Solicita tu <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Asesoría de Éxito</span></>
                 ) : (
@@ -113,8 +135,8 @@ const ContactForm = () => {
                   ))
                 ) : (
                   <div className="p-6 bg-[#c9a961]/5 border border-[#c9a961]/20 rounded-2xl">
-                    <p className="text-[#c9a961] font-bold mb-2 uppercase tracking-widest text-xs">✓ Datos Confirmados</p>
-                    <p className="text-white/80 text-sm">Hemos guardado tu información. Una vez agendes, recibirás automáticamente un link de **Google Meet** en tu correo.</p>
+                    <p className="text-[#c9a961] font-bold mb-2 uppercase tracking-widest text-xs">✓ Datos Recibidos</p>
+                    <p className="text-white/80 text-sm">Por favor, confirma tu identidad en la agenda oficial de Google para blindar tu espacio.</p>
                   </div>
                 )}
               </div>
@@ -157,7 +179,18 @@ const ContactForm = () => {
               
               {step === 1 ? (
                 <form onSubmit={handleSubmit} className="space-y-8 relative z-10 animate-fade-in">
-                  {formFields.map((field) => (
+                  {formFields.map((field) => {
+                    const getAutoComplete = (name) => {
+                      switch(name) {
+                        case 'nombre': return 'name';
+                        case 'email': return 'email';
+                        case 'whatsapp': return 'tel';
+                        case 'pais': return 'country';
+                        default: return 'off';
+                      }
+                    };
+
+                    return (
                     <div key={field.name} className="relative group">
                       <label className="block text-white/40 text-[10px] uppercase tracking-[0.2em] font-black mb-3 ml-1 group-focus-within:text-[#c9a961] transition-colors">
                         {field.label} {field.required && <span className="text-[#c9a961] text-lg">*</span>}
@@ -169,6 +202,7 @@ const ContactForm = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           required={field.required}
+                          autoComplete={getAutoComplete(field.name)}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#c9a961]/50 focus:ring-4 focus:ring-[#c9a961]/10 transition-all appearance-none cursor-pointer font-medium"
                         >
                           <option value="" className="bg-black text-white/30">Selecciona un servicio</option>
@@ -183,18 +217,19 @@ const ContactForm = () => {
                           value={formData[field.name]}
                           onChange={handleChange}
                           required={field.required}
+                          autoComplete={getAutoComplete(field.name)}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-white/10 focus:outline-none focus:border-[#c9a961]/50 focus:ring-4 focus:ring-[#c9a961]/10 transition-all font-medium"
                         />
                       )}
                     </div>
-                  ))}
+                  )})}
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] shadow-[0_0_30px_rgba(201,169,97,0.2)] flex items-center justify-center gap-3 disabled:opacity-50"
                   >
-                    {isSubmitting ? 'Procesando...' : 'Solicitar Auditoría'}
+                    {isSubmitting ? 'Procesando...' : 'Solicitar Cita'}
                     <Send size={20} />
                   </button>
                 </form>
@@ -207,7 +242,7 @@ const ContactForm = () => {
 
                   <div className="w-full h-[450px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/10 group relative">
                     <iframe
-                      src={`https://calendar.app.google/qmCnU7s9NLruyVdRA?gv=true&name=${encodeURIComponent(formData.nombre)}&email=${encodeURIComponent(formData.email)}`}
+                      src={`https://calendar.app.google/NKQGyQizTe4m4R8a6?gv=true&name=${encodeURIComponent(formData.nombre)}&email=${encodeURIComponent(formData.email)}&first_name=${encodeURIComponent(formData.nombre.split(' ')[0])}&last_name=${encodeURIComponent(formData.nombre.split(' ').slice(1).join(' '))}`}
                       style={{ border: 0 }}
                       width="100%"
                       height="100%"
@@ -221,7 +256,7 @@ const ContactForm = () => {
                     onClick={handleConfirmBooking}
                     className="w-full mt-6 bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] shadow-[0_0_30px_rgba(201,169,97,0.3)] flex items-center justify-center gap-3 group"
                   >
-                    Confirmar Agendamiento <CheckCircle size={20} />
+                    Confirmar Cita <CheckCircle size={20} />
                   </button>
 
                   <button 

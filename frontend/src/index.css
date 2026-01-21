@@ -9,7 +9,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #000000;
     color: #ffffff;
-    cursor: none; /* Hide default cursor for Mystic Experience */
+}
+
+@media (min-width: 1024px) {
+    body {
+        cursor: none; /* Hide default cursor for Mystic Experience only on Desktop */
+    }
 }
 
 code {

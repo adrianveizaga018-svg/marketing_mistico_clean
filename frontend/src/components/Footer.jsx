@@ -110,6 +110,9 @@ const Footer = () => {
             © {currentYear} Marketing Místico. Todos los derechos reservados.
           </p>
           <div className="flex gap-6 text-sm text-gray-600">
+            <a href="/gestion-leads" className="hover:text-[#c9a961] transition-colors flex items-center gap-1">
+              <span className="w-1 h-1 bg-[#c9a961] rounded-full"></span> Acceso
+            </a>
             <a href="#" className="hover:text-[#c9a961] transition-colors">Privacidad</a>
             <a href="#" className="hover:text-[#c9a961] transition-colors">Términos</a>
           </div>

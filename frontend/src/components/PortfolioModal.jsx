@@ -191,7 +191,7 @@ const PortfolioModal = ({ isOpen, projectId, onClose, onNavigate }) => {
               </p>
               <div className="flex justify-center">
                 <a
-                  href="https://calendar.app.google/7Kjy2fZJmhGaNFef6"
+                  href="https://calendar.app.google/NKQGyQizTe4m4R8a6"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => metaPixel.trackSchedule()}

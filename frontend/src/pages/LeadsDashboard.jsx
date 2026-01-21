@@ -41,7 +41,8 @@ const LeadsDashboard = () => {
   const fetchLeads = async () => {
     setIsLoading(true);
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8000`;
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const apiUrl = process.env.REACT_APP_API_URL || (isLocal ? `http://${window.location.hostname}:5000` : 'https://api.marketingmistico.com');
       const response = await fetch(`${apiUrl}/api/leads`);
       if (response.ok) {
         const data = await response.json();

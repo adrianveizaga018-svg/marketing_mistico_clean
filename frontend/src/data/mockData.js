@@ -60,6 +60,16 @@ export const videosData = [
     externalUrl: "https://icalp.org.bo",
     results: "Digitalización institucional completa",
     aspect: "horizontal"
+  },
+  {
+    id: 5,
+    title: "Colegio de Auditores - CAULP",
+    description: "Renovación total de la identidad digital y plataforma de servicios para auditores y contadores de La Paz.",
+    category: "Plataforma Institucional",
+    thumbnail: "/thumb_auditores.png",
+    externalUrl: "http://caulp.org.bo",
+    results: "Lanzamiento de Nueva Identidad Digital",
+    aspect: "horizontal"
   }
 ];
 
@@ -207,7 +217,7 @@ export const formFields = [
     required: true,
     options: countries.map(c => `${c.flag} ${c.name} (${c.dial})`)
   },
-  { name: "whatsapp", label: "WhatsApp (con código)", type: "tel", required: true },
+  { name: "whatsapp", label: "Número de celular", type: "tel", required: true },
   {
     name: "servicio",
     label: "Servicio de interés",

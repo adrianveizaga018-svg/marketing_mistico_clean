@@ -16,7 +16,7 @@ import MysticCursor from '../components/MysticCursor';
 
 const Home = () => {
   return (
-    <div className="bg-black relative min-h-screen overflow-hidden">
+    <div className="bg-black relative min-h-screen">
       <MysticCursor />
       {/* Ambient Background Auras */}
       <div className="fixed inset-0 pointer-events-none z-0">
