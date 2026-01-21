@@ -3,7 +3,16 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const MysticCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if mobile/tablet IMMEDIATELY before any render
+  const checkIsMobile = () => {
+    // Must match the CSS media query (min-width: 1024px)
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isSmallScreen = window.innerWidth < 1024;
+    return isTouch || isSmallScreen;
+  };
+  
+  const [isMobile, setIsMobile] = useState(checkIsMobile);
   
   // Mouse position state
   const mouseX = useMotionValue(0);
@@ -15,17 +24,12 @@ const MysticCursor = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Detect mobile by screen size or touch capability
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 1024 || 
-        window.matchMedia("(pointer: coarse)").matches ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-      );
+    // Update mobile detection on resize
+    const handleResize = () => {
+      setIsMobile(checkIsMobile());
     };
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener('resize', handleResize);
 
     const moveCursor = (e) => {
       if (isMobile) return;
@@ -44,10 +48,11 @@ const MysticCursor = () => {
     window.addEventListener('mousemove', moveCursor);
     return () => {
       window.removeEventListener('mousemove', moveCursor);
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', handleResize);
     };
   }, [mouseX, mouseY, isMobile]);
 
+  // Early return if mobile - don't render cursor at all
   if (isMobile) return null;
 
   return (

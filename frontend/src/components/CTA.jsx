@@ -52,14 +52,14 @@ const CTA = () => {
             <div className="relative">
               <UrgencyBadge text="⚡ Respuesta en 24h" position="top" />
               <a
-                href="https://calendar.app.google/7Kjy2fZJmhGaNFef6"
+                href="https://calendar.app.google/NKQGyQizTe4m4R8a6"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSchedule}
-                className="group bg-[#c9a961] hover:bg-white text-black font-black text-sm md:text-base uppercase tracking-[0.2em] px-16 py-7 rounded-full transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(201,169,97,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] inline-flex items-center gap-4 no-underline"
+                className="group bg-[#c9a961] hover:bg-white text-black font-black text-xs sm:text-sm md:text-base uppercase tracking-[0.15em] sm:tracking-[0.2em] px-10 sm:px-14 md:px-16 py-5 sm:py-6 md:py-7 rounded-full transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(201,169,97,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] inline-flex items-center gap-3 sm:gap-4 no-underline min-h-[56px]"
               >
                 {ctaData.buttonText}
-                <ArrowRight className="group-hover:translate-x-3 transition-transform duration-500" size={24} />
+                <ArrowRight className="group-hover:translate-x-3 transition-transform duration-500" size={20} />
               </a>
             </div>
             <p className="text-white/30 text-xs uppercase tracking-widest font-black">

@@ -44,14 +44,14 @@ const WhatsAppWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[9999]">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-[9999]">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20, transformOrigin: 'bottom right' }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="absolute bottom-20 right-0 w-[350px] mb-4 overflow-hidden"
+            className="absolute bottom-16 sm:bottom-20 right-0 w-[320px] sm:w-[350px] mb-4 overflow-hidden"
           >
             {/* Widget Container */}
             <div className="bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-3xl overflow-hidden">
@@ -129,7 +129,7 @@ const WhatsAppWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group relative ${
+        className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group relative ${
           isOpen ? 'bg-white text-black rotate-90' : 'bg-[#25D366] text-white'
         }`}
       >
@@ -141,7 +141,7 @@ const WhatsAppWidget = () => {
               animate={{ opacity: 1, rotate: 0 }}
               exit={{ opacity: 0, rotate: 90 }}
             >
-              <X size={32} />
+              <X size={28} className="sm:w-8 sm:h-8" />
             </motion.div>
           ) : (
             <motion.div
@@ -151,7 +151,7 @@ const WhatsAppWidget = () => {
               exit={{ opacity: 0, rotate: -90 }}
               className="relative"
             >
-              <MessageCircle size={32} fill="currentColor" className="text-white" />
+              <MessageCircle size={28} fill="currentColor" className="text-white sm:w-8 sm:h-8" />
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-[#25D366] rounded-full flex items-center justify-center text-[10px] font-bold">1</span>
             </motion.div>
           )}

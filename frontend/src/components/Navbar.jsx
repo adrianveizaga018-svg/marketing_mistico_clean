@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShieldCheck } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,15 +25,24 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-black/95 backdrop-blur-lg shadow-[0_4px_30px_rgba(201,169,97,0.15)]' : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-6 py-5">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <img
-              src="/logo_oficial.webp"
-              alt="Marketing Místico"
-              className="h-10 md:h-14 transition-all transform hover:scale-105"
-            />
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="cursor-pointer" onClick={() => scrollToSection('hero')}>
+              <img
+                src="/logo_oficial.webp"
+                alt="Marketing Místico"
+                className="h-8 sm:h-10 md:h-14 transition-all transform hover:scale-105"
+              />
+            </div>
+            <a 
+              href="/gestion-leads" 
+              className="text-[#c9a961]/20 hover:text-[#c9a961] transition-all duration-500 mt-1"
+              title="Acceso Gestión"
+            >
+              <ShieldCheck size={14} className="sm:w-4 sm:h-4" />
+            </a>
           </div>
 
           {/* Desktop Menu */}
@@ -61,10 +70,11 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-[#c9a961]"
+            className="md:hidden text-[#c9a961] p-2 -mr-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
 

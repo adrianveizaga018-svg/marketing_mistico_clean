@@ -65,53 +65,53 @@ const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 md:pl-20 lg:pl-32 relative z-10 pt-28 pb-12">
+      <div className="container mx-auto px-4 sm:px-6 md:pl-20 lg:pl-32 relative z-10 pt-24 sm:pt-28 pb-12">
         <div className="max-w-2xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full mb-8 animate-fade-in shadow-[0_0_20px_rgba(201,169,97,0.1)]">
-            <Sparkles size={16} className="text-[#c9a961] animate-pulse" />
-            <span className="text-white/80 text-[10px] uppercase tracking-[0.2em] font-black">Agencia Premium de Marketing Digital</span>
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-2 sm:px-5 sm:py-2.5 rounded-full mb-6 sm:mb-8 animate-fade-in shadow-[0_0_20px_rgba(201,169,97,0.1)]">
+            <Sparkles size={14} className="sm:w-4 sm:h-4 text-[#c9a961] animate-pulse" />
+            <span className="text-white/80 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-black">Agencia Premium de Marketing Digital</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] mb-8 tracking-tighter min-h-[1.1em]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] mb-5 sm:mb-6 md:mb-8 tracking-tighter min-h-[1.1em]">
             <span className="text-white drop-shadow-2xl">
               {displayText}
               <span className="animate-pulse ml-1 text-[#c9a961]">|</span>
             </span>
-            <span className="block mt-4 text-transparent bg-clip-text bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] drop-shadow-[0_0_15px_rgba(201,169,97,0.3)]">
+            <span className="block mt-3 sm:mt-4 text-transparent bg-clip-text bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] drop-shadow-[0_0_15px_rgba(201,169,97,0.3)]">
               con Estrategia
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-4 max-w-xl" style={{ textShadow: '0 1px 10px rgba(0,0,0,0.3)' }}>
+          <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed mb-3 sm:mb-4 max-w-xl" style={{ textShadow: '0 1px 10px rgba(0,0,0,0.3)' }}>
             {heroData.subtitle}
           </p>
 
           {/* Description */}
-          <p className="text-base md:text-lg text-white/60 leading-relaxed mb-10 max-w-lg">
+          <p className="text-sm sm:text-base md:text-lg text-white/70 leading-relaxed mb-6 sm:mb-8 md:mb-10 max-w-lg">
             {heroData.description}
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
             <a 
               href={heroData.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleSchedule}
-              className="group bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] text-black font-black text-sm uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] hover:shadow-[0_0_50px_rgba(201,169,97,0.5)] flex items-center justify-center gap-3 no-underline"
+              className="group bg-gradient-to-r from-[#c9a961] via-[#fff5d1] to-[#c9a961] animate-shimmer bg-[length:200%_auto] text-black font-black text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] px-8 sm:px-10 py-4 sm:py-5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_30px_rgba(201,169,97,0.3)] hover:shadow-[0_0_50px_rgba(201,169,97,0.5)] flex items-center justify-center gap-2 sm:gap-3 no-underline min-h-[52px]"
             >
               {heroData.ctaPrimary}
-              <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} />
+              <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={18} />
             </a>
             <button 
               onClick={() => scrollToSection('videos')}
-              className="group bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+              className="group bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 font-semibold text-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]"
             >
-              <Play size={18} className="text-[#c9a961]" />
-              {heroData.ctaSecondary}
+              <Play size={16} className="sm:w-[18px] sm:h-[18px] text-[#c9a961]" />
+              <span className="text-xs sm:text-sm">{heroData.ctaSecondary}</span>
             </button>
           </div>
 
