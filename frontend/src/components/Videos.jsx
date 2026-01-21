@@ -64,13 +64,16 @@ const VideoCard = ({ video, setSelectedVideo }) => {
           {/* Overlay - Intensified gradient for better text contrast */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-100 group-hover:opacity-60 transition-all duration-700"></div>
 
-          {/* Action Icon */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          {/* Action Icon - Repositioned to bottom-right */}
+          <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
             <motion.div
-              className="bg-[#c9a961] p-6 md:p-7 rounded-full shadow-[0_0_80px_rgba(201,169,97,0.7)]"
-              animate={{ scale: isHovered ? 1.1 : 0.8 }}
+              className="bg-[#c9a961] p-4 md:p-6 rounded-full shadow-[0_0_50px_rgba(201,169,97,0.5)] md:shadow-[0_0_80px_rgba(201,169,97,0.7)]"
+              animate={{ 
+                scale: isHovered ? 1 : 0.8,
+                y: isHovered ? 0 : 10 
+              }}
             >
-              {video.externalUrl ? <ArrowRight className="text-black" size={32} /> : <Play className="text-black" size={32} fill="currentColor" />}
+              {video.externalUrl ? <ArrowRight className="text-black" size={24} className="md:w-8 md:h-8" /> : <Play className="text-black" size={24} className="md:w-8 md:h-8" fill="currentColor" />}
             </motion.div>
           </div>
 
