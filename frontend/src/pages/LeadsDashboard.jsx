@@ -43,7 +43,12 @@ const LeadsDashboard = () => {
     try {
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const apiUrl = process.env.REACT_APP_API_URL || (isLocal ? `http://${window.location.hostname}:5000` : 'https://api.marketingmistico.com');
-      const response = await fetch(`${apiUrl}/api/leads`);
+      const apiKey = process.env.REACT_APP_API_KEY || 'mm_secret_98234521_mistico_2026';
+      const response = await fetch(`${apiUrl}/api/leads`, {
+        headers: {
+          'x-api-key': apiKey
+        }
+      });
       if (response.ok) {
         const data = await response.json();
         // Sort by timestamp descending

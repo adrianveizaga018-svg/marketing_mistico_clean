@@ -3,11 +3,14 @@ const { Sequelize, DataTypes } = require('sequelize');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 
-dotenv.config();
+// Load environment variables
+const envPath = path.resolve(__dirname, '.env');
+dotenv.config({ path: envPath });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
@@ -16,15 +19,29 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// MySQL Connection (Sequelize)
+// API Key Security Middleware
+const authenticateAPI = (req, res, next) => {
+    const apiKey = req.header('x-api-key');
+    const secretKey = process.env.API_KEY;
+
+    if (!apiKey || apiKey !== secretKey) {
+        return res.status(401).json({ error: "Unauthorized access" });
+    }
+    next();
+};
+
+// Database Connection
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASS,
+    process.env.DB_NAME.trim(),
+    process.env.DB_USER.trim(),
+    process.env.DB_PASS.trim(),
     {
-        host: process.env.DB_HOST,
+        host: '127.0.0.1',
         dialect: 'mysql',
-        logging: false
+        logging: false,
+        dialectOptions: {
+            connectTimeout: 10000
+        }
     }
 );
 
@@ -52,27 +69,31 @@ const Lead = sequelize.define('Lead', {
     timestamps: false
 });
 
-// Sync Database
-sequelize.sync()
-    .then(() => console.log('✅ MySQL Database synced'))
-    .catch(err => console.error('❌ MySQL Sync error:', err));
+// Authentication and Sync
+sequelize.authenticate()
+    .then(() => {
+        console.log('✅ Connected to MySQL at 127.0.0.1');
+        return sequelize.sync();
+    })
+    .catch(err => {
+        console.error('❌ Connection failed:', err.message);
+    });
 
-// Routes
+// Public Routes
+app.get('/', (req, res) => {
+    res.json({ 
+        status: "online", 
+        message: "Marketing Místico API",
+        api_version: "1.0.1 (Secured)"
+    });
+});
+
 app.get('/api', (req, res) => {
     res.json({ message: "Marketing Místico API v1 (Node + MySQL)" });
 });
 
-app.post('/api/leads', async (req, res) => {
-    try {
-        const lead = await Lead.create(req.body);
-        console.log("✅ Lead saved to MySQL");
-        res.status(201).json(lead);
-    } catch (error) {
-        console.error("❌ Error saving lead:", error);
-        res.status(500).json({ error: "Failed to save lead" });
-    }
-});
-
+// Protected Routes
+// Get all leads - PUBLIC READING FOR COMPATIBILITY
 app.get('/api/leads', async (req, res) => {
     try {
         const leads = await Lead.findAll({
@@ -80,10 +101,53 @@ app.get('/api/leads', async (req, res) => {
         });
         res.json(leads);
     } catch (error) {
-        res.status(500).json({ error: "Failed to fetch leads" });
+        res.status(500).json({ error: "Failed to fetch leads", details: error.message });
+    }
+});
+
+// Create new lead
+app.post('/api/leads', authenticateAPI, async (req, res) => {
+    try {
+        const { nombre, email, pais, whatsapp, servicio } = req.body;
+        
+        if (!nombre || !email) {
+            return res.status(400).json({ error: "Nombre and email are required" });
+        }
+
+        const newLead = await Lead.create({
+            nombre,
+            email,
+            pais,
+            whatsapp,
+            servicio
+        });
+
+        res.status(201).json(newLead);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to create lead", details: error.message });
+    }
+});
+
+// Update lead status
+app.patch('/api/leads/:id/status', authenticateAPI, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const lead = await Lead.findByPk(id);
+        if (!lead) {
+            return res.status(404).json({ error: "Lead not found" });
+        }
+
+        lead.status = status;
+        await lead.save();
+
+        res.json(lead);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to update lead", details: error.message });
     }
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Node Server (MySQL) running on http://localhost:${PORT}`);
+    console.log(`🚀 Secured Server running on port ${PORT}`);
 });
