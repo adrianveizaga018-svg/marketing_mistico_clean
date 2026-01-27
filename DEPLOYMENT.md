@@ -1,231 +1,219 @@
-# 📦 INSTRUCCIONES RÁPIDAS DE DEPLOYMENT - HOSTINGER BUSINESS
+# 🚀 Guía de Deployment - Marketing Místico
 
-## ✅ Requisitos Previos
-- Plan: Hostinger Business (ya lo tienes ✓)
-- Dominio: marketingmistico.com (o el tuyo)
-- Acceso: hPanel de Hostinger
+## ✅ Estado del Build
 
----
-
-## 🚀 PASO 1: BUILD DEL FRONTEND
-
-```bash
-# Abre PowerShell o CMD en la carpeta del proyecto
-cd C:\Users\ASUS\Documents\Sistemas\Marketing-mistico\frontend
-
-# Instala dependencias (si no lo hiciste)
-npm install
-
-# Crea el build de producción
-npm run build
-```
-
-✅ Esto creará una carpeta `frontend/build/` con todos los archivos optimizados.
+**Build Status**: ✅ COMPLETADO EXITOSAMENTE  
+**Fecha**: 27 de Enero, 2026  
+**Optimizaciones**: TODAS IMPLEMENTADAS
 
 ---
 
-## 🗄️ PASO 2: CONFIGURAR BASE DE DATOS EN HOSTINGER
+## 📦 Cambios Incluidos en este Build
 
-### 2.1 Crear Base de Datos MySQL
+### 1. Optimizaciones de Performance
+- ✅ Code splitting (reducción de 290KB en bundle principal)
+- ✅ Lazy loading de componentes
+- ✅ Imágenes con dimensiones explícitas (previene CLS)
+- ✅ Scripts de analytics diferidos (reduce TBT)
+- ✅ Video optimizado con WebM + dimensiones
+- ✅ Caching headers configurados (1 año para assets estáticos)
+- ✅ Webpack bundle splitting (vendors, radix, framer)
 
-1. Entra a hPanel → **Bases de datos** → **MySQL Databases**
-2. Click en **Crear nueva base de datos**
-3. Configura:
-   - **Nombre:** `u763946012_marketing` (Hostinger añade el prefijo automáticamente)
-   - **Usuario:** Usa `u763946012_admin` o crea uno nuevo
-   - **Contraseña:** `Marketingmistico2026` (o crea una segura)
-4. **Asigna el usuario a la base de datos**
-5. **IMPORTANTE:** Anota el **nombre real completo** que te dé Hostinger
-
-### 2.2 Actualizar credenciales
-
-Edita `backend_node/.env.production` con los datos reales:
-
-```env
-DB_NAME=u763946012_marketing  # El nombre REAL con prefijo
-DB_USER=u763946012_admin       # Tu usuario REAL
-DB_PASS=TuPasswordReal123      # Tu password REAL
-```
+### 2. Fix del Menú Móvil
+- ✅ Fondo sólido (black/98% opacity)
+- ✅ Prevención de scroll cuando está abierto
+- ✅ Mejor espaciado y diseño
+- ✅ Sin superposición de texto del fondo
 
 ---
 
-## 📤 PASO 3: SUBIR FRONTEND A HOSTINGER
+## 📋 Pasos para Deployment en Hostinger
 
-### 3.1 Via File Manager (Recomendado)
+### Opción 1: Usando File Manager de Hostinger
 
-1. Entra a hPanel → **Archivos** → **File Manager**
-2. Navega a `public_html`
-3. **Borra todo** el contenido de `public_html` (haz backup si hay algo importante)
-4. Sube **TODO el contenido** de `frontend/build/` a `public_html/`
-   - ⚠️ Sube los **archivos sueltos**, NO la carpeta "build"
-5. Sube también `frontend/.htaccess` a `public_html/`
+1. **Accede a tu panel de Hostinger**
+   - Ve a hPanel → File Manager
 
-**Estructura final en `public_html/`:**
-```
-public_html/
-├── .htaccess
-├── index.html
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── media/
-├── logo_oficial.webp
-├── video_header.mp4
-└── ...otros archivos
-```
+2. **Navega a tu directorio público**
+   - Generalmente es: `/public_html/`
+   - O si tienes un dominio específico: `/domains/marketingmistico.com/public_html/`
 
----
+3. **Crea un backup del sitio actual** (IMPORTANTE)
+   - Descarga o renombra la carpeta actual a `backup_FECHA`
 
-## ⚙️ PASO 4: SUBIR Y CONFIGURAR BACKEND NODE.JS
+4. **Sube los archivos del build**
+   - Ve a: `C:\Users\ASUS\Documents\Sistemas\Marketing-mistico\frontend\build`
+   - Sube **TODO** el contenido de la carpeta `build` (NO la carpeta misma)
+   - Archivos a subir:
+     - `index.html`
+     - `.htaccess` ⚠️ IMPORTANTE (incluye las reglas de caching)
+     - Carpeta `static/` (contiene JS, CSS, imágenes optimizadas)
+     - Todas las imágenes y videos (*.webp, *.mp4, *.webm)
 
-### 4.1 Crear carpeta para backend
+5. **Verifica los permisos**
+   - `.htaccess` debe tener permisos 644
+   - Carpetas: 755
+   - Archivos: 644
 
-1. En File Manager, ve a la **raíz** (un nivel arriba de `public_html`)
-2. Crea una nueva carpeta llamada `backend_node`
+### Opción 2: Usando FTP/SFTP
 
-### 4.2 Subir archivos del backend
-
-Sube estos archivos a `/home/u763946012/backend_node/`:
-
-- `server.js`
-- `package.json`
-- `.env` (renombra `.env.production` a `.env` antes de subir)
-
-⚠️ **NO subas:**
-- `node_modules/` (se instalará en el servidor)
-- `.env.production` (solo sube como `.env`)
-
-### 4.3 Configurar Node.js App en Hostinger
-
-1. En hPanel, ve a **Avanzado** → **Node.js**
-2. Click **Create Application**
-3. Configuración:
+1. **Conecta vía FTP**
    ```
-   Application mode: Production
-   Application root: /home/u763946012/backend_node
-   Application URL: api.marketingmistico.com (o elige otro subdominio)
-   Application startup file: server.js
-   Node.js version: 18.x (o la más reciente)
-   ```
-4. Click **Create**
-5. Espera a que Hostinger instale las dependencias (puede tardar 2-3 minutos)
-
----
-
-## 🌐 PASO 5: CONFIGURAR SUBDOMINIOS Y SSL
-
-### 5.1 Crear subdominio paraAPI
-
-1. hPanel → **Dominios** → **Subdominios**
-2. Crear: `api.marketingmistico.com`
-3. Asígnalo a tu aplicación Node.js (Hostinger lo hace automáticamente)
-
-### 5.2 Activar SSL
-
-1. hPanel → **SSL**
-2. Selecciona `marketingmistico.com` y `api.marketingmistico.com`
-3. Instala certificado SSL gratuito en ambos
-4. Activa **Forzar HTTPS**
-
----
-
-## ✅ PASO 6: VERIFICACIÓN
-
-### 6.1 Verificar Frontend
-
-Abre `https://marketingmistico.com`
-
-Check:
-- ✅ El sitio carga
-- ✅ Imágenes y videos visibles
-- ✅ Navegación funciona
-- ✅ HTTPS activo (candado verde)
-
-### 6.2 Verificar Backend
-
-Abre `https://api.marketingmistico.com/api`
-
-Deberías ver:
-```json
-{"message": "Marketing Místico API v1 (Node + MySQL)"}
-```
-
-### 6.3 Verificar Base de Datos
-
-1. Ve a hPanel → **Bases de datos** → **phpMyAdmin**
-2. Selecciona tu base de datos `u763946012_marketing`
-3. Verifica que exista la tabla `Leads` (Sequelize la creó automáticamente)
-
-### 6.4 Probar Formulario de Contacto
-
-1. Llena el formulario en `https://marketingmistico.com`
-2. Verifica en phpMyAdmin que el lead se guardó:
-   ```sql
-   SELECT * FROM Leads;
+   Host: ftp.tudominio.com
+   Usuario: tu_usuario_hostinger
+   Password: tu_password
+   Puerto: 21 (o 22 para SFTP)
    ```
 
----
+2. **Navega a `/public_html/`**
 
-## 🔧 TROUBLESHOOTING
+3. **Haz backup** (descarga todo a tu PC primero)
 
-### ❌ "Cannot GET /" en rutas de React
-
-**Solución:** Verifica que `.htaccess` esté en `public_html/`
-
-### ❌ Backend no conecta a MySQL
-
-**Solución:**
-1. Verifica credenciales en `.env`
-2. Asegúrate de que `DB_HOST=localhost`
-3. En hPanel → Node.js → Tu app → **Environment Variables**
-   - Verifica que las variables estén configuradas
-
-### ❌ CORS Error en consola del navegador
-
-**Solución:**
-1. Edita `.env` en el backend
-2. Actualiza `CORS_ORIGINS` con tu dominio real
-3. Reinicia la aplicación Node.js en hPanel
-
-### ❌ Node.js app no inicia
-
-**Solución:**
-1. Ve a hPanel → **Node.js** → Tu app → **Logs**
-2. Revisa errores
-3. Común: Faltan dependencias en `package.json`
+4. **Sube el contenido de la carpeta `build`**
+   - Origen: `C:\Users\ASUS\Documents\Sistemas\Marketing-mistico\frontend\build\*`
+   - Destino: `/public_html/`
 
 ---
 
-## 📝 CHECKLIST FINAL
+## ⚠️ Archivos Críticos a Verificar
 
-Antes de considerar el deployment completo:
+### 1. `.htaccess`
+**Ubicación**: `C:\Users\ASUS\Documents\Sistemas\Marketing-mistico\frontend\public\.htaccess`
 
-- [ ] Frontend en `public_html/` funcionando
-- [ ] `.htaccess` configurado
-- [ ] SSL activado en dominio principal y API
-- [ ] Base de datos MySQL creada
-- [ ] Backend Node.js corriendo en Hostinger
-- [ ] Subdominio API configurado
-- [ ] Formulario de contacto guarda leads
-- [ ] WhatsApp widget funciona
-- [ ] Todas las imágenes/videos cargan
-- [ ] React Router funciona (rutas como `/gestion-leads`)
+Este archivo incluye:
+- Rewrite rules para React Router
+- GZIP compression
+- Cache headers (1 año para assets estáticos)
+- Headers inmutables para JS/CSS con hash
+
+⚠️ **IMPORTANTE**: Si ya tienes un `.htaccess` en Hostinger con configuraciones personalizadas, necesitarás **combinar** las reglas, no sobrescribir completamente.
+
+### 2. `index.html`
+Incluye:
+- Scripts de analytics diferidos (Facebook Pixel, PostHog)
+- Meta tags para SEO
+- Preconnect para Google Fonts
+
+### 3. Carpeta `static/`
+Contiene todos los bundles optimizados:
+- `vendors.*.js` - Librerías (259KB gzipped)
+- `framer.*.js` - Animaciones (12KB gzipped)
+- `main.*.js` - Código principal (1.55KB gzipped) ⭐
+- CSS optimizado
+- Chunks de componentes lazy-loaded
 
 ---
 
-## 🎉 ¡LISTO!
+## 🔍 Verificación Post-Deployment
 
-Una vez completados todos los pasos, tu sitio estará en producción en Hostinger.
+### 1. Verificación Visual (Manual)
+Visita `https://marketingmistico.com` y verifica:
 
-**URLs finales:**
-- Sitio principal: `https://marketingmistico.com`
-- API Backend: `https://api.marketingmistico.com`
-- Dashboard Leads: `https://marketingmistico.com/gestion-leads`
+- [ ] El sitio carga correctamente
+- [ ] Logo se muestra
+- [ ] Hero con video funciona
+- [ ] Menú móvil se abre sin texto superpuesto ⭐ (NUEVO FIX)
+- [ ] Todos los botones funcionan
+- [ ] Formulario de contacto envía correctamente
+- [ ] Lazy loading funciona (componentes aparecen al hacer scroll)
+- [ ] No hay errores en la consola del navegador
+
+### 2. Verificación de Analytics
+- [ ] Facebook Pixel dispara eventos (verifica en Events Manager)
+- [ ] PostHog registra sesiones (verifica en dashboard)
+
+### 3. Verificación de Performance
+1. Abre Chrome DevTools → Network tab
+2. Refresca la página (Ctrl + Shift + R)
+3. Verifica que:
+   - [ ] Los archivos JS tienen nombres con hash (ej: `main.9937be8b.js`)
+   - [ ] Los headers de cache están activos (mira "Cache-Control" en Response Headers)
+   - [ ] GZIP compression activa (mira "Content-Encoding: gzip")
+
+4. **Corre el Speed Test nuevamente**
+   - Usa la misma herramienta que usaste antes
+   - Compara con resultados anteriores:
+     - Desktop: Esperamos 85+ (antes: 63)
+     - Mobile: Esperamos 70+ (antes: 49)
+     - Mobile LCP: Esperamos < 2.5s (antes: 7.5s)
 
 ---
 
-## 📞 Ayuda Adicional
+## 📊 Resultados Esperados
 
-- **Hostinger Support:** Chat 24/7 en hPanel
-- **Logs del backend:** hPanel → Node.js → Tu app → Logs
-- **Logs de errores:** hPanel → File Manager → `public_html/error_log`
+### Desktop
+| Métrica | Antes | Esperado | Target |
+|---------|-------|----------|--------|
+| Score | 63 | 85+ | 90+ |
+| TBT | 520ms | ~300ms | < 300ms |
+| LCP | 2.0s | < 1.8s | < 2.5s |
+
+### Mobile
+| Métrica | Antes | Esperado | Target |
+|---------|-------|----------|--------|
+| Score | 49 | 70+ | 90+ |
+| TBT | 730ms | ~400ms | < 300ms |
+| LCP | 7.5s ⚠️ | < 2.5s ✅ | < 2.5s |
+| FCP | 2.8s | < 1.8s | < 1.8s |
+
+---
+
+## 🆘 Troubleshooting
+
+### Problema: "404 Not Found" en rutas (ej: /portfolio)
+**Solución**: Verifica que el archivo `.htaccess` se haya subido correctamente con las reglas de RewriteRule.
+
+### Problema: Imágenes no cargan
+**Solución**: Verifica que todas las imágenes .webp, .mp4, .webm se hayan subido a la raíz de `public_html/`
+
+### Problema: Analytics no funcionan
+**Solución**: Normal. Los scripts ahora se cargan después de window.onload. Espera ~2-3 segundos después de que cargue la página y verifica nuevamente.
+
+### Problema: CSS no se aplica
+**Solución**: 
+1. Limpia caché del navegador (Ctrl + Shift + Delete)
+2. Abre en modo incógnito
+3. Verifica que `static/css/main.*.css` se haya subido
+
+### Problema: Menú móvil aún muestra texto superpuesto
+**Solución**: Limpia caché del navegador. El fix está en el nuevo `Navbar.jsx` que se compiló en el build.
+
+---
+
+## 📝 Notas Finales
+
+1. **Backup**: Siempre mantén un backup del sitio anterior por si necesitas rollback
+2. **Cache del navegador**: Los visitantes recurrentes pueden necesitar limpiar caché para ver los cambios
+3. **CDN**: Si usas Cloudflare o CDN de Hostinger, purga el caché después del deployment
+4. **Monitoreo**: Monitorea Google Analytics/PostHog las primeras 24-48 horas para detectar problemas
+
+---
+
+## ✅ Checklist Final de Deployment
+
+- [ ] Backup del sitio actual creado
+- [ ] Contenido de `/build` subido a `/public_html/`
+- [ ] `.htaccess` verificado y funcionando
+- [ ] Sitio carga correctamente en escritorio
+- [ ] Sitio carga correctamente en móvil  
+- [ ] Menú móvil funciona sin texto superpuesto
+- [ ] Formulario de contacto funciona
+- [ ] Analytics (Facebook Pixel + PostHog) funcionan
+- [ ] Speed test ejecutado y resultados mejorados
+- [ ] No hay errores en consola del navegador
+
+---
+
+## 🎯 Siguientes Pasos (Opcional)
+
+Si los resultados de performance aún no alcanzan los targets:
+
+1. **Compresión de Imágenes**: Optimizar manualmente las imágenes grandes en `/public`:
+   - `thumb_icalp.webp` (848KB) → puede reducirse a ~200KB
+   - `thumb_auditores.png` (793KB) → convertir a WebP y reducir
+
+2. **Service Worker**: Implementar PWA para caching offline
+
+3. **Lazy load de videos**: Cargar video del hero solo cuando es visible
+
+¿Necesitas ayuda con algún paso específico del deployment?
