@@ -49,6 +49,9 @@ const VideoCard = ({ video, setSelectedVideo }) => {
           <img
             src={video.thumbnail}
             alt={video.title}
+            loading="lazy"
+            width="650"
+            height="450"
             className={`w-full h-full object-cover transition-opacity duration-1000 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
           />
           {!video.externalUrl && (
@@ -58,6 +61,7 @@ const VideoCard = ({ video, setSelectedVideo }) => {
                 muted
                 loop
                 playsInline
+                preload="none"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               />
           )}
@@ -73,12 +77,12 @@ const VideoCard = ({ video, setSelectedVideo }) => {
                 y: isHovered ? 0 : 10 
               }}
             >
-              {video.externalUrl ? <ArrowRight className="text-black" size={24} className="md:w-8 md:h-8" /> : <Play className="text-black" size={24} className="md:w-8 md:h-8" fill="currentColor" />}
+              {video.externalUrl ? <ArrowRight className="text-black md:w-8 md:h-8" size={24} /> : <Play className="text-black md:w-8 md:h-8" size={24} fill="currentColor" />}
             </motion.div>
           </div>
 
           <div className="absolute top-6 left-6 md:top-10 md:left-10">
-            <span className="bg-black/60 backdrop-blur-2xl text-[#c9a961] text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-black px-4 py-2 md:px-6 md:py-3 rounded-xl md:rounded-2xl border border-[#c9a961]/30 shadow-2xl">
+            <span className="bg-black/60 backdrop-blur-2xl text-[#c9a961] text-[8px] md:text-[9px] lg:text-[10px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-black px-3 py-1.5 md:px-6 md:py-3 rounded-lg md:rounded-2xl border border-[#c9a961]/30 shadow-2xl">
               {video.category}
             </span>
           </div>
@@ -86,7 +90,7 @@ const VideoCard = ({ video, setSelectedVideo }) => {
 
         {/* Content Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10 transition-transform duration-500 group-hover:translate-y-[-10px] md:group-hover:translate-y-[-15px]">
-          <h3 className="text-2xl md:text-5xl font-black text-white mb-4 md:mb-5 tracking-tighter group-hover:text-[#c9a961] transition-colors leading-[1] md:leading-[0.95] drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+          <h3 className="text-xl md:text-3xl lg:text-5xl font-black text-white mb-3 md:mb-5 tracking-tighter group-hover:text-[#c9a961] transition-colors leading-[1] md:leading-[0.95] drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
             {video.title}
           </h3>
           <div className="flex items-center justify-between pt-6 md:pt-8 border-t border-white/20">
@@ -159,7 +163,7 @@ const Videos = () => {
               transition={{ duration: 0.8 }}
             >
                 <span className="text-[#c9a961] text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-black mb-4 block">Legado de Impacto</span>
-                <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter leading-tight mb-4 md:mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-6xl font-black text-white tracking-tighter leading-tight mb-4 md:mb-6">
                   Casos de <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Éxito</span>
                 </h2>
                 <div className="flex items-center justify-center gap-4">

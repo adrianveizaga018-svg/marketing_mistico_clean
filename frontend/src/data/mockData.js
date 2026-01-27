@@ -397,6 +397,182 @@ export const portfolioDetails = {
   }
 };
 
+export const problemsData = {
+  title: "¿Te Suena Familiar?",
+  subtitle: "Estos son los desafíos que enfrentan nuestros clientes antes de trabajar con nosotros",
+  problems: [
+    {
+      id: 1,
+      icon: "TrendingDown",
+      title: "Gastas en Publicidad y No Ves Resultados",
+      description: "Inviertes dinero en Facebook Ads o TikTok pero no generas ventas reales. No sabes si tu inversión está funcionando o solo estás quemando presupuesto."
+    },
+    {
+      id: 2,
+      icon: "Users",
+      title: "Tu Negocio es Invisible en Redes",
+      description: "Tienes productos o servicios increíbles, pero nadie te encuentra. Tu competencia está captando todos los clientes mientras tú quedas relegado."
+    },
+    {
+      id: 3,
+      icon: "Clock",
+      title: "No Tienes Tiempo ni Conocimiento",
+      description: "Intentas hacer marketing por tu cuenta pero no sabes por dónde empezar. Entre gestionar tu negocio y crear contenido, no te alcanza el tiempo."
+    },
+    {
+      id: 4,
+      icon: "AlertCircle",
+      title: "Tus Redes No Convierten en Ventas",
+      description: "Tienes seguidores, pero no se traducen en clientes reales. Tu sitio web no convierte visitas en ventas y pierdes oportunidades cada día."
+    }
+  ]
+};
+
+export const solutionData = {
+  badge: "La Transformación Marketing Místico",
+  title: "Convertimos Tu Inversión en Ventas Reales",
+  subtitle: "No vendemos servicios, creamos sistemas de adquisición de clientes que funcionan 24/7",
+  features: [
+    {
+      id: 1,
+      icon: "Target",
+      title: "Estrategia Basada en Datos",
+      description: "No hacemos publicidad al azar. Cada campaña está respaldada por análisis de audiencia, competencia y comportamiento de compra."
+    },
+    {
+      id: 2,
+      icon: "Zap",
+      title: "Creatividades que Venden",
+      description: "Videos, diseños y copy que capturan atención en 3 segundos y convierten scroll en clics y clics en clientes."
+    },
+    {
+      id: 3,
+      icon: "BarChart",
+      title: "Optimización Constante",
+      description: "Monitoreamos y ajustamos tus campañas diariamente para maximizar resultados y minimizar costos de adquisición."
+    },
+    {
+      id: 4,
+      icon: "Shield",
+      title: "Transparencia Total",
+      description: "Reportes claros con métricas que importan: cuánto invertiste, cuántos clientes generaste, cuál fue tu retorno real."
+    }
+  ],
+  transformation: {
+    before: "Sin dirección, gastando dinero sin resultados claros",
+    after: "Sistema predecible de generación de clientes y ventas"
+  }
+};
+
+export const offerData = {
+  badge: "Nuestra Oferta Completa",
+  title: "Sistema de Marketing Todo-en-Uno",
+  subtitle: "Todo lo que necesitas para hacer crecer tu negocio en un solo lugar",
+  packages: [
+    {
+      id: 1,
+      name: "Starter",
+      price: "Desde $500/mes",
+      description: "Para emprendedores que quieren empezar a vender online",
+      features: [
+        "Gestión de 1 plataforma (Facebook o TikTok)",
+        "Creación de 4 creatividades mensuales (imagen o video)",
+        "Configuración y optimización de campañas",
+        "Copywriting básico para anuncios",
+        "Reporte semanal de resultados",
+        "Soporte por WhatsApp",
+        "Inversión publicitaria sugerida: $300-500 USD/mes"
+      ],
+      highlight: false
+    },
+    {
+      id: 2,
+      name: "Growth",
+      price: "Desde $900/mes",
+      description: "Para negocios listos para escalar",
+      features: [
+        "Gestión multi-plataforma (Facebook + TikTok + Instagram)",
+        "8 creatividades mensuales premium",
+        "Copywriting profesional para anuncios",
+        "Landing page de alta conversión incluida",
+        "Optimización diaria + A/B testing",
+        "Automatización básica de leads (WhatsApp o Email)",
+        "Reportes detallados + reunión estratégica mensual",
+        "Inversión publicitaria sugerida: $800-1500 USD/mes"
+      ],
+      highlight: true
+    },
+    {
+      id: 3,
+      name: "Enterprise",
+      price: "Personalizado",
+      description: "Solución completa para empresas",
+      features: [
+        "Todo lo incluido en Growth",
+        "Desarrollo web / landing / ecommerce a medida",
+        "Producción de videos profesionales",
+        "Automatización avanzada de ventas",
+        "CRM personalizado con pipelines",
+        "Integración de chatbots inteligentes (IA)",
+        "Sistemas web y apps personalizadas",
+        "Email marketing automatizado",
+        "Dashboards y analítica avanzada",
+        "Webhooks y APIs personalizadas",
+        "Consultoría estratégica continua",
+        "Presupuesto según alcance del proyecto"
+      ],
+      highlight: false
+    }
+  ],
+  guarantee: "Si en los primeros 30 días no ves progreso medible, ajustamos la estrategia completamente sin costo adicional.",
+  cta: "Agenda tu Asesoría Gratuita"
+};
+
+
+export const consequencesData = {
+  badge: "El Costo de la Inacción",
+  title: "¿Cuánto Te Está Costando NO Invertir en Marketing?",
+  subtitle: "Mientras tú esperas, tu competencia está captando a TUS clientes potenciales",
+  stats: [
+    {
+      id: 1,
+      number: "73%",
+      label: "de consumidores buscan en redes antes de comprar",
+      description: "Si no estás visible, no existes para ellos"
+    },
+    {
+      id: 2,
+      number: "$2,400",
+      label: "promedio perdido cada mes",
+      description: "Por cada mes que no inviertes en marketing estratégico"
+    },
+    {
+      id: 3,
+      number: "5X",
+      label: "más caro conseguir clientes después",
+      description: "Esperar significa competir con marcas ya establecidas"
+    }
+  ],
+  urgency: {
+    title: "Cada Día Que Pasa:",
+    points: [
+      "❌ Tu competencia gana clientes que pudieron ser tuyos",
+      "❌ Pierdes oportunidades de venta que nunca vuelven",
+      "❌ Tu marca se vuelve más invisible en el mercado",
+      "❌ El costo de destacar se incrementa mes a mes"
+    ]
+  },
+  action: {
+    title: "O Empiezas Hoy a:",
+    points: [
+      "✅ Captar clientes de forma predecible y escalable",
+      "✅ Posicionarte como autoridad en tu industria",
+      "✅ Generar ventas mientras duermes",
+      "✅ Construir un activo digital que crece con el tiempo"
+    ]
+  }
+};
+
 export const faqData = [
   {
     question: "¿Cuánto tiempo toma ver resultados?",
@@ -431,3 +607,61 @@ export const faqData = [
     answer: "Trabajamos con total transparencia. Si no estás satisfecho, puedes cancelar el servicio al finalizar el mes en curso sin penalidades. Además, si en los primeros 30 días no ves progreso, te ayudamos a ajustar la estrategia completamente sin costo adicional."
   }
 ];
+
+// Datos adicionales para el Portfolio
+export const videosPortfolioData = [
+  { 
+    id: 101, 
+    title: "La Magia de la Navidad", 
+    client: "Pasión Criolla", 
+    thumbnail: "/thumb_pasion_1.webp", // Fallback or placeholder, actual embed will show
+    video: "https://player.vimeo.com/video/1154010752?badge=0&autopause=0&player_id=0&app_id=58479",
+    category: "Spot Publicitario", 
+    duration: "1:00",
+    type: "vimeo"
+  },
+  { 
+    id: 102, 
+    title: "Experiencia Sensorial: Café & Bar", 
+    client: "Pasión Criolla", 
+    thumbnail: "/thumb_pasion_2.webp", 
+    video: "https://player.vimeo.com/video/1154011401?badge=0&autopause=0&player_id=0&app_id=58479",
+    category: "Video Promocional", 
+    duration: "0:45",
+    type: "vimeo"
+  },
+  { 
+    id: 103, 
+    title: "Excelencia Académica", 
+    client: "CENEFCO", 
+    thumbnail: "/thumb_cenefco.webp", 
+    video: "https://player.vimeo.com/video/1154013061?badge=0&autopause=0&player_id=0&app_id=58479",
+    category: "Institucional", 
+    duration: "1:30",
+    type: "vimeo"
+  }
+];
+
+export const brandingPortfolioData = []; // Removed as requested
+
+export const webPortfolioData = [
+  { 
+    id: 301, 
+    title: "Portal Institucional ICALP", 
+    client: "Ilustre Colegio de Abogados de La Paz", 
+    image: "/thumb_icalp.webp", 
+    category: "Portal Web", 
+    tech: "WordPress + Custom Theme",
+    link: "https://icalp.org.bo"
+  },
+  { 
+    id: 302, 
+    title: "Portal Institucional CAULP", 
+    client: "Colegio de Auditores de La Paz", 
+    image: "/thumb_auditores.png", 
+    category: "Portal Web", 
+    tech: "WordPress + Custom Design",
+    link: "https://caulp.org.bo"
+  }
+];
+

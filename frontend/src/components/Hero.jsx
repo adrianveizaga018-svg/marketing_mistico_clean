@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles, Play } from 'lucide-react';
 import { heroData } from '../data/mockData';
 import metaPixel from '../lib/metaPixel';
 
 const Hero = () => {
-  const handleSchedule = () => {
-    metaPixel.trackSchedule();
-  };
   const [displayText, setDisplayText] = useState('');
   const fullText = heroData.title;
+  const videoRef = useRef(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -24,6 +23,34 @@ const Hero = () => {
     return () => clearInterval(typingInterval);
   }, []);
 
+  // Lazy load video after hero is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldLoadVideo(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '100px' }
+    );
+
+    const heroElement = document.getElementById('hero');
+    if (heroElement) {
+      observer.observe(heroElement);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleSchedule = () => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Schedule');
+    }
+  };
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -33,18 +60,26 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative flex items-center overflow-hidden min-h-screen bg-black">
-      {/* Video Background - Optimized WebM version */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-y-0 right-0 w-full md:w-[95%] h-full object-cover z-0 pointer-events-none will-change-transform filter brightness-110 contrast-105"
-        style={{ objectPosition: '70% center' }}
-      >
-        <source src="/video_header.mp4" type="video/mp4" />
-      </video>
+      {/* Video Background - Lazy loaded with poster */}
+      <div className={`absolute inset-y-0 right-0 w-full md:w-[95%] h-full transition-opacity duration-1000 ${shouldLoadVideo ? 'opacity-100' : 'opacity-0'}`}>
+        {shouldLoadVideo && (
+          <video
+            ref={videoRef}
+            width="1920"
+            height="1080"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover pointer-events-none filter brightness-110 contrast-105"
+            style={{ objectPosition: '70% center' }}
+          >
+            <source src="/video_header.webm" type="video/webm" />
+            <source src="/video_header.mp4" type="video/mp4" />
+          </video>
+        )}
+      </div>
       
       {/* Gradient Overlay - integrations video with background */}
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-[1]"></div>
@@ -107,11 +142,11 @@ const Hero = () => {
               <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={18} />
             </a>
             <button 
-              onClick={() => scrollToSection('videos')}
+              onClick={() => scrollToSection('problemas')}
               className="group bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 font-semibold text-sm px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]"
             >
               <Play size={16} className="sm:w-[18px] sm:h-[18px] text-[#c9a961]" />
-              <span className="text-xs sm:text-sm">{heroData.ctaSecondary}</span>
+              <span className="text-xs sm:text-sm">Ver Más</span>
             </button>
           </div>
 

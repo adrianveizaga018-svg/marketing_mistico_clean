@@ -5,22 +5,22 @@ import AnimatedCounter from './AnimatedCounter';
 
 const Authority = () => {
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-black relative overflow-hidden">
       {/* Background radial glow - Now animated */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[#c9a961]/5 blur-[120px] rounded-full pointer-events-none animate-ambient"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-16 md:mb-24">
           {autorityData.stats.map((stat, index) => (
             <div 
               key={index} 
               className="text-center group"
             >
-              <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-[#c9a961] to-[#d4af37] mb-3 tracking-tighter transition-transform duration-500 group-hover:scale-110">
+              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-[#c9a961] to-[#d4af37] mb-2 md:mb-3 tracking-tighter transition-transform duration-500 group-hover:scale-110">
                 <AnimatedCounter value={stat.number} duration={2.5} />
               </div>
-              <div className="text-white/40 text-xs md:text-sm uppercase tracking-[0.2em] font-bold">{stat.label}</div>
+              <div className="text-white/40 text-[10px] md:text-xs lg:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-bold leading-tight">{stat.label}</div>
             </div>
           ))}
         </div>

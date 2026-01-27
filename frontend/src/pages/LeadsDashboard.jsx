@@ -41,18 +41,17 @@ const LeadsDashboard = () => {
   const fetchLeads = async () => {
     setIsLoading(true);
     try {
-      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const apiUrl = process.env.REACT_APP_API_URL || (isLocal ? `http://${window.location.hostname}:5000` : 'https://api.marketingmistico.com');
-      const apiKey = process.env.REACT_APP_API_KEY || 'mm_secret_98234521_mistico_2026';
-      const response = await fetch(`${apiUrl}/api/leads`, {
-        headers: {
-          'x-api-key': apiKey
-        }
-      });
+      // Fetch directly from the PHP backend on the same domain
+      const response = await fetch('/leads_api.php');
+      
       if (response.ok) {
         const data = await response.json();
-        // Sort by timestamp descending
-        setLeads(data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)));
+        // Ensure timestamp is valid date
+        const validData = data.map(item => ({
+            ...item,
+            timestamp: new Date(item.timestamp || item.fecha)
+        }));
+        setLeads(validData);
         setLastRefreshed(new Date());
       }
     } catch (err) {

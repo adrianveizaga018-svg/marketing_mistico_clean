@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { footerData } from '../data/mockData';
 import metaPixel from '../lib/metaPixel';
@@ -6,6 +7,12 @@ import WhatsAppWidget from './WhatsAppWidget';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const quickLinks = [
+    { name: 'Inicio', path: '/' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Agendar Cita', path: 'https://calendar.app.google/7Kjy2fZJmhGaNFef6', external: true }
+  ];
 
   return (
     <footer className="bg-black border-t border-[#c9a961]/20 pt-20 pb-10">
@@ -33,13 +40,21 @@ const Footer = () => {
               <span className="w-8 h-[2px] bg-[#c9a961]"></span> Explorar <span className="w-8 h-[2px] bg-[#c9a961]"></span>
             </h3>
             <ul className="space-y-4">
-              {['Inicio', 'Nosotros', 'Portafolio', 'Casos de Éxito', 'Agendar Cita'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
-                    <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
-                    {item}
-                    <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
-                  </a>
+              {quickLinks.map((item) => (
+                <li key={item.name}>
+                  {item.external ? (
+                    <a href={item.path} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
+                      <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
+                      {item.name}
+                      <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
+                    </a>
+                  ) : (
+                    <Link to={item.path} className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
+                      <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
+                      {item.name}
+                      <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

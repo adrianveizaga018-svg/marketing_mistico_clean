@@ -12,11 +12,11 @@ const iconMap = {
 
 const Services = () => {
   return (
-    <section id="servicios" className="py-24 bg-black relative">
+    <section id="servicios" className="py-12 md:py-24 bg-black relative">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+        <div className="text-center mb-10 md:mb-16 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 md:mb-6 tracking-tight">
             Servicios que <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Impulsan Crecimiento</span>
           </h2>
           <p className="text-lg md:text-xl text-white/50 max-w-3xl mx-auto font-medium">

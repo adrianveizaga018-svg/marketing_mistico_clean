@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import Authority from '../components/Authority';
-import Videos from '../components/Videos';
-import Testimonials from '../components/Testimonials';
-import GraphicsCarousel from '../components/GraphicsCarousel';
-import Services from '../components/Services';
-import Process from '../components/Process';
-import FAQ from '../components/FAQ';
-import CTA from '../components/CTA';
-import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
-import PromoBanner from '../components/PromoBanner';
 import MysticCursor from '../components/MysticCursor';
+import LazySection from '../components/LazySection';
+
+// Lazy load below-the-fold components
+const Testimonials = lazy(() => import('../components/Testimonials'));
+const Problems = lazy(() => import('../components/Problems'));
+const Solution = lazy(() => import('../components/Solution'));
+const Offer = lazy(() => import('../components/Offer'));
+const Authority = lazy(() => import('../components/Authority'));
+const Consequences = lazy(() => import('../components/Consequences'));
+const FAQ = lazy(() => import('../components/FAQ'));
+const CTA = lazy(() => import('../components/CTA'));
+const ContactForm = lazy(() => import('../components/ContactForm'));
+const Footer = lazy(() => import('../components/Footer'));
 
 const Home = () => {
   return (
-    <div className="bg-black relative min-h-screen">
+    <div className="bg-black relative min-h-screen lg:cursor-none">
       <MysticCursor />
       {/* Ambient Background Auras */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -26,19 +28,21 @@ const Home = () => {
       </div>
 
       <div className="relative z-10">
+        {/* Critical above-the-fold components - load immediately */}
         <Navbar />
         <Hero />
-        <Authority />
-        <Videos />
-        <Testimonials />
-        <Process />
-        <GraphicsCarousel />
-        <Services />
-        <FAQ />
-        <PromoBanner />
-        <CTA />
-        <ContactForm />
-        <Footer />
+
+        {/* Below-the-fold components - lazy load */}
+        <LazySection component={Testimonials} />
+        <LazySection component={Problems} />
+        <LazySection component={Solution} />
+        <LazySection component={Offer} />
+        <LazySection component={Authority} />
+        <LazySection component={Consequences} />
+        <LazySection component={FAQ} />
+        <LazySection component={CTA} />
+        <LazySection component={ContactForm} />
+        <LazySection component={Footer} />
       </div>
     </div>
   );

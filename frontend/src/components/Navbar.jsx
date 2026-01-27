@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, ShieldCheck } from 'lucide-react';
 
 const Navbar = () => {
@@ -12,6 +13,18 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -36,8 +49,8 @@ const Navbar = () => {
                 className="h-8 sm:h-10 md:h-14 transition-all transform hover:scale-105"
               />
             </div>
-            <a 
-              href="/gestion-leads" 
+            <a
+              href="/gestion-leads"
               className="text-[#c9a961]/20 hover:text-[#c9a961] transition-all duration-500 mt-1"
               title="Acceso Gestión"
             >
@@ -47,20 +60,21 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 mt-1">
-            {['Servicios', 'Trabajos', 'Proceso'].map((item) => (
-              <button 
-                key={item}
-                onClick={() => {
-                  const targetId = item === 'Trabajos' ? 'videos' : item.toLowerCase();
-                  scrollToSection(targetId);
-                }} 
-                className="relative text-[#c9a961] hover:text-white transition-colors group py-2 text-xs uppercase tracking-[0.2em] font-bold"
-              >
-                {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c9a961] transition-all duration-300 group-hover:w-full"></span>
-              </button>
-            ))}
-            <button 
+            <button
+              onClick={() => scrollToSection('oferta')}
+              className="relative text-[#c9a961] hover:text-white transition-colors group py-2 text-xs uppercase tracking-[0.2em] font-bold"
+            >
+              Servicios
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c9a961] transition-all duration-300 group-hover:w-full"></span>
+            </button>
+            <Link
+              to="/portfolio"
+              className="relative text-[#c9a961] hover:text-white transition-colors group py-2 text-xs uppercase tracking-[0.2em] font-bold"
+            >
+              Portfolio
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c9a961] transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <button
               onClick={() => scrollToSection('contacto')}
               className="bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs uppercase tracking-widest px-8 py-3 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_25px_rgba(201,169,97,0.4)]"
             >
@@ -69,8 +83,8 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-[#c9a961] p-2 -mr-2"
+          <button
+            className="md:hidden text-[#c9a961] p-2 -mr-2 relative z-50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -80,23 +94,29 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-[#c9a961]/20">
-            <div className="flex flex-col gap-4 pt-4">
-              <button onClick={() => scrollToSection('servicios')} className="text-[#c9a961] hover:text-white transition-colors text-left">
-                Servicios
-              </button>
-              <button onClick={() => scrollToSection('videos')} className="text-[#c9a961] hover:text-white transition-colors text-left">
-                Trabajos
-              </button>
-              <button onClick={() => scrollToSection('proceso')} className="text-[#c9a961] hover:text-white transition-colors text-left">
-                Proceso
-              </button>
-              <button 
-                onClick={() => scrollToSection('contacto')}
-                className="bg-[#c9a961] hover:bg-[#d4af37] text-[#1a1f2e] font-semibold px-6 py-2 rounded-full transition-all text-center"
-              >
-                Contactar
-              </button>
+          <div className="md:hidden absolute left-0 right-0 top-full bg-black/98 backdrop-blur-xl border-t border-[#c9a961]/30 shadow-[0_10px_40px_rgba(0,0,0,0.9)]">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="flex flex-col gap-4 py-6">
+                <button
+                  onClick={() => scrollToSection('oferta')}
+                  className="text-[#c9a961] hover:text-white transition-colors text-left py-3 px-4 rounded-lg hover:bg-white/5 font-semibold text-base"
+                >
+                  Servicios
+                </button>
+                <Link
+                  to="/portfolio"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[#c9a961] hover:text-white transition-colors text-left py-3 px-4 rounded-lg hover:bg-white/5 font-semibold text-base"
+                >
+                  Portfolio
+                </Link>
+                <button
+                  onClick={() => scrollToSection('contacto')}
+                  className="bg-[#c9a961] hover:bg-[#d4af37] text-black font-bold px-8 py-4 rounded-full transition-all text-center text-base mt-2 shadow-lg"
+                >
+                  Contactar
+                </button>
+              </div>
             </div>
           </div>
         )}

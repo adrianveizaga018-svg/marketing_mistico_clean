@@ -5,33 +5,45 @@ import { graphicsData, portfolioDetails } from '../data/mockData';
 import * as Icons from 'lucide-react';
 import metaPixel from '../lib/metaPixel';
 
-const PortfolioModal = ({ isOpen, projectId, onClose, onNavigate }) => {
+const PortfolioModal = ({ isOpen, projectId, onClose, onNavigate, projectData = [] }) => {
+  // If no specific data passed, try to use graphicsData as fallback (for backward compatibility if needed)
+  // or better, just use the passed data. 
+  
   useEffect(() => {
     if (isOpen && projectId) {
-      const project = graphicsData.find(p => p.id === projectId);
+      const project = projectData.find(p => p.id === projectId);
       if (project) {
         metaPixel.trackPortfolioView(project.title);
       }
     }
-  }, [isOpen, projectId]);
+  }, [isOpen, projectId, projectData]);
 
   if (!isOpen || !projectId) return null;
 
-  const project = graphicsData.find(p => p.id === projectId);
-  const details = portfolioDetails[projectId];
+  const project = projectData.find(p => p.id === projectId);
+  const details = portfolioDetails[projectId] || { 
+    // Fallback details if specific case study data is missing
+    problem: "El cliente buscaba elevar su presencia digital y conectar con su audiencia objetivo de manera efectiva.",
+    solution: "Desarrollamos una solución a medida enfocada en la calidad visual y la conversión, utilizando las últimas tendencias del mercado.",
+    results: [
+      { label: "Satisfacción", value: "100%", icon: "Star" },
+      { label: "Entrega", value: "A Tiempo", icon: "Clock" },
+      { label: "Calidad", value: "Premium", icon: "CheckCircle" }
+    ]
+  };
 
-  if (!project || !details) return null;
+  if (!project) return null;
 
   const handlePrevious = () => {
-    const currentIndex = graphicsData.findIndex(p => p.id === projectId);
-    const prevIndex = currentIndex === 0 ? graphicsData.length - 1 : currentIndex - 1;
-    onNavigate(graphicsData[prevIndex].id);
+    const currentIndex = projectData.findIndex(p => p.id === projectId);
+    const prevIndex = currentIndex === 0 ? projectData.length - 1 : currentIndex - 1;
+    onNavigate(projectData[prevIndex].id);
   };
 
   const handleNext = () => {
-    const currentIndex = graphicsData.findIndex(p => p.id === projectId);
-    const nextIndex = currentIndex === graphicsData.length - 1 ? 0 : currentIndex + 1;
-    onNavigate(graphicsData[nextIndex].id);
+    const currentIndex = projectData.findIndex(p => p.id === projectId);
+    const nextIndex = currentIndex === projectData.length - 1 ? 0 : currentIndex + 1;
+    onNavigate(projectData[nextIndex].id);
   };
 
   return (
@@ -89,7 +101,7 @@ const PortfolioModal = ({ isOpen, projectId, onClose, onNavigate }) => {
             <div className="mb-8">
               <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10">
                 <img
-                  src={project.image}
+                  src={project.image || project.thumbnail}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />

@@ -71,6 +71,8 @@ const GraphicsCarousel = () => {
                       src={item.image} 
                       alt={item.title}
                       loading="lazy"
+                      width="350"
+                      height="438"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     {/* Overlay */}

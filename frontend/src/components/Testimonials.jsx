@@ -5,7 +5,7 @@ import { Quote } from 'lucide-react';
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-black relative overflow-hidden">
       {/* Background Decorative Glows */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#c9a961]/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#c9a961]/5 blur-[120px] rounded-full pointer-events-none"></div>
@@ -17,9 +17,9 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 md:mb-6 tracking-tight">
             Lo Que Dicen Nuestros{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">
               Clientes
@@ -42,19 +42,19 @@ const Testimonials = () => {
               whileHover={{ y: -8 }}
               className="group relative"
             >
-              <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 h-full
+              <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-8 h-full
                             hover:border-[#c9a961]/40 transition-all duration-500 shadow-2xl
                             hover:shadow-[0_0_30px_rgba(201,169,97,0.15)] relative overflow-hidden">
                 
                 {/* Quote Icon */}
-                <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Quote className="w-16 h-16 text-[#c9a961]" />
+                <div className="absolute top-4 right-4 md:top-6 md:right-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Quote className="w-12 h-12 md:w-16 md:h-16 text-[#c9a961]" />
                 </div>
 
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Quote */}
-                  <p className="text-white/80 italic leading-relaxed mb-8 text-base">
+                  <p className="text-white/80 italic leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
                     "{testimonial.content}"
                   </p>
 

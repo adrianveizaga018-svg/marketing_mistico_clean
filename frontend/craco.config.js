@@ -65,6 +65,45 @@ const webpackConfig = {
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
       }
+
+      // Production optimizations
+      if (process.env.NODE_ENV === 'production') {
+        // Optimize bundle splitting
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              // Vendor libraries (node_modules)
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                priority: 10,
+              },
+              // Radix UI components (large UI library)
+              radix: {
+                test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+                name: 'radix',
+                priority: 20,
+              },
+              // Framer Motion (animation library)
+              framer: {
+                test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+                name: 'framer',
+                priority: 20,
+              },
+              // Common code shared between chunks
+              common: {
+                minChunks: 2,
+                priority: 5,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+          runtimeChunk: 'single',
+        };
+      }
+
       return webpackConfig;
     },
   },

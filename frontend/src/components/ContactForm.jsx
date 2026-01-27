@@ -60,21 +60,17 @@ const ContactForm = () => {
     // Track Lead on Meta Pixel
     metaPixel.trackLead();
 
-    // 1. Fire-and-forget backend save (Non-blocking)
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const apiUrl = process.env.REACT_APP_API_URL || (isLocal ? `http://${window.location.hostname}:5000` : 'https://api.marketingmistico.com');
-    const apiKey = process.env.REACT_APP_API_KEY || 'mm_secret_98234521_mistico_2026';
-    fetch(`${apiUrl}/api/leads`, {
+    // 1. Send data to local PHP backend (Hostinger)
+    fetch('/contact.php', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData),
     }).then(response => {
-        if (response.ok) console.log("Lead saved to specialized DB");
+        if (response.ok) console.log("Lead saved via PHP");
     }).catch(error => {
-        console.warn('Backend connection issue (Non-critical):', error);
+        console.warn('PHP Backend connection issue:', error);
     });
 
     // 2. Simulate "Processing" visualization (1.2s fixed)

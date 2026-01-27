@@ -16,7 +16,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c9a961]/5 blur-[150px] rounded-full pointer-events-none"></div>
       
@@ -27,9 +27,9 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 md:mb-6 tracking-tight">
             Preguntas <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Frecuentes</span>
           </h2>
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-medium">

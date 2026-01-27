@@ -13,7 +13,7 @@ const iconMap = {
 
 const Process = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#c9a961]/5 blur-[150px] rounded-full pointer-events-none"></div>
 
@@ -24,9 +24,9 @@ const Process = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">
             {processData.title}
           </h2>
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-medium">
@@ -125,10 +125,10 @@ const Process = () => {
                   {/* Content Card */}
                   <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6
                                 hover:border-[#c9a961]/40 transition-all duration-300">
-                    <div className="text-[#c9a961]/30 text-3xl font-black mb-2">
+                    <div className="text-[#c9a961]/30 text-2xl md:text-3xl font-black mb-2">
                       {step.number}
                     </div>
-                    <h3 className="text-xl font-black text-white mb-3">
+                    <h3 className="text-lg md:text-xl font-black text-white mb-2 md:mb-3">
                       {step.title}
                     </h3>
                     <p className="text-white/60 text-sm leading-relaxed">
