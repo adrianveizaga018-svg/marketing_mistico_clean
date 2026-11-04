@@ -70,3 +70,71 @@ export const services = [
     isNew: true,
   },
 ];
+
+// ─── Invitaciones digitales ─────────────────────────────────────────────
+// Precios y contenido PROPUESTOS: ajústalos a tu realidad antes de publicar.
+export const invitationsSection = {
+  eyebrow: 'Nuevo servicio',
+  title: 'Invitaciones digitales que tus invitados sí abren',
+  subtitle: 'Tu invitación en un link: la mandas por WhatsApp, tus invitados ven la ubicación, la hora y confirman asistencia con un toque. Tú ves quién viene sin llamar a nadie.',
+  events: ['Bodas', 'Quinceañeros', 'Cumpleaños', 'Bautizos', 'Baby shower', 'Graduaciones', 'Eventos de empresa'],
+  // Pega aquí el link de una invitación de muestra para mostrar el botón "Ver ejemplo".
+  demoUrl: '',
+  note: 'Precios en bolivianos. Pago 50% al iniciar y 50% al entregar.',
+};
+
+export const invitationPackages = [
+  {
+    id: 'esencial',
+    name: 'Esencial',
+    price: 150,
+    tagline: 'Para cumpleaños y reuniones',
+    delivery: 'Lista en 2 días hábiles',
+    features: [
+      'Invitación web de una página con tus datos y foto',
+      'Diseño a elegir de nuestras plantillas',
+      'Cuenta regresiva para el evento',
+      'Ubicación con Google Maps',
+      'Botón para confirmar por WhatsApp',
+      '1 ronda de cambios',
+    ],
+  },
+  {
+    id: 'premium',
+    name: 'Premium',
+    price: 300,
+    tagline: 'Para quinceañeros, bautizos y graduaciones',
+    delivery: 'Lista en 3 días hábiles',
+    highlighted: true,
+    features: [
+      'Todo lo del paquete Esencial',
+      'Diseño personalizado con tus colores y temática',
+      'Galería de hasta 15 fotos',
+      'Música de fondo',
+      'Itinerario del evento y código de vestimenta',
+      'Formulario de confirmación con lista de asistentes',
+      '2 rondas de cambios',
+    ],
+  },
+  {
+    id: 'deluxe',
+    name: 'Deluxe',
+    price: 500,
+    tagline: 'Para bodas y eventos especiales',
+    delivery: 'Lista en 5 días hábiles',
+    features: [
+      'Todo lo del paquete Premium',
+      'Animación de apertura tipo sobre',
+      'Link personalizado con el nombre de cada invitado',
+      'Mesa de regalos o QR para transferencias',
+      'Video o historia de la pareja / festejado',
+      'Cambios ilimitados hasta el día del evento',
+    ],
+  },
+];
+
+export const invitationSteps = [
+  { title: 'Escríbenos', text: 'Elige tu paquete y cuéntanos de tu evento por WhatsApp.' },
+  { title: 'Mándanos tus datos', text: 'Fecha, lugar, fotos y nombres. Nosotros diseñamos.' },
+  { title: 'Comparte tu link', text: 'Lo envías por WhatsApp y ves quién confirma.' },
+];

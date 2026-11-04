@@ -6,6 +6,7 @@ import LazySection from '../components/LazySection';
 
 // Lazy load below-the-fold components
 const Services = lazy(() => import('../components/Services'));
+const Invitations = lazy(() => import('../components/Invitations'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const Problems = lazy(() => import('../components/Problems'));
 const Offer = lazy(() => import('../components/Offer'));
@@ -34,6 +35,7 @@ const Home = () => {
 
         {/* Below-the-fold components - lazy load */}
         <LazySection component={Services} anchor="servicios" />
+        <LazySection component={Invitations} anchor="invitaciones" />
         <LazySection component={Testimonials} />
         <LazySection component={Problems} />
         <LazySection component={Offer} />
