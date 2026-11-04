@@ -138,3 +138,16 @@ code {
     }
 }
 
+
+/* Apertura rápida del menú de WhatsApp */
+.animate-pop {
+  animation: pop 0.18s ease-out;
+  transform-origin: bottom right;
+}
+@keyframes pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop { animation: none; }
+}

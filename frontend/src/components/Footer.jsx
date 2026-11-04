@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { footerData } from '../data/mockData';
 import metaPixel from '../lib/metaPixel';
-import WhatsAppWidget from './WhatsAppWidget';
+import { waLink, whatsappMessages } from '../data/contacto';
+import { scrollToSection } from './Navbar';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,7 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Inicio', path: '/' },
     { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Agendar Cita', path: 'https://calendar.app.google/7Kjy2fZJmhGaNFef6', external: true }
+    { name: 'Cotizar por WhatsApp', path: waLink(whatsappMessages.general), external: true }
   ];
 
   return (
@@ -26,7 +27,7 @@ const Footer = () => {
               className="h-14"
             />
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
-              Combinamos la magia de la creatividad con la ciencia de los datos. Tu socio estratégico para dominar el mercado digital en Bolivia y el mundo.
+              Páginas web, sistemas, publicidad, diseño, foto y video e invitaciones digitales para emprendedores y negocios de Bolivia.
             </p>
             <div className="flex items-center justify-center gap-2 text-[#c9a961]/80 text-sm">
               <MapPin size={16} />
@@ -66,9 +67,9 @@ const Footer = () => {
               <span className="w-8 h-[2px] bg-[#c9a961]"></span> Servicios <span className="w-8 h-[2px] bg-[#c9a961]"></span>
             </h3>
             <ul className="space-y-4">
-              {['Publicidad en Redes', 'Desarrollo Web Premium', 'Producción Audiovisual', 'Branding Corporativo', 'Estrategia Digital'].map((item) => (
+              {[['Páginas web', 'servicios'], ['Sistemas a medida', 'servicios'], ['Publicidad en Facebook y TikTok', 'servicios'], ['Diseño, foto y video', 'servicios'], ['Invitaciones digitales', 'invitaciones']].map(([item, anchor]) => (
                 <li key={item}>
-                  <a href="#" className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
+                  <a href={`/#${anchor}`} onClick={(e) => { if (document.querySelector(`[data-anchor="${anchor}"]`)) { e.preventDefault(); scrollToSection(anchor); } }} className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
                     <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
                     {item}
                     <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
@@ -88,7 +89,7 @@ const Footer = () => {
                 <Mail size={18} className="group-hover:animate-bounce" />
                 <span className="break-all">{footerData.email}</span>
               </a>
-              <a href={`https://wa.me/${footerData.whatsapp.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 text-gray-400 hover:text-[#c9a961] transition-colors text-sm group w-full">
+              <a href={waLink(whatsappMessages.general)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 text-gray-400 hover:text-[#c9a961] transition-colors text-sm group w-full">
                 <Phone size={18} className="group-hover:animate-pulse" />
                 <span>{footerData.whatsapp}</span>
               </a>
@@ -101,12 +102,13 @@ const Footer = () => {
                     key={index} 
                     href={social.url} 
                     target="_blank" 
-                    rel="noopener noreferrer" 
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
                     className="w-10 h-10 rounded-lg bg-[#1a1f2e] border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#c9a961] hover:text-black hover:border-[#c9a961] transition-all"
                   >
                      {social.name === 'Facebook' && <Facebook size={18} />}
                      {social.name === 'Instagram' && <Instagram size={18} />}
-                     {social.name === 'Linkedin' && <Linkedin size={18} />}
+                     {social.name === 'LinkedIn' && <Linkedin size={18} />}
                      {social.name === 'TikTok' && (
                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
                          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
@@ -128,14 +130,9 @@ const Footer = () => {
             <a href="/gestion-leads" className="hover:text-[#c9a961] transition-colors flex items-center gap-1">
               <span className="w-1 h-1 bg-[#c9a961] rounded-full"></span> Acceso
             </a>
-            <a href="#" className="hover:text-[#c9a961] transition-colors">Privacidad</a>
-            <a href="#" className="hover:text-[#c9a961] transition-colors">Términos</a>
           </div>
         </div>
       </div>
-
-      {/* WhatsApp Concierge Widget */}
-      <WhatsAppWidget />
     </footer>
   );
 };

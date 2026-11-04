@@ -2,6 +2,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Toaster } from "./components/ui/sonner";
+import WhatsAppWidget from "./components/WhatsAppWidget";
 
 // Lazy load route components for code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -26,6 +27,8 @@ function App() {
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
           </Routes>
         </Suspense>
+        {/* Botón flotante de WhatsApp: visible desde el primer segundo en todas las páginas */}
+        <WhatsAppWidget />
       </BrowserRouter>
       <Toaster />
     </div>
