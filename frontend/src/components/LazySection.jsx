@@ -11,8 +11,9 @@ import React, { Suspense, useState, useEffect, useRef } from 'react';
 const LazySection = ({ 
   component: Component, 
   fallback = null,
-  rootMargin = '100px',
-  ...props 
+  rootMargin = '300px',
+  anchor,
+  ...props
 }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const sectionRef = useRef(null);
@@ -44,7 +45,7 @@ const LazySection = ({
   );
 
   return (
-    <div ref={sectionRef}>
+    <div ref={sectionRef} data-anchor={anchor} className={anchor ? 'scroll-mt-16' : undefined}>
       {shouldLoad ? (
         <Suspense fallback={<LoadingFallback />}>
           <Component {...props} />

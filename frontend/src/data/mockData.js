@@ -1,10 +1,12 @@
 // Mock data para Marketing Místico
 
 export const heroData = {
-  title: "Convertimos Ideas en Ventas",
-  subtitle: "Marketing, publicidad y tecnología para hacer crecer tu negocio",
-  description: "Somos la agencia que transforma tu visión en resultados reales. Estrategia, creatividad y datos para impulsar tu marca.",
-  ctaPrimary: "Agenda Asesoría Gratuita",
+  title: "Hacemos que tu negocio",
+  titleHighlight: "venda más en internet",
+  subtitle: "Páginas web, sistemas a medida, publicidad en Facebook y TikTok, diseño, foto y video, e invitaciones digitales. Todo con un solo equipo.",
+  description: "Para emprendedores y negocios de Bolivia que quieren más clientes, sin complicarse.",
+  ctaPrimary: "Cotiza gratis por WhatsApp",
+  trustedBy: ["CENEFCO", "ARES", "Colegio de Abogados LP", "Colegio de Auditores", "Monocroma", "Pasión Criolla"],
   ctaSecondary: "Ver Nuestros Trabajos",
   bookingUrl: "https://calendar.app.google/7Kjy2fZJmhGaNFef6"
 };
@@ -237,7 +239,7 @@ export const formFields = [
 export const footerData = {
   tagline: "Transformando negocios con marketing y tecnología",
   email: "marketing.mistico.oficial@gmail.com",
-  whatsapp: "+591 75938402",
+  whatsapp: "+591 68105614",
   social: [
     { name: "Facebook", url: "https://www.facebook.com/share/1BuHy9EyJe/" },
     { name: "Instagram", url: "https://www.instagram.com/marketing_mistico_/" },

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { faqData } from '../data/mockData';
 import metaPixel from '../lib/metaPixel';
+import { waLink, whatsappMessages } from '../data/contacto';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -96,7 +97,7 @@ const FAQ = () => {
         >
           <p className="text-white/60 mb-4">¿Tienes más preguntas?</p>
           <a 
-            href="https://wa.me/59175938402?text=Hola,%20tengo%20algunas%20preguntas%20sobre%20sus%20servicios"
+            href={waLink(whatsappMessages.dudas)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => metaPixel.trackWhatsAppClick()}
