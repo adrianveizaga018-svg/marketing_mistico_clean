@@ -16,9 +16,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black border-t border-[#c9a961]/20 pt-20 pb-10">
+    <footer className="bg-black border-t border-[#c9a961]/20 pt-12 md:pt-20 pb-24 md:pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 text-center">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-16 text-center">
           {/* 1. Brand & Info */}
           <div className="space-y-6 flex flex-col items-center">
             <img
@@ -35,8 +35,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 2. Quick Links */}
-          <div>
+          {/* 2. Quick Links (solo tablet/escritorio) */}
+          <div className="hidden md:block">
             <h3 className="text-white font-bold text-lg mb-6 flex items-center justify-center gap-2">
               <span className="w-8 h-[2px] bg-[#c9a961]"></span> Explorar <span className="w-8 h-[2px] bg-[#c9a961]"></span>
             </h3>
@@ -61,8 +61,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* 3. Services */}
-          <div>
+          {/* 3. Services (solo tablet/escritorio) */}
+          <div className="hidden md:block">
             <h3 className="text-white font-bold text-lg mb-6 flex items-center justify-center gap-2">
               <span className="w-8 h-[2px] bg-[#c9a961]"></span> Servicios <span className="w-8 h-[2px] bg-[#c9a961]"></span>
             </h3>

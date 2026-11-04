@@ -151,3 +151,22 @@ code {
 @media (prefers-reduced-motion: reduce) {
   .animate-pop { animation: none; }
 }
+
+/* Filas deslizables en celular (acortan la página); en tablet/escritorio son grilla */
+.snap-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 0.75rem 1rem 0.5rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-row::-webkit-scrollbar { display: none; }
+.snap-row > * { scroll-snap-align: center; flex: 0 0 84%; }
+@media (min-width: 768px) {
+  .snap-row { display: grid; overflow: visible; margin: 0; padding: 0.75rem 0 0; }
+  .snap-row > * { flex: none; }
+}

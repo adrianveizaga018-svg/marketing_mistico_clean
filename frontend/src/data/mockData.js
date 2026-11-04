@@ -444,69 +444,7 @@ export const solutionData = {
   }
 };
 
-export const offerData = {
-  badge: "Planes de publicidad mensual",
-  title: "Publicidad que trabaja todos los meses",
-  subtitle: "Nos encargamos de tus anuncios en Facebook y TikTok mes a mes, sin contratos de permanencia forzosa.",
-  packages: [
-    {
-      id: 1,
-      name: "Starter",
-      price: "Desde $500/mes",
-      description: "Para emprendedores que quieren empezar a vender online",
-      features: [
-        "Gestión de 1 plataforma (Facebook o TikTok)",
-        "Creación de 4 creatividades mensuales (imagen o video)",
-        "Configuración y optimización de campañas",
-        "Copywriting básico para anuncios",
-        "Reporte semanal de resultados",
-        "Soporte por WhatsApp",
-        "Inversión publicitaria sugerida: $300-500 USD/mes"
-      ],
-      highlight: false
-    },
-    {
-      id: 2,
-      name: "Growth",
-      price: "Desde $900/mes",
-      description: "Para negocios listos para escalar",
-      features: [
-        "Gestión multi-plataforma (Facebook + TikTok + Instagram)",
-        "8 creatividades mensuales premium",
-        "Copywriting profesional para anuncios",
-        "Landing page de alta conversión incluida",
-        "Optimización diaria + A/B testing",
-        "Automatización básica de leads (WhatsApp o Email)",
-        "Reportes detallados + reunión estratégica mensual",
-        "Inversión publicitaria sugerida: $800-1500 USD/mes"
-      ],
-      highlight: true
-    },
-    {
-      id: 3,
-      name: "Enterprise",
-      price: "Personalizado",
-      description: "Solución completa para empresas",
-      features: [
-        "Todo lo incluido en Growth",
-        "Desarrollo web / landing / ecommerce a medida",
-        "Producción de videos profesionales",
-        "Automatización avanzada de ventas",
-        "CRM personalizado con pipelines",
-        "Integración de chatbots inteligentes (IA)",
-        "Sistemas web y apps personalizadas",
-        "Email marketing automatizado",
-        "Dashboards y analítica avanzada",
-        "Webhooks y APIs personalizadas",
-        "Consultoría estratégica continua",
-        "Presupuesto según alcance del proyecto"
-      ],
-      highlight: false
-    }
-  ],
-  guarantee: "Si en los primeros 30 días no ves progreso medible, ajustamos la estrategia completamente sin costo adicional.",
-  cta: "Consultar este plan"
-};
+// Los planes mensuales ahora están en data/landing.js (precios en bolivianos).
 
 
 export const consequencesData = {
@@ -553,40 +491,7 @@ export const consequencesData = {
   }
 };
 
-export const faqData = [
-  {
-    question: "¿Cuánto tiempo toma ver resultados?",
-    answer: "Los primeros resultados suelen verse entre 7-14 días después del lanzamiento de las campañas. Sin embargo, la optimización completa y resultados consistentes se logran generalmente entre 30-60 días, cuando ya tenemos suficientes datos para ajustar la estrategia."
-  },
-  {
-    question: "¿Cuánto debo invertir en publicidad digital?",
-    answer: "La inversión mínima recomendada es de $300-500 USD/mes para campañas efectivas en Meta Ads. Esto permite generar suficiente data para optimizar. Para campañas más agresivas con múltiples plataformas (Facebook, Instagram, TikTok), recomendamos presupuestos desde $1,000 USD/mes."
-  },
-  {
-    question: "¿Qué incluyen sus servicios de gestión de campañas?",
-    answer: "Incluimos: estrategia completa, creación de anuncios, diseño de creatividades, configuración técnica, administración de presupuesto, optimización diaria, reportes semanales con métricas clave (CPM, CTR, CPA, ROAS), y reuniones mensuales de análisis y ajuste de estrategia."
-  },
-  {
-    question: "¿Trabajan con negocios de cualquier industria?",
-    answer: "Sí, trabajamos con todo tipo de negocios: restaurantes, educación, servicios profesionales, e-commerce, inmobiliarias, salud y bienestar, entre otros. Nuestra experiencia abarca más de 15 industrias diferentes. Adaptamos la estrategia a las particularidades de cada sector."
-  },
-  {
-    question: "¿Ofrecen garantía de resultados?",
-    answer: "Si bien no podemos garantizar resultados específicos (dependen de muchas variables como producto, mercado, competencia), sí garantizamos trabajo profesional con mejores prácticas, optimización constante y transparencia total. El 98% de nuestros clientes renuevan porque ven resultados tangibles."
-  },
-  {
-    question: "¿Necesito tener redes sociales activas para empezar?",
-    answer: "No necesariamente. Si no tienes presencia en redes, podemos crear y configurar tus perfiles desde cero como parte del servicio. Si ya tienes redes, optimizaremos lo existente. Lo importante es tener un objetivo claro de negocio."
-  },
-  {
-    question: "¿Cuánto tiempo de contrato mínimo requieren?",
-    answer: "Recomendamos mínimo 3 meses para ver resultados significativos y permitir la optimización completa de las campañas. Sin embargo, trabajamos mes a mes sin contratos de permanencia forzosa. Creemos en ganar tu confianza con resultados, no con ataduras contractuales."
-  },
-  {
-    question: "¿Qué pasa si no estoy satisfecho con el servicio?",
-    answer: "Trabajamos con total transparencia. Si no estás satisfecho, puedes cancelar el servicio al finalizar el mes en curso sin penalidades. Además, si en los primeros 30 días no ves progreso, te ayudamos a ajustar la estrategia completamente sin costo adicional."
-  }
-];
+// Las preguntas frecuentes ahora están en data/landing.js.
 
 // Datos adicionales para el Portfolio
 export const videosPortfolioData = [

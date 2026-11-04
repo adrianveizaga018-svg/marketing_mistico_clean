@@ -10,6 +10,7 @@ export const servicesSection = {
 export const services = [
   {
     id: 'web',
+    image: '/img/svc-web.webp',
     icon: 'Globe',
     name: 'Páginas web',
     benefit: 'Que te encuentren en Google y te escriban directo',
@@ -20,6 +21,7 @@ export const services = [
   },
   {
     id: 'sistemas',
+    image: '/img/svc-sistemas.webp',
     icon: 'Cpu',
     name: 'Sistemas a medida',
     benefit: 'Deja el cuaderno y el Excel: controla tu negocio desde el celular',
@@ -30,6 +32,7 @@ export const services = [
   },
   {
     id: 'publicidad',
+    image: '/img/svc-publicidad.webp',
     icon: 'Megaphone',
     name: 'Publicidad en Facebook y TikTok',
     benefit: 'Mensajes de clientes interesados, no solo "me gusta"',
@@ -40,6 +43,7 @@ export const services = [
   },
   {
     id: 'diseno',
+    image: '/img/svc-diseno.webp',
     icon: 'PenTool',
     name: 'Diseño y branding',
     benefit: 'Una marca que se ve profesional y se recuerda',
@@ -50,6 +54,7 @@ export const services = [
   },
   {
     id: 'fotovideo',
+    image: '/img/svc-fotovideo.webp',
     icon: 'Camera',
     name: 'Foto y video',
     benefit: 'Contenido que detiene el scroll y vende tu producto',
@@ -60,6 +65,7 @@ export const services = [
   },
   {
     id: 'invitaciones',
+    image: '/img/svc-invitaciones.webp',
     icon: 'MailOpen',
     name: 'Invitaciones digitales',
     benefit: 'Invita a todos por WhatsApp y confirma asistencia sin llamar uno por uno',
@@ -148,11 +154,21 @@ export const workSection = {
 
 export const projects = [
   {
+    id: 'vendly',
+    client: 'Vendly',
+    type: 'Plataforma / sistema a medida',
+    description: 'Plataforma para que emprendedores bolivianos creen su tienda online, cobren con QR y reciban pedidos por WhatsApp.',
+    image: '/img/work-vendly.webp',
+    url: 'https://vendly.com.bo',
+    linkLabel: 'Ver vendly.com.bo',
+    featured: true,
+  },
+  {
     id: 'icalp',
     client: 'Colegio de Abogados de La Paz',
     type: 'Plataforma web',
     description: 'Plataforma institucional y sistema de gestión para colegiados.',
-    image: '/thumb_icalp.webp',
+    image: '/img/work-icalp.webp',
     url: 'https://icalp.org.bo',
     linkLabel: 'Ver sitio',
   },
@@ -161,7 +177,7 @@ export const projects = [
     client: 'Colegio de Auditores – CAULP',
     type: 'Web e identidad digital',
     description: 'Renovación de la identidad digital y plataforma de servicios para auditores.',
-    image: '/thumb_auditores.png',
+    image: '/img/work-caulp.webp',
     url: 'http://caulp.org.bo',
     linkLabel: 'Ver sitio',
   },
@@ -170,7 +186,7 @@ export const projects = [
     client: 'CENEFCO',
     type: 'Producción de video',
     description: 'Videos para promocionar cursos y formación profesional.',
-    image: '/thumb_cenefco.webp',
+    image: '/img/work-cenefco.webp',
     url: 'https://player.vimeo.com/video/1154013061',
     linkLabel: 'Ver video',
   },
@@ -179,7 +195,7 @@ export const projects = [
     client: 'Pasión Criolla',
     type: 'Video para TikTok y anuncios',
     description: 'Videos verticales de sus platos estrella para redes y publicidad.',
-    image: '/thumb_pasion_1.webp',
+    image: '/img/work-pasion.webp',
     url: 'https://player.vimeo.com/video/1154010752',
     linkLabel: 'Ver video',
   },
@@ -229,7 +245,7 @@ export const faqData = [
   },
   {
     question: '¿Cuánto debo invertir en publicidad en Facebook o TikTok?',
-    answer: 'La inversión mínima recomendada es de $300-500 USD al mes para campañas efectivas en Meta Ads, porque permite juntar suficientes datos para optimizar. Ese dinero va directo a la plataforma; nuestra gestión se cobra aparte.',
+    answer: 'Te recomendamos empezar con al menos Bs 700 al mes en anuncios. Ese dinero se paga directo a Facebook o TikTok; nuestra gestión mensual se cobra aparte según el plan que elijas.',
   },
   {
     question: '¿Cuánto tiempo toma ver resultados con publicidad?',
@@ -250,5 +266,59 @@ export const faqData = [
   {
     question: '¿Qué pasa si no estoy satisfecho?',
     answer: 'Puedes cancelar el servicio al terminar el mes en curso, sin penalidades.',
+  },
+];
+
+// ─── Planes mensuales de publicidad (precios PROPUESTOS en bolivianos) ──
+export const plansSection = {
+  eyebrow: 'Planes de publicidad mensual',
+  title: 'Publicidad que trabaja todos los meses',
+  subtitle: 'Nos encargamos de tus anuncios mes a mes, sin contratos de permanencia forzosa.',
+  note: 'La inversión en anuncios se paga aparte, directo a Facebook o TikTok (te recomendamos desde Bs 700 al mes). Si en los primeros 30 días no ves progreso, ajustamos la estrategia sin costo adicional.',
+};
+
+export const plans = [
+  {
+    id: 'basico',
+    name: 'Básico',
+    price: 'Bs 1.200',
+    period: '/mes',
+    tagline: 'Para emprendedores que están empezando',
+    features: [
+      'Anuncios en 1 red (Facebook/Instagram o TikTok)',
+      '4 diseños o videos cortos al mes',
+      'Configuración y seguimiento de campañas',
+      'Textos para tus anuncios',
+      'Reporte de resultados y soporte por WhatsApp',
+    ],
+  },
+  {
+    id: 'crecimiento',
+    name: 'Crecimiento',
+    price: 'Bs 2.500',
+    period: '/mes',
+    tagline: 'Para negocios que quieren vender más',
+    highlighted: true,
+    features: [
+      'Anuncios en Facebook, Instagram y TikTok',
+      '8 diseños o videos al mes',
+      'Página de ventas (landing) incluida',
+      'Mensajes automáticos para atender por WhatsApp',
+      'Reporte y reunión mensual de resultados',
+    ],
+  },
+  {
+    id: 'empresa',
+    name: 'Empresa',
+    price: 'A cotizar',
+    period: '',
+    tagline: 'Solución completa a tu medida',
+    features: [
+      'Todo lo del plan Crecimiento',
+      'Página web o tienda online',
+      'Producción de video profesional',
+      'Sistema a medida (ventas, clientes, inventario)',
+      'Asesoría continua',
+    ],
   },
 ];

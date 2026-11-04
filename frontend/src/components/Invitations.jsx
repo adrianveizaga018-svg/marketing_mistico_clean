@@ -3,6 +3,7 @@ import { Check, MapPin, Clock, CalendarHeart, ExternalLink } from 'lucide-react'
 import { invitationsSection, invitationPackages, invitationSteps } from '../data/landing';
 import { waLink, whatsappMessages } from '../data/contacto';
 import SectionHeader from './SectionHeader';
+import SwipeHint from './SwipeHint';
 import WhatsAppIcon from './WhatsAppIcon';
 import metaPixel from '../lib/metaPixel';
 
@@ -61,9 +62,9 @@ const PackageCard = ({ pkg }) => (
     </p>
     <p className="text-white/55 text-[13px] mb-5">Pago único · {pkg.delivery}</p>
 
-    <ul className="space-y-2.5 mb-7">
+    <ul className="space-y-2 mb-6">
       {pkg.features.map((f) => (
-        <li key={f} className="flex items-start gap-2.5 text-white/85 text-[15px] leading-snug">
+        <li key={f} className="flex items-start gap-2 text-white/85 text-sm leading-snug">
           <Check size={17} className="text-[#c9a961] mt-0.5 shrink-0" />
           {f}
         </li>
@@ -88,37 +89,38 @@ const PackageCard = ({ pkg }) => (
 );
 
 const Invitations = () => (
-  <section id="invitaciones" className="py-16 md:py-24 bg-gradient-to-b from-black via-[#0b0905] to-black relative overflow-hidden scroll-mt-16">
+  <section id="invitaciones" className="py-12 md:py-20 bg-gradient-to-b from-black via-[#0b0905] to-black relative overflow-hidden scroll-mt-16">
     <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[#c9a961]/[0.06] blur-[140px] rounded-full pointer-events-none" />
     <div className="container mx-auto px-4 sm:px-6 relative z-10">
-      <div className="grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center max-w-6xl mx-auto mb-12 md:mb-16">
+      <div className="grid lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center max-w-6xl mx-auto mb-6 md:mb-14">
         <div className="text-center lg:text-left">
           <SectionHeader {...invitationsSection} className="lg:mx-0 lg:text-left !mb-6" />
-          <ul className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
+          <ul className="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 md:mb-8">
             {invitationsSection.events.map((e) => (
               <li key={e} className="text-[13px] text-white/80 border border-white/10 bg-white/[0.03] px-3 py-1.5 rounded-full">{e}</li>
             ))}
           </ul>
-          <ol className="grid sm:grid-cols-3 gap-4 text-left">
+          <ol className="grid sm:grid-cols-3 gap-3 sm:gap-4 text-left">
             {invitationSteps.map((step, i) => (
               <li key={step.title} className="flex sm:flex-col gap-3 sm:gap-2">
                 <span className="w-8 h-8 shrink-0 rounded-full bg-[#c9a961]/15 border border-[#c9a961]/40 text-[#c9a961] text-sm font-black flex items-center justify-center">{i + 1}</span>
                 <div>
                   <p className="text-white font-bold">{step.title}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{step.text}</p>
+                  <p className="text-white/60 text-[13px] sm:text-sm leading-snug sm:leading-relaxed">{step.text}</p>
                 </div>
               </li>
             ))}
           </ol>
         </div>
-        <PhoneMockup />
+        <div className="hidden lg:block"><PhoneMockup /></div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-6 max-w-6xl mx-auto pt-3">
+      <div className="snap-row md:grid-cols-3 md:gap-5 lg:gap-6 max-w-6xl mx-auto">
         {invitationPackages.map((pkg) => (
           <PackageCard key={pkg.id} pkg={pkg} />
         ))}
       </div>
+      <SwipeHint text="Desliza para ver los 3 paquetes" />
 
       <div className="text-center mt-8 space-y-4">
         <p className="text-white/55 text-sm">{invitationsSection.note}</p>

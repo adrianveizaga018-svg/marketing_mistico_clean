@@ -90,16 +90,16 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-black relative overflow-hidden">
+    <section id="contacto" className="py-12 md:py-24 bg-black relative overflow-hidden">
       {/* Background Decorative Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[#c9a961]/5 blur-[120px] rounded-full pointer-events-none animate-ambient"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Side - Info */}
             <div className="animate-fade-in">
-              <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-8 tracking-tighter leading-tight">
                 {step === 1 ? (
                   <>Pide tu <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">cotización sin costo</span></>
                 ) : (
@@ -107,21 +107,21 @@ const ContactForm = () => {
                 )}
               </h2>
               
-              <p className="text-xl text-white/50 mb-12 leading-relaxed font-medium">
+              <p className="text-base md:text-xl text-white/60 mb-6 md:mb-12 leading-relaxed font-medium">
                 {step === 1 
                   ? "¿Prefieres no escribir por WhatsApp? Déjanos tus datos y te contactamos para entender lo que necesitas."
                   : "Nuestra agenda está disponible en tiempo real. Selecciona el horario que más te convenga para nuestro Meet estratégico."}
               </p>
 
               {/* Step Indicator */}
-              <div className="flex items-center gap-4 mb-12">
+              <div className="hidden md:flex items-center gap-4 mb-12">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-black transition-all duration-500 border-2 ${step === 1 ? 'bg-[#c9a961] border-[#c9a961] text-black scale-110' : 'bg-transparent border-white/20 text-white/40'}`}>1</div>
                 <div className="w-12 h-[2px] bg-white/10"></div>
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-black transition-all duration-500 border-2 ${step === 2 ? 'bg-[#c9a961] border-[#c9a961] text-black scale-110' : 'bg-transparent border-white/20 text-white/40'}`}>2</div>
               </div>
 
               {/* Benefits/Info display based on step */}
-              <div className="space-y-6 mb-16 transition-opacity duration-500">
+              <div className="space-y-3 md:space-y-6 mb-2 md:mb-16 transition-opacity duration-500">
                 {step === 1 ? (
                   ['Te contactamos por WhatsApp', 'Entendemos tu negocio y lo que buscas', 'Te enviamos una propuesta con precio claro', 'Sin compromiso de contratar'].map((benefit, index) => (
                     <div key={index} className="flex items-center gap-4 group">
