@@ -32,7 +32,7 @@ const Portfolio = () => {
             </Link>
             
             <div className="flex items-center gap-3">
-              <img src="/logo_oficial.webp" alt="Marketing Místico" className="h-8 w-auto" />
+              <img src="/logo_nav.webp" alt="Marketing Místico" className="h-8 w-auto" />
               <span className="text-white font-black text-lg tracking-tight hidden sm:block">Portfolio</span>
             </div>
           </div>

@@ -22,7 +22,7 @@ const Footer = () => {
           {/* 1. Brand & Info */}
           <div className="space-y-6 flex flex-col items-center">
             <img
-              src="/logo_oficial.webp"
+              src="/logo_nav.webp"
               alt="Marketing Místico"
               className="h-14"
             />

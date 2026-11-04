@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between gap-4">
           <button type="button" onClick={() => goTo('hero')} aria-label="Ir al inicio">
             <img
-              src="/logo_oficial.webp"
+              src="/logo_nav.webp"
               alt="Marketing Místico"
               width="168"
               height="56"
