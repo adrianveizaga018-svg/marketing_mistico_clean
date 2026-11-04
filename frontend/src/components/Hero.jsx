@@ -18,7 +18,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative flex items-center overflow-hidden min-h-[100svh] bg-black">
-      <div className={`absolute inset-y-0 right-0 w-full md:w-[95%] h-full transition-opacity duration-1000 ${shouldLoadVideo ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute inset-y-0 right-0 w-full md:w-[72%] h-full transition-opacity duration-1000 ${shouldLoadVideo ? 'opacity-100' : 'opacity-0'}`}>
         {shouldLoadVideo && (
           <video
             width="1920"

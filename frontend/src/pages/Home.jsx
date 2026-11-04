@@ -5,9 +5,9 @@ import MysticCursor from '../components/MysticCursor';
 import LazySection from '../components/LazySection';
 
 // Lazy load below-the-fold components
+const Services = lazy(() => import('../components/Services'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const Problems = lazy(() => import('../components/Problems'));
-const Solution = lazy(() => import('../components/Solution'));
 const Offer = lazy(() => import('../components/Offer'));
 const Authority = lazy(() => import('../components/Authority'));
 const Consequences = lazy(() => import('../components/Consequences'));
@@ -33,9 +33,9 @@ const Home = () => {
         <Hero />
 
         {/* Below-the-fold components - lazy load */}
+        <LazySection component={Services} anchor="servicios" />
         <LazySection component={Testimonials} />
         <LazySection component={Problems} />
-        <LazySection component={Solution} />
         <LazySection component={Offer} />
         <LazySection component={Authority} />
         <LazySection component={Consequences} />
