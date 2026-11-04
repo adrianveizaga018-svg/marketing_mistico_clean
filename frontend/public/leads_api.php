@@ -1,34 +1,15 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+// Lista de leads para el panel /gestion-leads. Solo con sesión de administrador.
+define('MM_APP', true);
+require __DIR__ . '/_mm/bootstrap.php';
 
-// Configuración de Base de Datos (Misma que contact.php)
-$host = "localhost";
-$user = "u763946012_admin"; 
-$password = "Marketingmistico2026"; 
-$dbname = "u763946012_u12345678_nomb"; 
+mm_same_origin();
+mm_require_admin();
 
-$conn = new mysqli($host, $user, $password, $dbname);
-
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "Database connection failed"]);
-    exit;
+try {
+    $rows = mm_db()->query('SELECT id, nombre, email, pais, whatsapp, servicio, status, timestamp FROM Leads ORDER BY timestamp DESC LIMIT 500')->fetchAll();
+    mm_json($rows);
+} catch (Throwable $e) {
+    error_log('leads_api.php: ' . $e->getMessage());
+    mm_json(['status' => 'error', 'message' => 'No se pudo leer la base de datos'], 500);
 }
-
-// Consultar Leads
-$sql = "SELECT * FROM Leads ORDER BY timestamp DESC LIMIT 500";
-$result = $conn->query($sql);
-
-$leads = [];
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $leads[] = $row;
-    }
-}
-
-echo json_encode($leads);
-
-$conn->close();
-?>

@@ -42,3 +42,6 @@ coverage.xml
 *.log
 .mypy_cache/
 .pytest_cache/
+
+# Configuración con contraseñas (va fuera de public_html, nunca a GitHub)
+mm_config.php

@@ -1,85 +1,60 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+// Recibe el formulario de cotización de la landing: guarda el lead y avisa por correo.
+define('MM_APP', true);
+require __DIR__ . '/_mm/bootstrap.php';
 
-// Configuración de Base de Datos (MySQL)
-$host = "localhost";
-$user = "u763946012_admin"; // Usuario de la imagen
-$password = "Marketingmistico2026"; // Debes poner la contraseña que creaste
-$dbname = "u763946012_u12345678_nomb"; // Verifica si el nombre termina así o es más largo
-
-$conn = new mysqli($host, $user, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    // Si falla la conexión, al menos intentamos enviar el correo
-    // pero reportamos el error de BD
-    error_log("Connection failed: " . $conn->connect_error);
-}
-
-// Recibir datos JSON
-$data = json_decode(file_get_contents("php://input"));
-
-if (!$data) {
-    echo json_encode(["status" => "error", "message" => "No data received"]);
+mm_same_origin();
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
     exit;
 }
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    mm_json(['status' => 'error', 'message' => 'Método no permitido'], 405);
+}
+// Evita que un bot llene la base: máximo 10 envíos por IP cada 15 minutos.
+if (mm_rate_limit_hit('contact|' . mm_client_ip(), 10, 900)) {
+    mm_json(['status' => 'error', 'message' => 'Demasiados envíos, intenta más tarde'], 429);
+}
 
-// Función para generar UUID v4
-function gen_uuid() {
-    return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-        mt_rand( 0, 0xffff ),
-        mt_rand( 0, 0x0fff ) | 0x4000,
-        mt_rand( 0, 0x3fff ) | 0x8000,
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+$in = mm_input();
+$lead = [
+    'nombre' => mm_clean_line((string) ($in['nombre'] ?? ''), 120),
+    'email' => mm_clean_line((string) ($in['email'] ?? ''), 160),
+    'pais' => mm_clean_line((string) ($in['pais'] ?? ''), 80),
+    'whatsapp' => mm_clean_line((string) ($in['whatsapp'] ?? ''), 40),
+    'servicio' => mm_clean_line((string) ($in['servicio'] ?? ''), 120),
+];
+
+if ($lead['nombre'] === '' || $lead['whatsapp'] === '') {
+    mm_json(['status' => 'error', 'message' => 'Faltan nombre o celular'], 422);
+}
+if ($lead['email'] !== '' && !filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) {
+    mm_json(['status' => 'error', 'message' => 'Email no válido'], 422);
+}
+
+$id = bin2hex(random_bytes(16));
+$fecha = date('Y-m-d H:i:s');
+
+$dbOk = false;
+try {
+    $stmt = mm_db()->prepare(
+        'INSERT INTO Leads (id, nombre, email, pais, whatsapp, servicio, status, timestamp)
+         VALUES (:id, :nombre, :email, :pais, :whatsapp, :servicio, :status, :fecha)'
     );
+    $dbOk = $stmt->execute($lead + ['id' => $id, 'status' => 'nuevo', 'fecha' => $fecha]);
+} catch (Throwable $e) {
+    error_log('contact.php BD: ' . $e->getMessage());
 }
 
-$id = gen_uuid();
-$nombre = $conn->real_escape_string($data->nombre);
-$email = $conn->real_escape_string($data->email);
-$pais = $conn->real_escape_string($data->pais);
-$whatsapp = $conn->real_escape_string($data->whatsapp);
-$servicio = $conn->real_escape_string($data->servicio);
-$fecha = date("Y-m-d H:i:s");
-$status = "nuevo";
+$to = mm_config()['notify_email'] ?? 'marketing.mistico.oficial@gmail.com';
+$subject = 'Nuevo lead: ' . $lead['nombre'] . ' - ' . $lead['servicio'];
+$body = "Nuevo contacto desde el sitio web:\n\n"
+    . "Nombre: {$lead['nombre']}\nEmail: {$lead['email']}\nPaís: {$lead['pais']}\n"
+    . "WhatsApp: {$lead['whatsapp']}\nServicio: {$lead['servicio']}\n\nFecha: $fecha\n";
+$mailOk = @mail($to, $subject, $body, "From: noreply@marketingmistico.com\r\nContent-Type: text/plain; charset=UTF-8");
 
-// 1. Guardar en Base de Datos (Mapeado a tu tabla existente "Leads")
-$sql = "INSERT INTO Leads (id, nombre, email, pais, whatsapp, servicio, status, timestamp) VALUES ('$id', '$nombre', '$email', '$pais', '$whatsapp', '$servicio', '$status', '$fecha')";
-
-$db_success = false;
-if ($conn->query($sql) === TRUE) {
-    $db_success = true;
-} else {
-    error_log("Error BD: " . $conn->error);
+if ($dbOk || $mailOk) {
+    mm_json(['status' => 'success', 'message' => 'Lead recibido']);
 }
-
-// 2. Enviar Correo Electrónico
-$to = "marketing.mistico.oficial@gmail.com"; // Tu correo
-$subject = "Nuevo Lead: $nombre - $servicio";
-$message = "
-Nuevo contacto desde el sitio web:
-
-Nombre: $nombre
-Email: $email
-País: $pais
-WhatsApp: $whatsapp
-Servicio: $servicio
-
-Fecha: $fecha
-";
-$headers = "From: noreply@marketingmistico.com";
-
-$mail_success = mail($to, $subject, $message, $headers);
-
-// Respuesta al Frontend
-if ($db_success || $mail_success) {
-    echo json_encode(["status" => "success", "message" => "Lead recibido"]);
-} else {
-    echo json_encode(["status" => "error", "message" => "Error al procesar"]);
-}
-
-$conn->close();
-?>
+mm_json(['status' => 'error', 'message' => 'Error al procesar'], 500);

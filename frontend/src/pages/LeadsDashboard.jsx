@@ -25,28 +25,65 @@ const LeadsDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [lastRefreshed, setLastRefreshed] = useState(null);
 
-  const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD || 'mistico2026';
+  // El login lo valida el servidor (admin_auth.php); la contraseña ya no está en el código del navegador.
+  useEffect(() => {
+    fetch('/admin_auth.php', { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : { authenticated: false }))
+      .then((d) => {
+        if (d.authenticated) {
+          setIsAuthenticated(true);
+          fetchLeads();
+        }
+      })
+      .catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (password === adminPassword) {
-      setIsAuthenticated(true);
-      fetchLeads();
-    } else {
-      setError('Contraseña mística incorrecta');
-      setTimeout(() => setError(''), 3000);
+    try {
+      const response = await fetch('/admin_auth.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok && data.authenticated) {
+        setPassword('');
+        setIsAuthenticated(true);
+        fetchLeads();
+      } else {
+        setError(data.message || 'Contraseña incorrecta');
+        setTimeout(() => setError(''), 4000);
+      }
+    } catch (err) {
+      setError('No se pudo conectar con el servidor');
+      setTimeout(() => setError(''), 4000);
     }
+  };
+
+  const handleLogout = async () => {
+    await fetch('/admin_auth.php', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout' }),
+    }).catch(() => {});
+    setIsAuthenticated(false);
+    setLeads([]);
   };
 
   const fetchLeads = async () => {
     setIsLoading(true);
     try {
-      // Fetch directly from the PHP backend on the same domain
-      const response = await fetch('/leads_api.php');
-      
+      const response = await fetch('/leads_api.php', { credentials: 'same-origin' });
+      if (response.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
       if (response.ok) {
         const data = await response.json();
-        // Ensure timestamp is valid date
         const validData = data.map(item => ({
             ...item,
             timestamp: new Date(item.timestamp || item.fecha)
@@ -200,7 +237,7 @@ const LeadsDashboard = () => {
             </button>
 
             <button 
-              onClick={() => setIsAuthenticated(false)}
+              onClick={handleLogout}
               className="p-3 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"
               title="Cerrar sesión"
             >
