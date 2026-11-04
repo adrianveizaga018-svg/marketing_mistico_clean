@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Sparkles } from 'lucide-react';
 import { offerData } from '../data/mockData';
+import { waLink } from '../data/contacto';
+import metaPixel from '../lib/metaPixel';
 
 const Offer = () => {
   return (
@@ -47,7 +49,7 @@ const Offer = () => {
                 {/* Highlight Badge */}
                 {pkg.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#c9a961] to-[#d4af37] px-6 py-2 rounded-full">
-                    <span className="text-black text-xs font-black uppercase tracking-widest">Más Popular</span>
+                    <span className="text-black text-xs font-black uppercase tracking-widest">Recomendado</span>
                   </div>
                 )}
 
@@ -83,9 +85,10 @@ const Offer = () => {
 
                 {/* CTA Button */}
                 <a
-                  href="https://calendar.app.google/7Kjy2fZJmhGaNFef6"
+                  href={waLink(`Hola Marketing Místico 👋 Me interesa el plan ${pkg.name} de publicidad mensual.`)}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => metaPixel.trackWhatsAppClick()}
                   className={`block text-center ${pkg.highlight ? 'bg-gradient-to-r from-[#c9a961] to-[#d4af37] text-black' : 'bg-white/10 text-white border border-white/20'} font-black text-sm uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg`}
                 >
                   {offerData.cta}

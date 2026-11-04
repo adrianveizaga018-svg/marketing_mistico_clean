@@ -101,7 +101,7 @@ const ContactForm = () => {
             <div className="animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
                 {step === 1 ? (
-                  <>Solicita tu <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Asesoría de Éxito</span></>
+                  <>Pide tu <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">cotización sin costo</span></>
                 ) : (
                   <>Reserva tu <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#c9a961] to-[#d4af37]">Espacio en Agenda</span></>
                 )}
@@ -109,7 +109,7 @@ const ContactForm = () => {
               
               <p className="text-xl text-white/50 mb-12 leading-relaxed font-medium">
                 {step === 1 
-                  ? "No somos una agencia más, somos tu socio estratégico. Completa el formulario y auditemos tu marca hoy mismo."
+                  ? "¿Prefieres no escribir por WhatsApp? Déjanos tus datos y te contactamos para entender lo que necesitas."
                   : "Nuestra agenda está disponible en tiempo real. Selecciona el horario que más te convenga para nuestro Meet estratégico."}
               </p>
 
@@ -123,7 +123,7 @@ const ContactForm = () => {
               {/* Benefits/Info display based on step */}
               <div className="space-y-6 mb-16 transition-opacity duration-500">
                 {step === 1 ? (
-                  ['Análisis profundo de tu ecosistema', 'Hoja de ruta estratégica', 'Auditoría de pauta actual', 'Objetivos de escalabilidad'].map((benefit, index) => (
+                  ['Te contactamos por WhatsApp', 'Entendemos tu negocio y lo que buscas', 'Te enviamos una propuesta con precio claro', 'Sin compromiso de contratar'].map((benefit, index) => (
                     <div key={index} className="flex items-center gap-4 group">
                       <div className="w-6 h-6 rounded-full bg-[#c9a961]/20 border border-[#c9a961]/40 flex items-center justify-center group-hover:bg-[#c9a961] transition-all duration-300">
                         <CheckCircle className="text-[#c9a961] group-hover:text-black" size={14} />
@@ -203,7 +203,7 @@ const ContactForm = () => {
                           autoComplete={getAutoComplete(field.name)}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#c9a961]/50 focus:ring-4 focus:ring-[#c9a961]/10 transition-all appearance-none cursor-pointer font-medium"
                         >
-                          <option value="" className="bg-black text-white/30">Selecciona un servicio</option>
+                          <option value="" className="bg-black text-white/30">{field.name === 'pais' ? 'Selecciona tu país' : 'Selecciona un servicio'}</option>
                           {field.options.map((option) => (
                             <option key={option} value={option} className="bg-black text-white">{option}</option>
                           ))}
@@ -227,7 +227,7 @@ const ContactForm = () => {
                     disabled={isSubmitting}
                     className="w-full bg-[#c9a961] hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] shadow-[0_0_30px_rgba(201,169,97,0.2)] flex items-center justify-center gap-3 disabled:opacity-50"
                   >
-                    {isSubmitting ? 'Procesando...' : 'Solicitar Cita'}
+                    {isSubmitting ? 'Procesando...' : 'Pedir cotización'}
                     <Send size={20} />
                   </button>
                 </form>

@@ -182,13 +182,13 @@ export const processData = {
 
 export const ctaData = {
   title: "¿Listo para Vender Más?",
-  subtitle: "Agenda una asesoría estratégica gratuita y descubre cómo podemos hacer crecer tu negocio",
+  subtitle: "Escríbenos por WhatsApp, cuéntanos de tu negocio y te mandamos una cotización sin costo.",
   features: [
-    "✓ Análisis inicial sin costo",
-    "✓ Estrategia personalizada",
+    "✓ Cotización sin costo",
+    "✓ Propuesta a tu medida",
     "✓ Sin compromisos ni letra pequeña"
   ],
-  buttonText: "Quiero Vender Más"
+  buttonText: "Escríbenos ahora"
 };
 
 export const countries = [
@@ -211,7 +211,7 @@ export const countries = [
 
 export const formFields = [
   { name: "nombre", label: "Nombre completo", type: "text", required: true },
-  { name: "email", label: "Email", type: "email", required: true },
+  { name: "email", label: "Email (opcional)", type: "email", required: false },
   {
     name: "pais",
     label: "País",
@@ -226,12 +226,13 @@ export const formFields = [
     type: "select",
     required: true,
     options: [
-      "Publicidad Digital (Facebook/TikTok)",
-      "Producción de Videos",
-      "Gestión de Campañas",
-      "Landing Pages",
-      "Desarrollo Web/Apps",
-      "Paquete Completo"
+      "Página web",
+      "Sistema a medida",
+      "Publicidad en Facebook / TikTok",
+      "Diseño y branding",
+      "Foto y video",
+      "Invitación digital",
+      "Todavía no sé, quiero asesoría"
     ]
   }
 ];
@@ -248,38 +249,15 @@ export const footerData = {
   ]
 };
 
+// Testimonios: marcadores hasta tener opiniones reales de clientes.
 export const testimonialsData = [
   {
     id: 1,
-    name: "Lic. Carlos Ruiz",
-    role: "Director General",
-    company: "Ares",
-    content: "La estrategia de rebranding digital fue impecable. Lograron capturar la esencia de nuestra fuerza y proyectarla al mercado con una elegancia única.",
-    image: "/post3.webp"
-  },
-  {
-    id: 2,
-    name: "Lic. Sandra Vargas",
-    role: "Junta Directiva",
-    company: "Colegio de Auditores",
-    content: "Su enfoque estratégico nos permitió modernizar nuestra comunicación y llegar a nuevos asociados de manera efectiva y elegante.",
+    name: "[NOMBRE DEL CLIENTE]",
+    role: "[CARGO]",
+    company: "[NEGOCIO]",
+    content: "[TESTIMONIO REAL]",
     image: "/logo_oficial.webp"
-  },
-  {
-    id: 3,
-    name: "Elena Torres",
-    role: "CEO",
-    company: "Tech Vision",
-    content: "El lanzamiento de CyberGlow rompió todos nuestros récords de ventas. La campaña de Social Ads fue simplemente perfecta.",
-    image: "/post1.webp"
-  },
-  {
-    id: 4,
-    name: "Marcus Weber",
-    role: "Brand Manager",
-    company: "Chronos",
-    content: "Necesitábamos lujo y precisión, y Marketing Místico nos dio exactamente eso. El diseño de producto elevó nuestra percepción de marca.",
-    image: "/post2.webp"
   }
 ];
 
@@ -302,99 +280,99 @@ export const portfolioDetails = {
     problem: "CENEFCO necesitaba promocionar su curso magistral especializado de manera efectiva en redes sociales.",
     solution: "Creamos un diseño publicitario impactante destacando a los docentes expertos, certificación avalada y acceso a biblioteca digital.",
     results: [
-      { label: "Inscripciones", value: "+250%", icon: "Users" },
-      { label: "Engagement", value: "+180%", icon: "Heart" },
-      { label: "Alcance", value: "45K+", icon: "Eye" }
+      { label: "Inscripciones", value: "[CIFRA REAL]", icon: "Users" },
+      { label: "Engagement", value: "[CIFRA REAL]", icon: "Heart" },
+      { label: "Alcance", value: "[CIFRA REAL]", icon: "Eye" }
     ]
   },
   2: {
     problem: "Focus Group requería promocionar su app educativa y aumentar descargas desde Play Store.",
     solution: "Diseñamos una campaña visual enfocada en los beneficios clave: cliente VIP, biblioteca digital y certificación de cursos.",
     results: [
-      { label: "Descargas", value: "+320%", icon: "Download" },
-      { label: "Rating App", value: "4.8★", icon: "Star" },
-      { label: "Usuarios Activos", value: "12K+", icon: "Users" }
+      { label: "Descargas", value: "[CIFRA REAL]", icon: "Download" },
+      { label: "Rating App", value: "[CIFRA REAL]", icon: "Star" },
+      { label: "Usuarios Activos", value: "[CIFRA REAL]", icon: "Users" }
     ]
   },
   3: {
     problem: "Quorum y Focus Group necesitaban llenar plazas para su curso especializado de derecho familiar.",
     solution: "Desarrollamos material gráfico profesional destacando a la docente especialista y el inicio inmediato del programa.",
     results: [
-      { label: "Cupos Llenos", value: "100%", icon: "CheckCircle" },
-      { label: "Lista de Espera", value: "85+", icon: "Clock" },
-      { label: "Conversión", value: "+65%", icon: "TrendingUp" }
+      { label: "Cupos Llenos", value: "[CIFRA REAL]", icon: "CheckCircle" },
+      { label: "Lista de Espera", value: "[CIFRA REAL]", icon: "Clock" },
+      { label: "Conversión", value: "[CIFRA REAL]", icon: "TrendingUp" }
     ]
   },
   4: {
     problem: "ARES requería impulsar ventas durante el mes de septiembre con una promoción atractiva.",
     solution: "Creamos una campaña visual destacando el descuento del 5% con imágenes de productos y diseño moderno.",
     results: [
-      { label: "Ventas", value: "+145%", icon: "ShoppingCart" },
-      { label: "Clics", value: "8.5K", icon: "MousePointer" },
-      { label: "ROI", value: "6.2X", icon: "DollarSign" }
+      { label: "Ventas", value: "[CIFRA REAL]", icon: "ShoppingCart" },
+      { label: "Clics", value: "[CIFRA REAL]", icon: "MousePointer" },
+      { label: "ROI", value: "[CIFRA REAL]", icon: "DollarSign" }
     ]
   },
   5: {
     problem: "ARES necesitaba posicionar su línea de ventanas de PVC destacando beneficios técnicos de manera visual.",
     solution: "Diseñamos infografía profesional con iconos personalizados mostrando durabilidad, eficiencia energética y otros beneficios clave.",
     results: [
-      { label: "Consultas", value: "+280%", icon: "MessageSquare" },
-      { label: "Cotizaciones", value: "+195%", icon: "FileText" },
-      { label: "Cierre Ventas", value: "+87%", icon: "CheckCircle" }
+      { label: "Consultas", value: "[CIFRA REAL]", icon: "MessageSquare" },
+      { label: "Cotizaciones", value: "[CIFRA REAL]", icon: "FileText" },
+      { label: "Cierre Ventas", value: "[CIFRA REAL]", icon: "CheckCircle" }
     ]
   },
   6: {
     problem: "Destaca Academia necesitaba llenar cupos para su taller práctico de actuación con urgencia.",
     solution: "Creamos diseño cinematográfico con elementos visuales de cine y TV, destacando modalidad presencial y certificación física.",
     results: [
-      { label: "Inscripciones", value: "Cupos Completos", icon: "Users" },
-      { label: "Engagement", value: "+220%", icon: "Heart" },
-      { label: "Shares", value: "1.2K", icon: "Share2" }
+      { label: "Inscripciones", value: "[CIFRA REAL]", icon: "Users" },
+      { label: "Engagement", value: "[CIFRA REAL]", icon: "Heart" },
+      { label: "Shares", value: "[CIFRA REAL]", icon: "Share2" }
     ]
   },
   7: {
     problem: "Monocroma Producción requería convocar talento para sus producciones audiovisuales de manera masiva.",
     solution: "Diseñamos anuncio de casting con estética cinematográfica profesional, incluidos detalles de fecha, hora y dirección exacta.",
     results: [
-      { label: "Asistentes", value: "300+", icon: "Users" },
-      { label: "Alcance", value: "52K", icon: "Eye" },
-      { label: "Interacción", value: "+310%", icon: "MessageCircle" }
+      { label: "Asistentes", value: "[CIFRA REAL]", icon: "Users" },
+      { label: "Alcance", value: "[CIFRA REAL]", icon: "Eye" },
+      { label: "Interacción", value: "[CIFRA REAL]", icon: "MessageCircle" }
     ]
   },
   8: {
     problem: "Monocroma necesitaba generar expectativa para el Día del Cine Boliviano con una pieza visual memorable.",
     solution: "Creamos diseño inspirador con elementos cinematográficos clásicos y mensaje patriótico para la fecha especial.",
     results: [
-      { label: "Alcance", value: "78K", icon: "Eye" },
-      { label: "Compartido", value: "2.1K", icon: "Share2" },
-      { label: "Engagement", value: "+425%", icon: "Heart" }
+      { label: "Alcance", value: "[CIFRA REAL]", icon: "Eye" },
+      { label: "Compartido", value: "[CIFRA REAL]", icon: "Share2" },
+      { label: "Engagement", value: "[CIFRA REAL]", icon: "Heart" }
     ]
   },
   9: {
     problem: "Lex Legal y Focus Group requerían posicionar su curso de especialización en derecho propietario.",
     solution: "Diseñamos pieza visual profesional con elementos 3D (casa, gavel) y destacando a la docente especialista con fechas claras.",
     results: [
-      { label: "Inscripciones", value: "+215%", icon: "Users" },
-      { label: "Leads Calificados", value: "180+", icon: "Target" },
-      { label: "Tasa Conversión", value: "42%", icon: "TrendingUp" }
+      { label: "Inscripciones", value: "[CIFRA REAL]", icon: "Users" },
+      { label: "Leads Calificados", value: "[CIFRA REAL]", icon: "Target" },
+      { label: "Tasa Conversión", value: "[CIFRA REAL]", icon: "TrendingUp" }
     ]
   },
   10: {
     problem: "CENEFCO quería crear contenido emotivo para celebrar el aniversario de Bolivia en redes sociales.",
     solution: "Diseñamos pieza de branding con collage de rostros bolivianos celebrando la diversidad cultural del país.",
     results: [
-      { label: "Alcance Orgánico", value: "125K", icon: "Eye" },
-      { label: "Engagement", value: "+550%", icon: "Heart" },
-      { label: "Brand Awareness", value: "+89%", icon: "TrendingUp" }
+      { label: "Alcance Orgánico", value: "[CIFRA REAL]", icon: "Eye" },
+      { label: "Engagement", value: "[CIFRA REAL]", icon: "Heart" },
+      { label: "Brand Awareness", value: "[CIFRA REAL]", icon: "TrendingUp" }
     ]
   },
   11: {
     problem: "Legal Praxis necesitaba generar conexión emocional con estudiantes de derecho en su día especial.",
     solution: "Creamos diseño aspiracional mostrando estudiantes universitarios felices con mensaje inspirador para celebrar su día.",
     results: [
-      { label: "Alcance", value: "95K", icon: "Eye" },
-      { label: "Compartido", value: "3.8K", icon: "Share2" },
-      { label: "Nuevos Seguidores", value: "+1.2K", icon: "UserPlus" }
+      { label: "Alcance", value: "[CIFRA REAL]", icon: "Eye" },
+      { label: "Compartido", value: "[CIFRA REAL]", icon: "Share2" },
+      { label: "Nuevos Seguidores", value: "[CIFRA REAL]", icon: "UserPlus" }
     ]
   }
 };
@@ -467,9 +445,9 @@ export const solutionData = {
 };
 
 export const offerData = {
-  badge: "Nuestra Oferta Completa",
-  title: "Sistema de Marketing Todo-en-Uno",
-  subtitle: "Todo lo que necesitas para hacer crecer tu negocio en un solo lugar",
+  badge: "Planes de publicidad mensual",
+  title: "Publicidad que trabaja todos los meses",
+  subtitle: "Nos encargamos de tus anuncios en Facebook y TikTok mes a mes, sin contratos de permanencia forzosa.",
   packages: [
     {
       id: 1,
@@ -527,7 +505,7 @@ export const offerData = {
     }
   ],
   guarantee: "Si en los primeros 30 días no ves progreso medible, ajustamos la estrategia completamente sin costo adicional.",
-  cta: "Agenda tu Asesoría Gratuita"
+  cta: "Consultar este plan"
 };
 
 

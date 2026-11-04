@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { faqData } from '../data/mockData';
+import { faqData } from '../data/landing';
 import metaPixel from '../lib/metaPixel';
 import { waLink, whatsappMessages } from '../data/contacto';
 
@@ -17,7 +17,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-12 md:py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
+    <section id="preguntas" className="scroll-mt-16 py-12 md:py-24 bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c9a961]/5 blur-[150px] rounded-full pointer-events-none"></div>
       

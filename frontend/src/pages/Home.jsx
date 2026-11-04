@@ -7,11 +7,10 @@ import LazySection from '../components/LazySection';
 // Lazy load below-the-fold components
 const Services = lazy(() => import('../components/Services'));
 const Invitations = lazy(() => import('../components/Invitations'));
-const Testimonials = lazy(() => import('../components/Testimonials'));
-const Problems = lazy(() => import('../components/Problems'));
+const Work = lazy(() => import('../components/Work'));
+const Process = lazy(() => import('../components/Process'));
 const Offer = lazy(() => import('../components/Offer'));
-const Authority = lazy(() => import('../components/Authority'));
-const Consequences = lazy(() => import('../components/Consequences'));
+const Testimonials = lazy(() => import('../components/Testimonials'));
 const FAQ = lazy(() => import('../components/FAQ'));
 const CTA = lazy(() => import('../components/CTA'));
 const ContactForm = lazy(() => import('../components/ContactForm'));
@@ -36,14 +35,13 @@ const Home = () => {
         {/* Below-the-fold components - lazy load */}
         <LazySection component={Services} anchor="servicios" />
         <LazySection component={Invitations} anchor="invitaciones" />
+        <LazySection component={Work} anchor="trabajos" />
+        <LazySection component={Process} anchor="proceso" />
+        <LazySection component={Offer} anchor="oferta" />
         <LazySection component={Testimonials} />
-        <LazySection component={Problems} />
-        <LazySection component={Offer} />
-        <LazySection component={Authority} />
-        <LazySection component={Consequences} />
-        <LazySection component={FAQ} />
+        <LazySection component={FAQ} anchor="preguntas" />
         <LazySection component={CTA} />
-        <LazySection component={ContactForm} />
+        <LazySection component={ContactForm} anchor="contacto" />
         <LazySection component={Footer} />
       </div>
     </div>

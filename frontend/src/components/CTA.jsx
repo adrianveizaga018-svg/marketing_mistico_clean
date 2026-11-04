@@ -3,11 +3,10 @@ import { ArrowRight, Zap } from 'lucide-react';
 import { ctaData } from '../data/mockData';
 import UrgencyBadge from './UrgencyBadge';
 import metaPixel from '../lib/metaPixel';
+import { waLink, whatsappMessages } from '../data/contacto';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const CTA = () => {
-  const handleSchedule = () => {
-    metaPixel.trackSchedule();
-  };
   return (
     <section className="py-24 bg-black relative overflow-hidden">
       {/* Premium Background Effects */}
@@ -26,13 +25,12 @@ const CTA = () => {
           </div>
 
           {/* Title */}
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
             {ctaData.title}
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-3xl text-white/60 mb-16 leading-tight max-w-3xl mx-auto font-bold italic">
-            "{ctaData.subtitle}"
+          <p className="text-lg md:text-2xl text-white/70 mb-10 md:mb-14 leading-snug max-w-2xl mx-auto font-semibold">
+            {ctaData.subtitle}
           </p>
 
           {/* Features - Premium Pill Style */}
@@ -52,19 +50,17 @@ const CTA = () => {
             <div className="relative">
               <UrgencyBadge text="⚡ Respuesta en 24h" position="top" />
               <a
-                href="https://calendar.app.google/NKQGyQizTe4m4R8a6"
+                href={waLink(whatsappMessages.general)}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleSchedule}
+                onClick={() => metaPixel.trackWhatsAppClick()}
                 className="group bg-[#c9a961] hover:bg-white text-black font-black text-xs sm:text-sm md:text-base uppercase tracking-[0.15em] sm:tracking-[0.2em] px-10 sm:px-14 md:px-16 py-5 sm:py-6 md:py-7 rounded-full transition-all duration-500 hover:scale-105 shadow-[0_0_40px_rgba(201,169,97,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] inline-flex items-center gap-3 sm:gap-4 no-underline min-h-[56px]"
               >
+                <WhatsAppIcon size={20} />
                 {ctaData.buttonText}
                 <ArrowRight className="group-hover:translate-x-3 transition-transform duration-500" size={20} />
               </a>
             </div>
-            <p className="text-white/30 text-xs uppercase tracking-widest font-black">
-              Resultados reales para marcas con visión de futuro
-            </p>
           </div>
         </div>
       </div>

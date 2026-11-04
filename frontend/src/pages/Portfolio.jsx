@@ -59,15 +59,15 @@ const Portfolio = () => {
               {/* Stats */}
               <div className="flex flex-wrap justify-center gap-8 md:gap-12 mt-12">
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">150+</div>
+                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">[CIFRA REAL]</div>
                   <div className="text-sm text-white/50 uppercase tracking-wider font-bold">Proyectos</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">15+</div>
+                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">[CIFRA REAL]</div>
                   <div className="text-sm text-white/50 uppercase tracking-wider font-bold">Industrias</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">98%</div>
+                  <div className="text-3xl md:text-4xl font-black text-[#c9a961] mb-2">[CIFRA REAL]</div>
                   <div className="text-sm text-white/50 uppercase tracking-wider font-bold">Satisfacción</div>
                 </div>
               </div>

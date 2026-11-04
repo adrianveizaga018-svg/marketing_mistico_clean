@@ -26,7 +26,7 @@ const PortfolioModal = ({ isOpen, projectId, onClose, onNavigate, projectData = 
     problem: "El cliente buscaba elevar su presencia digital y conectar con su audiencia objetivo de manera efectiva.",
     solution: "Desarrollamos una solución a medida enfocada en la calidad visual y la conversión, utilizando las últimas tendencias del mercado.",
     results: [
-      { label: "Satisfacción", value: "100%", icon: "Star" },
+      { label: "Satisfacción", value: "[CIFRA REAL]", icon: "Star" },
       { label: "Entrega", value: "A Tiempo", icon: "Clock" },
       { label: "Calidad", value: "Premium", icon: "CheckCircle" }
     ]

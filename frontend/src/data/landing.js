@@ -138,3 +138,117 @@ export const invitationSteps = [
   { title: 'Mándanos tus datos', text: 'Fecha, lugar, fotos y nombres. Nosotros diseñamos.' },
   { title: 'Comparte tu link', text: 'Lo envías por WhatsApp y ves quién confirma.' },
 ];
+
+// ─── Trabajos (proyectos reales del portafolio) ─────────────────────────
+export const workSection = {
+  eyebrow: 'Trabajos reales',
+  title: 'Marcas bolivianas que ya trabajan con nosotros',
+  subtitle: 'Webs institucionales, videos y campañas hechas en La Paz para negocios de verdad.',
+};
+
+export const projects = [
+  {
+    id: 'icalp',
+    client: 'Colegio de Abogados de La Paz',
+    type: 'Plataforma web',
+    description: 'Plataforma institucional y sistema de gestión para colegiados.',
+    image: '/thumb_icalp.webp',
+    url: 'https://icalp.org.bo',
+    linkLabel: 'Ver sitio',
+  },
+  {
+    id: 'caulp',
+    client: 'Colegio de Auditores – CAULP',
+    type: 'Web e identidad digital',
+    description: 'Renovación de la identidad digital y plataforma de servicios para auditores.',
+    image: '/thumb_auditores.png',
+    url: 'http://caulp.org.bo',
+    linkLabel: 'Ver sitio',
+  },
+  {
+    id: 'cenefco',
+    client: 'CENEFCO',
+    type: 'Producción de video',
+    description: 'Videos para promocionar cursos y formación profesional.',
+    image: '/thumb_cenefco.webp',
+    url: 'https://player.vimeo.com/video/1154013061',
+    linkLabel: 'Ver video',
+  },
+  {
+    id: 'pasion-criolla',
+    client: 'Pasión Criolla',
+    type: 'Video para TikTok y anuncios',
+    description: 'Videos verticales de sus platos estrella para redes y publicidad.',
+    image: '/thumb_pasion_1.webp',
+    url: 'https://player.vimeo.com/video/1154010752',
+    linkLabel: 'Ver video',
+  },
+];
+
+// ─── Proceso de trabajo ─────────────────────────────────────────────────
+export const processSection = {
+  eyebrow: 'Así trabajamos',
+  title: 'Simple, claro y sin sorpresas',
+  subtitle: 'Sabes en todo momento qué estamos haciendo y cuánto cuesta.',
+};
+
+export const processSteps = [
+  { title: 'Nos escribes', text: 'Por WhatsApp o el formulario. Nos cuentas qué necesitas, sin compromiso.' },
+  { title: 'Te cotizamos', text: 'Te enviamos una propuesta clara con precio, tiempos y lo que incluye. Sin costo.' },
+  { title: 'Creamos', text: 'Trabajamos y te mostramos avances para que opines antes de terminar.' },
+  { title: 'Entregamos y te acompañamos', text: 'Te entregamos todo funcionando y seguimos disponibles para ayudarte.' },
+];
+
+// ─── Testimonios ────────────────────────────────────────────────────────
+// Reemplaza cada marcador por un testimonio REAL (nombre, negocio, texto y, si se puede, foto o captura).
+export const testimonialsSection = {
+  eyebrow: 'Opiniones de clientes',
+  title: 'Lo que dicen quienes trabajaron con nosotros',
+};
+
+export const testimonials = [
+  { id: 1, quote: '[TESTIMONIO REAL]', name: '[NOMBRE DEL CLIENTE]', business: '[NEGOCIO / CARGO]' },
+  { id: 2, quote: '[TESTIMONIO REAL]', name: '[NOMBRE DEL CLIENTE]', business: '[NEGOCIO / CARGO]' },
+  { id: 3, quote: '[TESTIMONIO REAL]', name: '[NOMBRE DEL CLIENTE]', business: '[NEGOCIO / CARGO]' },
+];
+
+// ─── Preguntas frecuentes ───────────────────────────────────────────────
+export const faqSection = {
+  eyebrow: 'Preguntas frecuentes',
+  title: 'Resolvemos tus dudas',
+};
+
+export const faqData = [
+  {
+    question: '¿Cuánto cuesta una página web o un sistema?',
+    answer: 'Depende de lo que necesites: no es lo mismo una web de presentación que una tienda en línea o un sistema de inventario. Escríbenos por WhatsApp, te hacemos unas preguntas rápidas y te mandamos una cotización clara sin costo.',
+  },
+  {
+    question: '¿Cómo funcionan las invitaciones digitales?',
+    answer: 'Eliges un paquete, nos mandas los datos de tu evento (fecha, lugar, fotos, nombres) y te entregamos un link. Lo compartes por WhatsApp y tus invitados ven la ubicación, la hora y confirman asistencia desde su celular.',
+  },
+  {
+    question: '¿Cuánto debo invertir en publicidad en Facebook o TikTok?',
+    answer: 'La inversión mínima recomendada es de $300-500 USD al mes para campañas efectivas en Meta Ads, porque permite juntar suficientes datos para optimizar. Ese dinero va directo a la plataforma; nuestra gestión se cobra aparte.',
+  },
+  {
+    question: '¿Cuánto tiempo toma ver resultados con publicidad?',
+    answer: 'Los primeros resultados suelen verse entre 7 y 14 días después de lanzar las campañas. Los resultados más estables llegan entre 30 y 60 días, cuando ya hay datos para ajustar la estrategia.',
+  },
+  {
+    question: '¿Necesito tener redes sociales activas para empezar?',
+    answer: 'No. Si no tienes presencia en redes, podemos crear y configurar tus perfiles desde cero. Si ya tienes, optimizamos lo que hay.',
+  },
+  {
+    question: '¿Hay contrato mínimo?',
+    answer: 'Para publicidad recomendamos al menos 3 meses para ver resultados sólidos, pero trabajamos mes a mes, sin contratos de permanencia forzosa.',
+  },
+  {
+    question: '¿Ofrecen garantía de resultados?',
+    answer: 'Nadie serio puede garantizar ventas exactas, porque dependen del producto, el mercado y la competencia. Lo que sí garantizamos es trabajo profesional, optimización constante y transparencia total. Si en los primeros 30 días no ves progreso, ajustamos la estrategia sin costo adicional.',
+  },
+  {
+    question: '¿Qué pasa si no estoy satisfecho?',
+    answer: 'Puedes cancelar el servicio al terminar el mes en curso, sin penalidades.',
+  },
+];
