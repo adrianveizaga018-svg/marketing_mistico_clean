@@ -60,6 +60,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "node scripts/meta-paginas.js",
     "test": "craco test"
   },
   "browserslist": {
