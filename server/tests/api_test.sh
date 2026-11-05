@@ -60,5 +60,7 @@ c=$(req $J -d "{\"slug\":\"$SLUG2\",\"name\":\"Ana Abierta\",\"attending\":true,
 c=$(req -b $A $J -d "{\"action\":\"duplicate\",\"id\":$INV}" $B/api/admin/invitaciones.php); check "duplicar" 201 $c '"active":0'
 c=$(req $B/_mm/invitations.php); check "archivo privado -> 403" 403 $c
 
-kill $SRV 2>/dev/null; wait $SRV 2>/dev/null
+kill $SRV 2>/dev/null
+# En Windows "kill" no cierra php.exe: lo cerramos por el puerto para no dejar servidores colgados.
+for p in $(netstat -ano 2>/dev/null | grep -E ":8090 .*LISTENING" | awk '{print $5}' | sort -u); do taskkill //F //PID $p >/dev/null 2>&1; done
 echo "== $pass OK, $fail FALLAS"
