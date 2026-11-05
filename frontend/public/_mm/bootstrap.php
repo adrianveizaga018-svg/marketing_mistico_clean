@@ -7,6 +7,8 @@ if (!defined('MM_APP')) {
     exit;
 }
 
+date_default_timezone_set('America/La_Paz');
+
 function mm_config(): array
 {
     static $config = null;
@@ -132,4 +134,78 @@ function mm_clean_line(string $value, int $max = 200): string
 {
     $value = preg_replace('/[\r\n\t]+/', ' ', $value);
     return mb_substr(trim($value), 0, $max);
+}
+
+function mm_method(): string
+{
+    return strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
+}
+
+// Código aleatorio criptográficamente seguro (letras y números, sin caracteres confusos).
+// 10 caracteres de 56 posibles ≈ 58 bits: imposible de adivinar probando.
+function mm_token(int $length = 10): string
+{
+    $alphabet = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    $max = strlen($alphabet) - 1;
+    $out = '';
+    for ($i = 0; $i < $length; $i++) {
+        $out .= $alphabet[random_int(0, $max)];
+    }
+    return $out;
+}
+
+function mm_now(): string
+{
+    return date('Y-m-d H:i:s');
+}
+
+// Usuario actual: el administrador (tú) o un cliente con acceso solo a sus eventos.
+function mm_current_user(): ?array
+{
+    mm_session();
+    if (!empty($_SESSION['is_admin'])) {
+        return ['id' => null, 'role' => 'admin', 'name' => 'Administrador'];
+    }
+    if (!empty($_SESSION['client_id'])) {
+        $stmt = mm_db()->prepare('SELECT id, name, email, role FROM users WHERE id = ? AND active = 1');
+        $stmt->execute([$_SESSION['client_id']]);
+        $user = $stmt->fetch();
+        return $user ?: null;
+    }
+    return null;
+}
+
+function mm_require_user(): array
+{
+    $user = mm_current_user();
+    if (!$user) {
+        mm_json(['status' => 'error', 'message' => 'No autorizado'], 401);
+    }
+    return $user;
+}
+
+// Devuelve la invitación solo si el usuario puede verla (admin: todas; cliente: las suyas).
+function mm_require_invitation(array $user, int $invitationId): array
+{
+    $stmt = mm_db()->prepare('SELECT * FROM invitations WHERE id = ?');
+    $stmt->execute([$invitationId]);
+    $inv = $stmt->fetch();
+    if (!$inv || ($user['role'] !== 'admin' && (int) $inv['owner_id'] !== (int) $user['id'])) {
+        // Mismo mensaje exista o no, para no revelar invitaciones ajenas.
+        mm_json(['status' => 'error', 'message' => 'Invitación no encontrada'], 404);
+    }
+    return $inv;
+}
+
+function mm_int($value, int $min, int $max, int $default): int
+{
+    if (!is_numeric($value)) {
+        return $default;
+    }
+    return max($min, min($max, (int) $value));
+}
+
+function mm_text($value, int $max = 255): string
+{
+    return mb_substr(trim((string) $value), 0, $max);
 }
