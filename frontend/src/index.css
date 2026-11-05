@@ -167,6 +167,7 @@ code {
 .snap-row::-webkit-scrollbar { display: none; }
 .snap-row > * { scroll-snap-align: center; flex: 0 0 84%; }
 @media (min-width: 768px) {
-  .snap-row { display: grid; overflow: visible; margin: 0; padding: 0.75rem 0 0; }
+  /* margin auto: mantiene la grilla centrada (antes quedaba corrida a la izquierda) */
+  .snap-row { display: grid; overflow: visible; margin-left: auto; margin-right: auto; padding: 0.75rem 0 0; }
   .snap-row > * { flex: none; }
 }
