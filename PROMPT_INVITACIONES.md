@@ -32,7 +32,7 @@ Debe tener:
 - Galería de fotos
 - Música de fondo opcional, con botón para activarla (los navegadores no permiten autoplay con sonido)
 - Vista previa bonita al compartir por WhatsApp (Open Graph: foto, título, fecha)
-- Al pie, discreto: "Invitación creada por Marketing Místico" con link a WhatsApp 68105614 (así cada invitación me trae clientes)
+- Al pie, discreto: "Invitación creada por Marketing Místico" con link a WhatsApp 69612395 (así cada invitación me trae clientes)
 
 Crea una invitación de prueba, saca capturas en celular (390px) y revísalas antes de mostrarme.
 

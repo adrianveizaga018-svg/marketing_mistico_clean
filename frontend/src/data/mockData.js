@@ -240,7 +240,7 @@ export const formFields = [
 export const footerData = {
   tagline: "Transformando negocios con marketing y tecnología",
   email: "marketing.mistico.oficial@gmail.com",
-  whatsapp: "+591 68105614",
+  whatsapp: "+591 69612395",
   social: [
     { name: "Facebook", url: "https://www.facebook.com/share/1BuHy9EyJe/" },
     { name: "Instagram", url: "https://www.instagram.com/marketing_mistico_/" },

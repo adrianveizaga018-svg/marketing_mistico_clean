@@ -11,7 +11,7 @@ Actúa como un equipo de 3 expertos:
 ## Contexto del negocio
 - Marketing Místico, La Paz, Bolivia. Servicios: páginas web, sistemas a medida, publicidad en Facebook/TikTok, diseño, foto y video, y un servicio nuevo de INVITACIONES DIGITALES.
 - Clientes: emprendedores y negocios bolivianos. La mayoría ve la página desde el celular, llegando desde WhatsApp, Facebook o TikTok.
-- Objetivo: que el visitante me escriba por WhatsApp (68105614) o pida una cotización.
+- Objetivo: que el visitante me escriba por WhatsApp (69612395) o pida una cotización.
 
 ## Paso 1: mírala con tus propios ojos (no cambies código todavía)
 - Levanta la página en local e instala Playwright si hace falta.
