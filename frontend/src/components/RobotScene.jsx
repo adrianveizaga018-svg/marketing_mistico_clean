@@ -37,7 +37,10 @@ const RobotScene = ({ className = '' }) => (
 
     {/* Robot */}
     <div className="rs-robot">
-      <img src="/img/robot-hero.webp" alt="" width="480" height="1000" decoding="async" fetchpriority="high" />
+      {/* Robot en capas: cuerpo + antebrazos que se mueven desde el codo */}
+      <img src="/img/robot-base.webp" alt="" width="480" height="1000" decoding="async" fetchpriority="high" />
+      <img src="/img/robot-brazo-izq.webp" alt="" width="480" height="1000" decoding="async" className="rs-arm rs-arm-l" />
+      <img src="/img/robot-brazo-der.webp" alt="" width="480" height="1000" decoding="async" className="rs-arm rs-arm-r" />
       <span className="rs-chest" />
     </div>
 

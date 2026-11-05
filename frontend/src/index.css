@@ -181,6 +181,26 @@ code {
           mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 62%, transparent 100%);
 }
 .rs-robot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* Antebrazos: misma posición que el cuerpo, giran desde el codo */
+.rs-arm { position: absolute; inset: 0; }
+.rs-arm-l { transform-origin: 23.3% 59.4%; animation: rs-wave 4.2s ease-in-out infinite; }
+.rs-arm-r { transform-origin: 85.4% 60.8%; animation: rs-tap 2.8s ease-in-out infinite 0.6s; }
+@keyframes rs-wave {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(6deg); }
+  35% { transform: rotate(-3deg); }
+  50% { transform: rotate(5deg); }
+  70% { transform: rotate(0deg); }
+}
+@keyframes rs-tap {
+  0%, 100% { transform: rotate(0deg); }
+  12% { transform: rotate(-5deg); }
+  22% { transform: rotate(-1deg); }
+  32% { transform: rotate(-4deg); }
+  42% { transform: rotate(0deg); }
+  60% { transform: rotate(3deg); }
+  75% { transform: rotate(0deg); }
+}
 .rs-chest {
   position: absolute; left: 27%; top: 41%; width: 10%; height: 6%; border-radius: 40%;
   background: radial-gradient(circle, rgba(63,213,255,.95), rgba(63,213,255,0) 70%);
