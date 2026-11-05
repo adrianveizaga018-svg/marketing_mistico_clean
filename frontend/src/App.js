@@ -8,6 +8,7 @@ import WhatsAppWidget from "./components/WhatsAppWidget";
 const Home = lazy(() => import("./pages/Home"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const LeadsDashboard = lazy(() => import("./pages/LeadsDashboard"));
+const PillarPage = lazy(() => import("./pages/PillarPage"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -23,6 +24,9 @@ function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/vende-mas" element={<PillarPage key="vende-mas" pillarId="vende-mas" />} />
+            <Route path="/organiza" element={<PillarPage key="organiza" pillarId="organiza" />} />
+            <Route path="/protege" element={<PillarPage key="protege" pillarId="protege" />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
           </Routes>
