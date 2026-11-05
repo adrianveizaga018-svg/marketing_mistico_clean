@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { PartyPopper, Send, CheckCircle, QrCode, ScanLine } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import PageHero from '../components/PageHero';
+import InvitationExamples from '../components/InvitationExamples';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { eventosPage } from '../data/paginas';
 import { pageMessages } from '../data/sitio';
@@ -26,6 +27,8 @@ const Eventos = () => (
         </button>
       </div>
     </PageHero>
+
+    <InvitationExamples />
 
     {/* Pases QR y control de asistencia */}
     <section className="py-12 md:py-16">

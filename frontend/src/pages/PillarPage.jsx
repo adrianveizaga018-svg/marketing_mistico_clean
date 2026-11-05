@@ -29,7 +29,7 @@ const ServiceBlock = ({ service, reverse }) => {
     <article id={service.id} className="scroll-mt-24 grid md:grid-cols-2 gap-6 md:gap-12 items-center py-10 md:py-14 border-t border-white/10 first:border-t-0">
       <div className={`${reverse ? 'md:order-2' : ''} ${service.image ? '' : 'hidden md:block'}`}>
         {service.image ? (
-          <img src={service.image} alt={service.name} width="800" height="500" loading="lazy" decoding="async" className="w-full aspect-[16/10] object-cover object-top rounded-3xl border border-white/10" />
+          <img src={service.image} alt={service.imageAlt || service.name} width="800" height="500" loading="lazy" decoding="async" className="w-full aspect-[16/10] object-cover object-top rounded-3xl border border-white/10" />
         ) : (
           <div className="hidden md:flex w-full aspect-[16/10] rounded-3xl border border-[#c9a961]/25 bg-gradient-to-br from-[#1a1508] via-[#0b0905] to-black items-center justify-center">
             {Icon && <Icon size={84} strokeWidth={1.2} className="text-[#c9a961]/80" />}

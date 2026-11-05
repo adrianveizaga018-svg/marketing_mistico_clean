@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, MapPin, Clock, CalendarHeart, ExternalLink } from 'lucide-react';
+import { Check, ExternalLink } from 'lucide-react';
 import { invitationsSection, invitationPackages, invitationSteps } from '../data/landing';
 import { waLink, whatsappMessages } from '../data/contacto';
 import SectionHeader from './SectionHeader';
@@ -8,37 +8,6 @@ import metaPixel from '../lib/metaPixel';
 
 const packageMessage = (pkg) =>
   `Hola Marketing Místico 👋 Quiero la invitación digital ${pkg.name} (Bs ${pkg.price}). Mi evento es: `;
-
-// Celular de muestra (ilustrativo) para que el cliente imagine su invitación.
-const PhoneMockup = () => (
-  <div className="relative mx-auto w-[220px] sm:w-[240px] shrink-0" aria-hidden="true">
-    <span className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-white/10 border border-white/20 text-white/70 text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full backdrop-blur">
-      Ejemplo
-    </span>
-    <div className="rounded-[2.2rem] border-[6px] border-[#1f1f1f] bg-gradient-to-b from-[#1a1508] via-[#0d0b07] to-black shadow-[0_0_60px_rgba(201,169,97,0.18)] overflow-hidden">
-      <div className="h-5 flex justify-center pt-1.5"><div className="w-16 h-1.5 rounded-full bg-[#2a2a2a]" /></div>
-      <div className="px-5 pt-5 pb-6 text-center">
-        <p className="text-[#c9a961] text-[10px] uppercase tracking-[0.3em] font-bold">Nuestra boda</p>
-        <p className="text-white text-2xl font-black mt-2 leading-tight">Ana <span className="text-[#c9a961]">&</span> Luis</p>
-        <div className="h-px w-16 bg-[#c9a961]/50 mx-auto my-4" />
-        <div className="grid grid-cols-4 gap-1.5 mb-4">
-          {[['24', 'días'], ['06', 'hrs'], ['15', 'min'], ['40', 'seg']].map(([n, l]) => (
-            <div key={l} className="bg-white/5 rounded-lg py-1.5">
-              <p className="text-white text-sm font-black">{n}</p>
-              <p className="text-white/50 text-[9px]">{l}</p>
-            </div>
-          ))}
-        </div>
-        <div className="space-y-2 text-left text-[11px] text-white/75 mb-5">
-          <p className="flex items-center gap-2"><CalendarHeart size={13} className="text-[#c9a961]" /> Sábado 14 de febrero</p>
-          <p className="flex items-center gap-2"><Clock size={13} className="text-[#c9a961]" /> 19:30</p>
-          <p className="flex items-center gap-2"><MapPin size={13} className="text-[#c9a961]" /> Ver ubicación en el mapa</p>
-        </div>
-        <div className="bg-[#c9a961] text-black text-[11px] font-black rounded-full py-2.5">Confirmar asistencia</div>
-      </div>
-    </div>
-  </div>
-);
 
 const PackageCard = ({ pkg }) => (
   <article
@@ -111,7 +80,6 @@ const Invitations = () => (
             ))}
           </ol>
         </div>
-        <div className="hidden lg:block"><PhoneMockup /></div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-6 max-w-6xl mx-auto pt-3">

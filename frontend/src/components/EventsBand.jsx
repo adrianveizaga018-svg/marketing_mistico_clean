@@ -27,11 +27,12 @@ const EventsBand = () => (
         </div>
         <img
           src="/img/svc-invitaciones.webp"
-          alt="Ejemplos de invitaciones digitales"
+          alt="Tres ejemplos de invitaciones digitales en celular: boda, quinceañero y cumpleaños infantil"
           width="800"
           height="500"
           loading="lazy"
-          className="hidden md:block w-[380px] rounded-2xl border border-white/10"
+          decoding="async"
+          className="order-first md:order-none w-full md:w-[420px] rounded-2xl border border-white/10"
         />
       </div>
     </div>
