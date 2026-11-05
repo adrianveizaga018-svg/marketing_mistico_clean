@@ -130,7 +130,7 @@ const PillarPage = ({ pillarId }) => {
                 <h2 className="text-white text-2xl sm:text-3xl font-black mb-3">{page.caseStudy.title}</h2>
                 <p className="text-white/75 mb-3">{page.caseStudy.text}</p>
                 <p className="text-white/55 text-sm mb-5">Resultado: {page.caseStudy.result}</p>
-                <span className="inline-flex items-center gap-1.5 text-white font-bold group-hover:text-[#c9a961]">Ver cenefco.com <ArrowUpRight size={16} /></span>
+                <span className="inline-flex items-center gap-1.5 text-white font-bold group-hover:text-[#c9a961]">{page.caseStudy.linkLabel} <ArrowUpRight size={16} /></span>
               </div>
             </a>
           </div>

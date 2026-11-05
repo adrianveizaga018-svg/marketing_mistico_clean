@@ -69,7 +69,7 @@ export const videosData = [
     description: "Renovación total de la identidad digital y plataforma de servicios para auditores y contadores de La Paz.",
     category: "Plataforma Institucional",
     thumbnail: "/thumb_auditores.png",
-    externalUrl: "http://caulp.org.bo",
+    externalUrl: "https://caulp.com.bo",
     results: "Lanzamiento de Nueva Identidad Digital",
     aspect: "horizontal"
   }
@@ -546,7 +546,7 @@ export const webPortfolioData = [
     image: "/thumb_auditores.png", 
     category: "Portal Web", 
     tech: "WordPress + Custom Design",
-    link: "https://caulp.org.bo"
+    link: "https://caulp.com.bo"
   }
 ];
 

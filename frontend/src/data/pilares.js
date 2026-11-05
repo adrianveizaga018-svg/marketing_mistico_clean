@@ -1,6 +1,8 @@
 // Contenido de las páginas de pilares: /vende-mas, /organiza, /protege.
 // Cada servicio: problema que resuelve, qué incluye, para quién es y su mensaje de WhatsApp.
 
+import { CAULP_URL } from './sitio';
+
 const hola = 'Hola Marketing Místico 👋 ';
 
 export const pillarPages = {
@@ -72,12 +74,13 @@ export const pillarPages = {
     seoTitle: 'Organiza tu negocio | Sistemas a medida, sistemas educativos y chatbots en La Paz',
     seoDescription: 'Sistemas a medida, sistemas para instituciones educativas, chatbots de WhatsApp con IA y capacitación a empresas en Bolivia.',
     caseStudy: {
-      client: 'CENEFCO',
-      title: 'Caso real: plataforma académica de CENEFCO',
-      text: 'Sitio y sistema para su oferta de cursos, diplomados y maestrías, con acceso para estudiantes.',
+      client: 'CAULP',
+      title: 'Caso real: plataforma del Colegio de Auditores de La Paz',
+      text: 'Sitio y plataforma para afiliación, servicios y formación continua, con acceso para colegiados.',
       result: '[RESULTADO REAL]',
-      image: '/img/case-cenefco.webp',
-      url: 'https://www.cenefco.com',
+      image: '/img/case-caulp.webp',
+      url: CAULP_URL,
+      linkLabel: 'Ver caulp.com.bo',
     },
     services: [
       {
@@ -92,12 +95,12 @@ export const pillarPages = {
       {
         id: 'educativos',
         name: 'Sistemas para instituciones educativas',
-        image: '/img/case-cenefco.webp',
+        image: '/img/case-caulp.webp',
         problem: 'Inscripciones, pagos y datos de estudiantes se manejan a mano y por mensajes sueltos.',
         includes: ['Oferta de cursos, diplomados y maestrías en línea', 'Inscripción y registro de estudiantes', 'Acceso para estudiantes', 'Reportes para la administración'],
         forWho: 'Institutos, centros de capacitación, colegios profesionales y universidades.',
         message: `${hola}Quiero un sistema para mi institución educativa.`,
-        extraLink: { label: 'Ver caso CENEFCO', url: 'https://www.cenefco.com' },
+        extraLink: { label: 'Ver caso CAULP', url: CAULP_URL },
       },
       {
         id: 'chatbots',

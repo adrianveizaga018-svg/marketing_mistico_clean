@@ -1,4 +1,7 @@
 // Contenido de la nueva estructura multipágina (PROMPT_LANDING v2).
+
+// Dirección del caso CAULP (cámbiala aquí si hace falta).
+export const CAULP_URL = 'https://caulp.com.bo';
 // Edita aquí los textos; los componentes solo los muestran.
 
 export const homeHero = {
@@ -47,15 +50,15 @@ export const eventsBand = {
 
 export const cases = [
   {
-    id: 'cenefco',
-    client: 'CENEFCO',
+    id: 'caulp',
+    client: 'CAULP',
     pillar: 'Organiza',
-    title: 'Plataforma académica para cursos, diplomados y maestrías',
-    text: 'Sitio y sistema para su oferta académica, con acceso para estudiantes.',
+    title: 'Plataforma del Colegio de Auditores de La Paz',
+    text: 'Sitio y plataforma para afiliación, servicios y formación continua, con acceso para colegiados.',
     result: '[RESULTADO REAL]',
-    image: '/img/case-cenefco.webp',
-    url: 'https://www.cenefco.com',
-    linkLabel: 'Ver cenefco.com',
+    image: '/img/case-caulp.webp',
+    url: CAULP_URL,
+    linkLabel: 'Ver caulp.com.bo',
   },
   {
     id: 'vendly',
