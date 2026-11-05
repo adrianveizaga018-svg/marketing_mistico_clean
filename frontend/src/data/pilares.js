@@ -80,7 +80,7 @@ export const pillarPages = {
       result: '[RESULTADO REAL]',
       image: '/img/case-caulp.webp',
       url: CAULP_URL,
-      linkLabel: 'Ver caulp.com.bo',
+      linkLabel: 'Ver caulp.org.bo',
     },
     services: [
       {

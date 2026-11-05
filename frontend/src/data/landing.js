@@ -178,7 +178,7 @@ export const projects = [
     type: 'Web e identidad digital',
     description: 'Renovación de la identidad digital y plataforma de servicios para auditores.',
     image: '/img/work-caulp.webp',
-    url: 'https://caulp.com.bo',
+    url: 'https://caulp.org.bo',
     linkLabel: 'Ver sitio',
   },
   {

@@ -1,7 +1,7 @@
 // Contenido de la nueva estructura multipágina (PROMPT_LANDING v2).
 
 // Dirección del caso CAULP (cámbiala aquí si hace falta).
-export const CAULP_URL = 'https://caulp.com.bo';
+export const CAULP_URL = 'https://caulp.org.bo';
 // Edita aquí los textos; los componentes solo los muestran.
 
 export const homeHero = {
@@ -58,7 +58,7 @@ export const cases = [
     result: '[RESULTADO REAL]',
     image: '/img/case-caulp.webp',
     url: CAULP_URL,
-    linkLabel: 'Ver caulp.com.bo',
+    linkLabel: 'Ver caulp.org.bo',
   },
   {
     id: 'vendly',
