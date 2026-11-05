@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import { waLink, whatsappMessages, WHATSAPP_DISPLAY } from '../data/contacto';
 import WhatsAppIcon from './WhatsAppIcon';
+import { owner } from '../data/sitio';
 import metaPixel from '../lib/metaPixel';
 
 const NEEDS = [
@@ -47,6 +48,13 @@ const ContactQuick = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div>
+            <figure className="flex items-center gap-4 mb-6">
+              <img src={owner.photo} alt={owner.name || owner.role} width="640" height="800" loading="lazy" className="w-24 sm:w-32 aspect-[4/5] object-cover rounded-2xl border-2 border-[#c9a961]/60 shadow-[0_0_30px_rgba(201,169,97,0.25)]" />
+              <figcaption>
+                <p className="text-white font-black text-lg leading-tight">{owner.name ? `Hola, soy ${owner.name}` : 'Te respondo yo'}</p>
+                <p className="text-white/60 text-sm">{owner.role} · Marketing Místico</p>
+              </figcaption>
+            </figure>
             <p className="text-[#c9a961] text-xs uppercase tracking-[0.2em] font-black mb-3">Contacto</p>
             <h2 className="text-white text-[1.9rem] sm:text-5xl font-black tracking-tight leading-tight mb-4">Cuéntanos qué necesitas</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-7">Te respondemos por WhatsApp con una propuesta clara y sin costo.</p>

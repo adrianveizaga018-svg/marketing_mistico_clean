@@ -4,6 +4,14 @@
 export const CAULP_URL = 'https://caulp.org.bo';
 // Edita aquí los textos; los componentes solo los muestran.
 
+// Quién atiende. Escribe tu nombre en "name" y aparecerá en el hero y en Contacto.
+export const owner = {
+  name: '',
+  role: 'Ingeniero de sistemas',
+  photo: '/img/yo-retrato.webp',
+  avatar: '/img/yo-avatar.webp',
+};
+
 export const homeHero = {
   eyebrow: 'Ingeniería de sistemas · La Paz, Bolivia',
   title: 'Tu negocio vende más, se organiza',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, Cpu } from 'lucide-react';
-import { homeHero, pillars } from '../data/sitio';
+import { homeHero, pillars, owner } from '../data/sitio';
 import { waLink, whatsappMessages } from '../data/contacto';
 import WhatsAppIcon from './WhatsAppIcon';
 import RobotScene from './RobotScene';
@@ -48,6 +48,16 @@ const Hero = () => (
           >
             Ver cómo te ayudamos <ArrowDown size={16} className="text-[#c9a961]" />
           </button>
+        </div>
+
+        {/* Quién atiende */}
+        <div className="flex items-center gap-3 mb-7">
+          <img src={owner.avatar} alt={owner.name || owner.role} width="96" height="96" className="w-12 h-12 rounded-full object-cover ring-2 ring-[#c9a961]/70" />
+          <p className="text-white/85 text-sm leading-snug">
+            {owner.name ? <strong className="text-white">{owner.name}</strong> : 'Te atiende directamente un'}
+            {owner.name ? ` · ${owner.role}` : ` ${owner.role.toLowerCase()}`}
+            <span className="block text-white/55 text-xs">Hablas con quien hace el trabajo</span>
+          </p>
         </div>
 
         {/* Atajos a los 3 pilares */}
