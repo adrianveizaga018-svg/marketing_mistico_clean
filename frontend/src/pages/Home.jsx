@@ -10,6 +10,7 @@ const Invitations = lazy(() => import('../components/Invitations'));
 const Work = lazy(() => import('../components/Work'));
 const Process = lazy(() => import('../components/Process'));
 const Offer = lazy(() => import('../components/Offer'));
+// eslint-disable-next-line no-unused-vars
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const FAQ = lazy(() => import('../components/FAQ'));
 const CTA = lazy(() => import('../components/CTA'));
@@ -38,7 +39,8 @@ const Home = () => {
         <LazySection component={Work} anchor="trabajos" />
         <LazySection component={Process} anchor="proceso" />
         <LazySection component={Offer} anchor="oferta" />
-        <LazySection component={Testimonials} />
+        {/* Testimonios ocultos hasta tener opiniones reales: descomenta la línea de abajo */}
+        {/* <LazySection component={Testimonials} /> */}
         <LazySection component={FAQ} anchor="preguntas" />
         <LazySection component={CTA} />
         <LazySection component={ContactForm} anchor="contacto" />
