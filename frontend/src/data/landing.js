@@ -80,9 +80,9 @@ export const services = [
 // ─── Invitaciones digitales ─────────────────────────────────────────────
 // Precios y contenido PROPUESTOS: ajústalos a tu realidad antes de publicar.
 export const invitationsSection = {
-  eyebrow: 'Nuevo servicio',
-  title: 'Invitaciones digitales que tus invitados sí abren',
-  subtitle: 'Tu invitación en un link: la mandas por WhatsApp, tus invitados ven la ubicación, la hora y confirman asistencia con un toque. Tú ves quién viene sin llamar a nadie.',
+  eyebrow: 'Paquetes y precios',
+  title: 'Elige tu paquete',
+  subtitle: 'Todos incluyen tu invitación en un link para mandar por WhatsApp, con ubicación, hora y confirmación de asistencia.',
   events: ['Bodas', 'Quinceañeros', 'Cumpleaños', 'Bautizos', 'Baby shower', 'Graduaciones', 'Eventos de empresa'],
   // Pega aquí el link de una invitación de muestra para mostrar el botón "Ver ejemplo".
   demoUrl: '',

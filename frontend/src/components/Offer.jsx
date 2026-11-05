@@ -3,7 +3,6 @@ import { Check } from 'lucide-react';
 import { plans, plansSection } from '../data/landing';
 import { waLink } from '../data/contacto';
 import SectionHeader from './SectionHeader';
-import SwipeHint from './SwipeHint';
 import WhatsAppIcon from './WhatsAppIcon';
 import metaPixel from '../lib/metaPixel';
 
@@ -55,12 +54,11 @@ const Offer = () => (
   <section id="oferta" className="py-12 md:py-20 bg-gradient-to-b from-black via-[#0a0a0a] to-black scroll-mt-16">
     <div className="container mx-auto px-4 sm:px-6">
       <SectionHeader {...plansSection} />
-      <div className="snap-row md:grid-cols-3 md:gap-5 lg:gap-6 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-6 max-w-6xl mx-auto pt-3">
         {plans.map((plan) => (
           <PlanCard key={plan.id} plan={plan} />
         ))}
       </div>
-      <SwipeHint text="Desliza para ver los 3 planes" />
       <p className="text-center text-white/55 text-sm max-w-2xl mx-auto mt-6 md:mt-8 leading-relaxed">{plansSection.note}</p>
     </div>
   </section>

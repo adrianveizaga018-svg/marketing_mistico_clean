@@ -3,7 +3,6 @@ import { Check, MapPin, Clock, CalendarHeart, ExternalLink } from 'lucide-react'
 import { invitationsSection, invitationPackages, invitationSteps } from '../data/landing';
 import { waLink, whatsappMessages } from '../data/contacto';
 import SectionHeader from './SectionHeader';
-import SwipeHint from './SwipeHint';
 import WhatsAppIcon from './WhatsAppIcon';
 import metaPixel from '../lib/metaPixel';
 
@@ -115,12 +114,11 @@ const Invitations = () => (
         <div className="hidden lg:block"><PhoneMockup /></div>
       </div>
 
-      <div className="snap-row md:grid-cols-3 md:gap-5 lg:gap-6 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-6 max-w-6xl mx-auto pt-3">
         {invitationPackages.map((pkg) => (
           <PackageCard key={pkg.id} pkg={pkg} />
         ))}
       </div>
-      <SwipeHint text="Desliza para ver los 3 paquetes" />
 
       <div className="text-center mt-8 space-y-4">
         <p className="text-white/55 text-sm">{invitationsSection.note}</p>

@@ -9,6 +9,9 @@ const Home = lazy(() => import("./pages/Home"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const LeadsDashboard = lazy(() => import("./pages/LeadsDashboard"));
 const PillarPage = lazy(() => import("./pages/PillarPage"));
+const Eventos = lazy(() => import("./pages/Eventos"));
+const Auditoria = lazy(() => import("./pages/Auditoria"));
+const Mantenimiento = lazy(() => import("./pages/Mantenimiento"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -27,6 +30,9 @@ function App() {
             <Route path="/vende-mas" element={<PillarPage key="vende-mas" pillarId="vende-mas" />} />
             <Route path="/organiza" element={<PillarPage key="organiza" pillarId="organiza" />} />
             <Route path="/protege" element={<PillarPage key="protege" pillarId="protege" />} />
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/auditoria" element={<Auditoria />} />
+            <Route path="/mantenimiento" element={<Mantenimiento />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
           </Routes>
