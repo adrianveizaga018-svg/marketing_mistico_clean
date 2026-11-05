@@ -105,6 +105,7 @@ export const pillarPages = {
       {
         id: 'chatbots',
         name: 'Automatización y chatbots de WhatsApp con IA',
+        image: '/img/svc-chatbots.webp',
         icon: 'Bot',
         problem: 'Respondes las mismas preguntas todo el día y se te escapan clientes por no contestar a tiempo.',
         includes: ['Respuestas automáticas a preguntas frecuentes', 'Toma de datos y pedidos del cliente', 'Pasa la conversación a una persona cuando hace falta', 'Conexión con tu catálogo o tu sistema'],
@@ -114,6 +115,7 @@ export const pillarPages = {
       {
         id: 'capacitacion',
         name: 'Capacitación a empresas',
+        image: '/img/svc-capacitacion.webp',
         icon: 'GraduationCap',
         problem: 'Tu equipo no aprovecha las herramientas digitales y todo depende de una sola persona.',
         includes: ['Talleres prácticos a medida de tu empresa', 'Redes sociales, IA y herramientas de oficina', 'Uso de los sistemas que implementamos', 'Presencial o virtual'],
@@ -135,6 +137,7 @@ export const pillarPages = {
       {
         id: 'auditoria',
         name: 'Diagnóstico y auditoría',
+        image: '/img/svc-auditoria.webp',
         icon: 'SearchCheck',
         problem: 'No sabes si tu web, tus correos o tus datos están en riesgo hasta que algo falla.',
         includes: ['Revisión de tu web y hosting', 'Dominio, correo y accesos', 'Respaldos y contraseñas', 'Informe con semáforo y plan de acción'],
@@ -145,6 +148,7 @@ export const pillarPages = {
       {
         id: 'mantenimiento',
         name: 'Mantenimiento y soporte mensual',
+        image: '/img/svc-mantenimiento.webp',
         icon: 'Wrench',
         problem: 'Tu web se cae, queda desactualizada o necesitas un cambio y nadie se encarga.',
         includes: ['Hosting y vigilancia de tu web', 'Respaldos periódicos', 'Actualizaciones de seguridad', 'Cambios pequeños cada mes'],
@@ -155,6 +159,7 @@ export const pillarPages = {
       {
         id: 'respaldos',
         name: 'Respaldos y seguridad',
+        image: '/img/svc-respaldos.webp',
         icon: 'DatabaseBackup',
         problem: 'Si se daña la computadora o te roban una cuenta, puedes perder años de información.',
         includes: ['Copias de seguridad automáticas', 'Verificación en dos pasos en tus cuentas', 'Revisión de quién tiene acceso a qué', 'Plan para recuperarte si pasa algo'],
