@@ -5,13 +5,15 @@ import { faqData } from '../data/landing';
 import metaPixel from '../lib/metaPixel';
 import { waLink, whatsappMessages } from '../data/contacto';
 
-const FAQ = () => {
+const FAQ = ({ ids }) => {
+  // ids: muestra solo algunas preguntas (página principal); sin ids muestra todas.
+  const items = ids ? ids.map((i) => faqData[i]).filter(Boolean) : faqData;
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleQuestion = (index) => {
     const isOpening = openIndex !== index;
     if (isOpening) {
-      metaPixel.trackFAQInteraction(faqData[index].question);
+      metaPixel.trackFAQInteraction(items[index].question);
     }
     setOpenIndex(isOpening ? index : null);
   };
@@ -40,7 +42,7 @@ const FAQ = () => {
 
         {/* FAQ Accordion */}
         <div className="max-w-4xl mx-auto space-y-4">
-          {faqData.map((faq, index) => (
+          {items.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}

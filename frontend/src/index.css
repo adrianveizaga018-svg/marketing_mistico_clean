@@ -171,3 +171,72 @@ code {
   .snap-row { display: grid; overflow: visible; margin-left: auto; margin-right: auto; padding: 0.75rem 0 0; }
   .snap-row > * { flex: none; }
 }
+
+/* ─── Robot del hero (RobotScene): imagen fija + animaciones livianas ─── */
+.rs-scene { position: relative; width: 100%; height: 100%; --rs-cyan: #3fd5ff; --rs-gold: #c9a961; }
+.rs-robot {
+  position: absolute; right: 6%; bottom: 4%; height: 88%; aspect-ratio: 480 / 1000;
+  animation: rs-float 6s ease-in-out infinite;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 62%, transparent 100%);
+}
+.rs-robot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.rs-chest {
+  position: absolute; left: 27%; top: 41%; width: 10%; height: 6%; border-radius: 40%;
+  background: radial-gradient(circle, rgba(63,213,255,.95), rgba(63,213,255,0) 70%);
+  mix-blend-mode: screen; animation: rs-pulse 2.4s ease-in-out infinite;
+}
+.rs-panel {
+  position: absolute; border: 1.5px solid rgba(63,213,255,.75); border-radius: 10px;
+  background: linear-gradient(160deg, rgba(63,213,255,.16), rgba(63,213,255,.04));
+  box-shadow: 0 0 24px rgba(63,213,255,.25), inset 0 0 18px rgba(63,213,255,.12);
+  transform: perspective(700px) rotateY(24deg); overflow: hidden; padding: 10px;
+  animation: rs-appear 7s ease-in-out infinite;
+}
+.rs-panel-a { right: 46%; top: 16%; width: 34%; height: 34%; }
+.rs-panel-b { right: 50%; top: 54%; width: 24%; height: 16%; animation-delay: 1.2s; }
+.rs-panel-c { right: 34%; top: 8%; width: 14%; height: 12%; animation-delay: 2.4s; }
+.rs-panel-title { height: 7px; width: 40%; border-radius: 3px; background: rgba(201,169,97,.85); margin-bottom: 9px; }
+.rs-code span {
+  display: block; height: 4px; margin: 0 0 7px; border-radius: 2px;
+  background: rgba(63,213,255,.7); transform-origin: left; animation: rs-type 3.5s ease-in-out infinite;
+}
+.rs-scan {
+  position: absolute; left: 0; right: 0; height: 30%; top: -30%;
+  background: linear-gradient(to bottom, transparent, rgba(63,213,255,.28), transparent);
+  animation: rs-scan 3.2s linear infinite;
+}
+.rs-chart { width: 100%; height: 100%; }
+.rs-chart rect { fill: rgba(63,213,255,.8); transform-box: fill-box; transform-origin: bottom; animation: rs-bar 2.6s ease-in-out infinite; }
+.rs-ring {
+  position: absolute; right: 2%; bottom: 0; width: 46%; aspect-ratio: 3 / 1;
+  transform: perspective(500px) rotateX(68deg);
+}
+.rs-ring, .rs-ring-inner { border-radius: 50%; }
+.rs-ring::before, .rs-ring-inner {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  border: 3px dashed rgba(63,213,255,.75); box-shadow: 0 0 22px rgba(63,213,255,.5);
+  animation: rs-spin 14s linear infinite;
+}
+.rs-ring-inner { inset: 18%; border-style: solid; border-width: 2px; border-color: rgba(201,169,97,.55); animation-direction: reverse; animation-duration: 9s; }
+.rs-particle {
+  position: absolute; bottom: 8%; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--rs-cyan); box-shadow: 0 0 8px var(--rs-cyan); opacity: 0;
+  animation: rs-rise 6s ease-in infinite;
+}
+@keyframes rs-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes rs-pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@keyframes rs-appear {
+  0% { opacity: 0; transform: perspective(700px) rotateY(24deg) translateX(14px) scale(.96); }
+  10%, 80% { opacity: 1; transform: perspective(700px) rotateY(24deg) translateX(0) scale(1); }
+  83% { opacity: .35; } 86% { opacity: 1; } 100% { opacity: 0; }
+}
+@keyframes rs-type { 0% { transform: scaleX(0); } 40%, 85% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+@keyframes rs-scan { to { top: 100%; } }
+@keyframes rs-bar { 0%, 100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+@keyframes rs-spin { to { transform: rotate(360deg); } }
+@keyframes rs-rise { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: .9; } 100% { opacity: 0; transform: translateY(-260px); } }
+@media (prefers-reduced-motion: reduce) {
+  .rs-scene *, .rs-scene *::before { animation: none !important; }
+  .rs-panel { opacity: 1; }
+}

@@ -4,14 +4,14 @@ import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react
 import { footerData } from '../data/mockData';
 import metaPixel from '../lib/metaPixel';
 import { waLink, whatsappMessages } from '../data/contacto';
-import { scrollToSection } from './Navbar';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
     { name: 'Inicio', path: '/' },
-    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Portafolio', path: '/portfolio' },
+    { name: 'Vendly (nuestro producto)', path: 'https://vendly.com.bo', external: true },
     { name: 'Cotizar por WhatsApp', path: waLink(whatsappMessages.general), external: true }
   ];
 
@@ -27,7 +27,7 @@ const Footer = () => {
               className="h-14"
             />
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
-              Páginas web, sistemas, publicidad, diseño, foto y video e invitaciones digitales para emprendedores y negocios de Bolivia.
+              Ingeniería de sistemas y marketing para que los negocios de Bolivia vendan más, se organicen y estén protegidos.
             </p>
             <div className="flex items-center justify-center gap-2 text-[#c9a961]/80 text-sm">
               <MapPin size={16} />
@@ -67,13 +67,13 @@ const Footer = () => {
               <span className="w-8 h-[2px] bg-[#c9a961]"></span> Servicios <span className="w-8 h-[2px] bg-[#c9a961]"></span>
             </h3>
             <ul className="space-y-4">
-              {[['Páginas web', 'servicios'], ['Sistemas a medida', 'servicios'], ['Publicidad en Facebook y TikTok', 'servicios'], ['Diseño, foto y video', 'servicios'], ['Invitaciones digitales', 'invitaciones']].map(([item, anchor]) => (
+              {[['Vende más', '/vende-mas'], ['Organiza tu negocio', '/organiza'], ['Protege tu negocio', '/protege'], ['Eventos e invitaciones', '/eventos']].map(([item, path]) => (
                 <li key={item}>
-                  <a href={`/#${anchor}`} onClick={(e) => { if (document.querySelector(`[data-anchor="${anchor}"]`)) { e.preventDefault(); scrollToSection(anchor); } }} className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
+                  <Link to={path} className="text-gray-400 hover:text-[#c9a961] transition-colors text-sm flex items-center justify-center gap-2 group">
                     <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
                     {item}
                     <span className="w-0 group-hover:w-2 h-[1px] bg-[#c9a961] transition-all"></span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

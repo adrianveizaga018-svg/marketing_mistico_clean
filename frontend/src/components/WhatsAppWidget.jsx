@@ -1,20 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { X, Globe, Cpu, Megaphone, PenTool, Camera, MailOpen, MessageCircle, ChevronRight } from 'lucide-react';
+import { X, Cpu, Megaphone, ShieldCheck, MailOpen, MessageCircle, ChevronRight, Star } from 'lucide-react';
 import { waLink, whatsappMessages } from '../data/contacto';
+import { pageMessages } from '../data/sitio';
 import WhatsAppIcon from './WhatsAppIcon';
 import metaPixel from '../lib/metaPixel';
 
-// Cada opción abre WhatsApp con un mensaje ya escrito según el servicio.
-const options = [
-  { id: 'web', label: 'Página web', icon: Globe },
-  { id: 'sistemas', label: 'Sistema a medida', icon: Cpu },
-  { id: 'publicidad', label: 'Publicidad Facebook / TikTok', icon: Megaphone },
-  { id: 'diseno', label: 'Diseño y branding', icon: PenTool },
-  { id: 'fotovideo', label: 'Foto y video', icon: Camera },
-  { id: 'invitaciones', label: 'Invitación digital', icon: MailOpen },
-  { id: 'general', label: 'Otra consulta', icon: MessageCircle },
+// Cada opción abre WhatsApp con un mensaje ya escrito según el tema.
+const baseOptions = [
+  { id: 'vende', label: 'Vender más (publicidad, web, diseño)', icon: Megaphone, message: pageMessages['/vende-mas'] },
+  { id: 'organiza', label: 'Organizar mi negocio (sistemas)', icon: Cpu, message: pageMessages['/organiza'] },
+  { id: 'protege', label: 'Proteger mi negocio', icon: ShieldCheck, message: pageMessages['/protege'] },
+  { id: 'eventos', label: 'Invitación digital', icon: MailOpen, message: pageMessages['/eventos'] },
+  { id: 'general', label: 'Otra consulta', icon: MessageCircle, message: whatsappMessages.general },
 ];
+
+// En una página interna, la primera opción es una consulta sobre ESA página.
+const optionsFor = (pathname) => {
+  const pageMessage = pathname !== '/' ? pageMessages[pathname] : null;
+  const page = pageMessage ? [{ id: 'page', label: 'Consultar sobre esta página', icon: Star, message: pageMessage }] : [];
+  return [...page, ...baseOptions.filter((o) => o.message !== pageMessage)];
+};
 
 const HIDDEN_ROUTES = ['/gestion-leads'];
 
@@ -59,10 +65,10 @@ const WhatsAppWidget = () => {
             </button>
           </div>
           <ul className="p-2 max-h-[60vh] overflow-y-auto">
-            {options.map(({ id, label, icon: Icon }) => (
+            {optionsFor(pathname).map(({ id, label, icon: Icon, message }) => (
               <li key={id}>
                 <a
-                  href={waLink(whatsappMessages[id])}
+                  href={waLink(message)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {

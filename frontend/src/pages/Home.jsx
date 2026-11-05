@@ -1,53 +1,30 @@
-import React, { lazy, Suspense } from 'react';
-import Navbar from '../components/Navbar';
+import React, { lazy } from 'react';
 import Hero from '../components/Hero';
-import MysticCursor from '../components/MysticCursor';
+import PageLayout from '../components/PageLayout';
 import LazySection from '../components/LazySection';
+import { homeFaqIds } from '../data/sitio';
 
-// Lazy load below-the-fold components
-const Services = lazy(() => import('../components/Services'));
-const Invitations = lazy(() => import('../components/Invitations'));
-const Work = lazy(() => import('../components/Work'));
+// Página principal corta: 7 secciones. El detalle vive en las páginas internas.
+const Pillars = lazy(() => import('../components/Pillars'));
+const EventsBand = lazy(() => import('../components/EventsBand'));
+const Cases = lazy(() => import('../components/Cases'));
 const Process = lazy(() => import('../components/Process'));
-const Offer = lazy(() => import('../components/Offer'));
-// eslint-disable-next-line no-unused-vars
-const Testimonials = lazy(() => import('../components/Testimonials'));
 const FAQ = lazy(() => import('../components/FAQ'));
-const CTA = lazy(() => import('../components/CTA'));
-const ContactForm = lazy(() => import('../components/ContactForm'));
-const Footer = lazy(() => import('../components/Footer'));
+const ContactQuick = lazy(() => import('../components/ContactQuick'));
 
-const Home = () => {
-  return (
-    <div className="bg-black relative min-h-screen lg:cursor-none">
-      <MysticCursor />
-      {/* Ambient Background Auras */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#c9a961]/5 rounded-full blur-[120px] animate-ambient"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[60%] bg-[#c9a961]/3 rounded-full blur-[150px] animate-ambient" style={{ animationDelay: '-5s' }}></div>
-        <div className="absolute bottom-[-10%] left-[20%] w-[60%] h-[40%] bg-white/[0.02] rounded-full blur-[120px] animate-ambient" style={{ animationDelay: '-10s' }}></div>
-      </div>
-
-      <div className="relative z-10">
-        {/* Critical above-the-fold components - load immediately */}
-        <Navbar />
-        <Hero />
-
-        {/* Below-the-fold components - lazy load */}
-        <LazySection component={Services} anchor="servicios" />
-        <LazySection component={Invitations} anchor="invitaciones" />
-        <LazySection component={Work} anchor="trabajos" />
-        <LazySection component={Process} anchor="proceso" />
-        <LazySection component={Offer} anchor="oferta" />
-        {/* Testimonios ocultos hasta tener opiniones reales: descomenta la línea de abajo */}
-        {/* <LazySection component={Testimonials} /> */}
-        <LazySection component={FAQ} anchor="preguntas" />
-        <LazySection component={CTA} />
-        <LazySection component={ContactForm} anchor="contacto" />
-        <LazySection component={Footer} />
-      </div>
-    </div>
-  );
-};
+const Home = () => (
+  <PageLayout
+    title="Marketing Místico | Vende más, organiza y protege tu negocio · La Paz"
+    description="Ingeniería de sistemas y marketing en La Paz, Bolivia: publicidad, páginas web, sistemas a medida, chatbots, auditoría, mantenimiento e invitaciones digitales. Escríbenos por WhatsApp."
+  >
+    <Hero />
+    <LazySection component={Pillars} anchor="pilares" />
+    <LazySection component={EventsBand} />
+    <LazySection component={Cases} anchor="casos" />
+    <LazySection component={Process} anchor="proceso" />
+    <LazySection component={FAQ} anchor="preguntas" ids={homeFaqIds} />
+    <LazySection component={ContactQuick} anchor="contacto" />
+  </PageLayout>
+);
 
 export default Home;
