@@ -25,14 +25,24 @@ const EventsBand = () => (
             >
               Ver invitaciones y paquetes <ArrowRight size={16} />
             </Link>
-            <a
-              href="/demo-morenada.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-[#c9a961]/50 text-[#c9a961] hover:bg-[#c9a961] hover:text-black font-bold text-sm px-6 py-3.5 rounded-full transition-all min-h-[48px]"
-            >
-              👑 Ver Demo en Vivo (Morenada 2026)
-            </a>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-4">
+            {[
+              { label: '👑 Morenada 2026', href: '/demo-morenada.html' },
+              { label: '💍 Boda Imperial', href: '/demo-boda-imperial.html' },
+              { label: '👸 Quinceañero', href: '/demo-quince-esmeralda.html' },
+              { label: '🎉 Fiesta VIP', href: '/demo-fiesta-gala.html' },
+            ].map((d) => (
+              <a
+                key={d.href}
+                href={d.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 border border-[#c9a961]/50 text-[#c9a961] hover:bg-[#c9a961] hover:text-black font-bold text-xs px-4 py-2 rounded-full transition-all"
+              >
+                {d.label}
+              </a>
+            ))}
           </div>
         </div>
         <img

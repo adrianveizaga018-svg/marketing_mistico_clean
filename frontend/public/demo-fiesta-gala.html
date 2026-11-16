@@ -1,0 +1,883 @@
+<!DOCTYPE html><html class="dark" lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#0a122a;color:#dbe1ff;}body{overscroll-behavior:none;font-family:'Outfit',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#680018", "on-surface-variant": "#d0c5af", "surface-container": "#171e37", "surface-dim": "#0a122a", "inverse-on-surface": "#282f49", "surface-container-high": "#212942", "tertiary-container": "#ff959a", "on-secondary-container": "#beb8a6", "error-container": "#93000a", "inverse-surface": "#dbe1ff", "tertiary-fixed": "#ffdada", "surface-variant": "#2c344d", "tertiary-fixed-dim": "#ffb3b5", "on-tertiary-fixed": "#40000b", "surface-tint": "#e9c349", "primary-fixed": "#ffe088", "on-error": "#690005", "on-primary-fixed-variant": "#574500", "secondary": "#ccc6b4", "on-tertiary-fixed-variant": "#8e0f28", "on-primary-container": "#554300", "secondary-container": "#4d493b", "outline-variant": "#4d4635", "on-tertiary-container": "#8c0d27", "background": "#0a122a", "outline": "#99907c", "surface": "#0a122a", "surface-container-highest": "#2c344d", "error": "#ffb4ab", "on-primary-fixed": "#241a00", "tertiary": "#ffbec0", "secondary-fixed": "#e9e2cf", "primary-container": "#d4af37", "on-error-container": "#ffdad6", "surface-bright": "#313852", "primary": "#f2ca50", "on-primary": "#3c2f00", "primary-fixed-dim": "#e9c349", "on-secondary-fixed": "#1e1c10", "surface-container-lowest": "#050d25", "on-surface": "#dbe1ff", "on-background": "#dbe1ff", "on-secondary-fixed-variant": "#4a4739", "on-secondary": "#333023", "surface-container-low": "#131a33", "inverse-primary": "#735c00", "secondary-fixed-dim": "#ccc6b4" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-lg": "1.5rem", "margin": "1.25rem", "space-xs": "0.25rem", "space-xl": "2.25rem", "space-md": "1rem" }, "fontFamily": { "body-lg": ["Outfit"], "label-uppercase": ["Outfit"], "display-gala": ["Playfair Display"], "body-sm": ["Outfit"], "headline-md": ["Playfair Display"], "headline-lg": ["Playfair Display"], "body-md": ["Outfit"], "headline-sm": ["Playfair Display"], "label-interactive": ["Outfit"] }, "fontSize": { "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-uppercase": ["11px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }], "display-gala": ["38px", { "lineHeight": "44px", "letterSpacing": "0.02em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "300" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "500" }], "label-interactive": ["15px", { "lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(5,13,37,0.6)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shadow-[0_0_12px_rgba(242,202,80,0.18)]"><span class="material-symbols-outlined text-[20px]">award_star</span></div><div class="flex flex-col"><span class="font-label-uppercase text-label-uppercase text-primary tracking-widest uppercase">Gran Gala</span><h1 class="font-headline-sm text-headline-sm text-on-surface leading-tight font-display-gala line-clamp-1">Fiesta</h1></div></div><div class="flex items-center gap-space-sm"><button aria-label="Música de Fondo" class="w-11 h-11 rounded-full bg-surface-container-high/90 text-primary flex items-center justify-center shadow-[0_2px_12px_rgba(242,202,80,0.2)] hover:bg-surface-bright transition-all active:scale-95"><span class="material-symbols-outlined text-[20px]">music_note</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+
+<!-- 1. Ambient Audio Strip -->
+
+<div class="px-margin mb-space-md">
+
+<div class="flex items-center justify-between p-space-sm rounded-xl bg-surface-container-high/90 shadow-[0_4px_16px_rgba(5,13,37,0.4)]">
+
+<div class="flex items-center gap-space-sm min-w-0 pr-space-xs">
+
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(242,202,80,0.3)] animate-pulse">
+
+<span class="material-symbols-outlined text-[16px]">equalizer</span>
+
+</div>
+
+<div class="flex flex-col min-w-0">
+
+<span class="font-label-uppercase text-[10px] text-primary uppercase tracking-wider">Música en Reproducción</span>
+
+<p class="font-body-sm text-[11px] text-on-surface truncate font-medium">La Gozadera &amp; Morenada Mix • Sonido En Vivo</p>
+
+</div>
+
+</div>
+
+<button aria-label="Controlar audio" class="shrink-0 flex items-center gap-1 px-space-sm py-1 rounded-full bg-primary text-on-primary shadow-sm hover:bg-primary-fixed transition-transform active:scale-95" id="audioToggleBtn" onclick="toggleAudio()">
+
+<span class="material-symbols-outlined text-[14px]" id="audioIcon">volume_up</span>
+
+<span class="font-label-uppercase text-[10px] font-bold tracking-tight" id="audioStateText">SONANDO</span>
+
+</button>
+
+</div>
+
+</div>
+
+<!-- 2. Celebratory Hero Header -->
+
+<section class="px-margin text-center mb-space-lg flex flex-col items-center">
+
+<div class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-highest shadow-sm mb-space-sm">
+
+<span class="material-symbols-outlined text-primary text-[14px]">hotel_class</span>
+
+<span class="font-label-uppercase text-label-uppercase text-primary tracking-widest">★ GRAN NOCHE DE GALA &amp; FIESTA PRIVADA ★</span>
+
+<span class="material-symbols-outlined text-primary text-[14px]">hotel_class</span>
+
+</div>
+
+<h2 class="font-display-gala text-[34px] leading-tight text-primary-fixed tracking-tight mt-1 mb-1">
+
+      RODRIGO &amp; MARCELA
+
+    </h2>
+
+<p class="font-headline-sm text-headline-sm text-secondary-fixed font-light mb-space-sm">
+
+      Celebrando a lo Grande • Fiesta de Cumpleaños &amp; Aniversario VIP
+
+    </p>
+
+<div class="inline-flex items-center gap-2 px-space-md py-1.5 rounded-lg bg-surface-container-low shadow-sm">
+
+<span class="material-symbols-outlined text-primary text-[16px]">calendar_today</span>
+
+<span class="font-label-uppercase text-[11px] tracking-widest text-primary font-semibold">
+
+        SÁBADO 24 DE OCTUBRE, 2026 • LA PAZ, BOLIVIA
+
+      </span>
+
+</div>
+
+</section>
+
+<!-- 3. Hero Photography Card -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="relative rounded-xl overflow-hidden bg-surface-container shadow-[0_8px_30px_rgba(5,13,37,0.6)]">
+
+<!-- Glow & Filigree simulation frame -->
+
+<div class="relative w-full aspect-[4/5] overflow-hidden">
+
+<img alt="Celebración de gala en La Paz con brindis de champán y confeti dorado" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv_qzt6D0K7Fl2lVaWvP0dPr8oB6b4ux_umLIO6T6xW3IJDk-SctivameSjH4mLtyIWA6Dh4VTThxoKi9ZREicNEhWA7UU8GagOY-uk8GgkpSDePjdRVxIfCXLBNzso7Q_Q4gxvwp-cx8p2-4V_BPaOaParNxl0EOPpU6oBxotj53tv5kctIT1UIN8dDHkZRBT3X49M3Ax_SybYxjPdauhJhCmeIsITkWCP2uDjH4">
+
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-dim/40 to-transparent"></div>
+
+<!-- Corner Ornaments (CSS Filigrees) -->
+
+<div class="absolute top-3 left-3 w-8 h-8 pointer-events-none flex items-start justify-start">
+
+<span class="material-symbols-outlined text-primary text-[28px] opacity-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">filter_vintage</span>
+
+</div>
+
+<div class="absolute top-3 right-3 w-8 h-8 pointer-events-none flex items-start justify-end">
+
+<span class="material-symbols-outlined text-primary text-[28px] opacity-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">filter_vintage</span>
+
+</div>
+
+<!-- Floating Badge Over Hero -->
+
+<div class="absolute bottom-4 left-4 right-4 p-space-md rounded-xl bg-surface-container-high/95 backdrop-blur-md shadow-xl text-center">
+
+<span class="material-symbols-outlined text-primary text-[24px] mb-1">celebration</span>
+
+<p class="font-headline-sm text-headline-sm text-primary font-display-gala italic leading-snug">
+
+            "¡Porque los mejores momentos de la vida se celebran bailando, brindando y rodeados de la gente que más amamos!"
+
+          </p>
+
+<div class="flex items-center justify-center gap-2 mt-space-xs text-secondary">
+
+<span class="w-6 h-[1px] bg-primary/40"></span>
+
+<span class="font-label-uppercase text-[10px] tracking-widest text-secondary-fixed">ANFITRIONES DE HONOR</span>
+
+<span class="w-6 h-[1px] bg-primary/40"></span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 4. Interactive Countdown Timer -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="p-space-lg rounded-xl bg-surface-container-low shadow-[0_4px_24px_rgba(0,0,0,0.4)] text-center">
+
+<div class="flex items-center justify-center gap-2 mb-space-sm text-primary">
+
+<span class="material-symbols-outlined text-[18px]">alarm_on</span>
+
+<span class="font-label-uppercase text-[11px] tracking-widest font-bold uppercase">FALTAN POCOS DÍAS PARA EL GRAN FIESTÓN</span>
+
+</div>
+
+<div class="grid grid-cols-4 gap-2 mb-space-md">
+
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-high shadow-md">
+
+<span class="font-display-gala text-[26px] font-bold text-primary leading-tight" id="timer-days">42</span>
+
+<span class="font-label-uppercase text-[9px] uppercase tracking-wider text-secondary">Días</span>
+
+</div>
+
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-high shadow-md">
+
+<span class="font-display-gala text-[26px] font-bold text-primary leading-tight" id="timer-hours">14</span>
+
+<span class="font-label-uppercase text-[9px] uppercase tracking-wider text-secondary">Horas</span>
+
+</div>
+
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-high shadow-md">
+
+<span class="font-display-gala text-[26px] font-bold text-primary leading-tight" id="timer-minutes">34</span>
+
+<span class="font-label-uppercase text-[9px] uppercase tracking-wider text-secondary">Minutos</span>
+
+</div>
+
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-high shadow-md">
+
+<span class="font-display-gala text-[26px] font-bold text-primary leading-tight" id="timer-seconds">35</span>
+
+<span class="font-label-uppercase text-[9px] uppercase tracking-wider text-secondary">Segundos</span>
+
+</div>
+
+</div>
+
+<a class="w-full flex items-center justify-center gap-2 py-3 px-space-md rounded-lg bg-surface-container-highest hover:bg-surface-bright text-primary font-label-interactive text-label-interactive shadow-sm transition-transform active:scale-98" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Gran+Fiesta+de+Gala+Rodrigo+%26+Marcela&amp;dates=20261024T200000Z/20261025T040000Z&amp;details=Fiesta+de+Cumplea%C3%B1os+y+Aniversario+VIP+en+Sal%C3%B3n+El+Campanario+Real,+La+Paz&amp;location=Salon+de+Eventos+El+Campanario+Real,+Calacoto,+La+Paz" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">event_available</span><span>Agendar evento en Google Calendar</span></a>
+
+</div>
+
+</section>
+
+<!-- 5. Personalized VIP Protocolar Pass -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="relative p-space-lg rounded-xl bg-surface-container-high shadow-[0_6px_28px_rgba(5,13,37,0.7)] overflow-hidden">
+
+<!-- Top Decorative Band -->
+
+<div class="flex items-center justify-between pb-space-sm mb-space-sm bg-surface-container-lowest/50 p-2.5 rounded-lg">
+
+<div class="flex items-center gap-2">
+
+<span class="material-symbols-outlined text-primary text-[22px]">verified_user</span>
+
+<div class="flex flex-col">
+
+<span class="font-label-uppercase text-[9px] tracking-widest text-primary uppercase">Protocolo de Alta Gala</span>
+
+<span class="font-headline-sm text-[14px] text-on-surface font-semibold">PASE DE HONOR PERSONALIZADO</span>
+
+</div>
+
+</div>
+
+<div class="px-2 py-1 rounded bg-on-tertiary text-tertiary-fixed font-label-uppercase text-[9px] font-bold tracking-wider">
+
+          ACCESO VIP
+
+        </div>
+
+</div>
+
+<!-- Ticket Core Details -->
+
+<div class="flex flex-col gap-2 mb-space-md text-left">
+
+<div>
+
+<span class="font-label-uppercase text-[10px] tracking-wider text-secondary uppercase">Distinguido Invitado de Honor:</span>
+
+<h3 class="font-headline-md text-headline-md text-primary font-display-gala leading-tight">
+
+            Lic. Carlos Eduardo Villarroel &amp; Sra.
+
+          </h3>
+
+</div>
+
+<div class="grid grid-cols-2 gap-2 mt-1">
+
+<div class="p-2.5 rounded-lg bg-surface-container-low">
+
+<span class="font-label-uppercase text-[9px] tracking-wider text-secondary uppercase">Ubicación Privada</span>
+
+<p class="font-body-md text-body-md text-on-surface font-semibold">Mesa VIP 07</p>
+
+</div>
+
+<div class="p-2.5 rounded-lg bg-surface-container-low">
+
+<span class="font-label-uppercase text-[9px] tracking-wider text-secondary uppercase">Capacidad Asignada</span>
+
+<p class="font-body-md text-body-md text-on-surface font-semibold">Pase Doble (2 Personas)</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Perforated Ticket Divider Simulation via Background Dots -->
+
+<div class="flex items-center justify-between gap-1 my-3 overflow-hidden opacity-60">
+
+<span class="h-1 w-full bg-[radial-gradient(circle,_#d4af37_2px,_transparent_2px)] bg-[length:10px_4px]"></span>
+
+</div>
+
+<!-- Security / Validation Row -->
+
+<div class="flex items-center justify-between pt-1">
+
+<div class="flex flex-col">
+
+<span class="font-label-uppercase text-[9px] text-secondary tracking-widest">CÓDIGO DE VALIDACIÓN</span>
+
+<span class="font-headline-sm text-[15px] font-mono font-bold text-primary">VIP-FIESTA-BOL-2026</span>
+
+</div>
+
+<div class="flex items-center gap-1.5 p-2 rounded bg-surface-container-lowest text-primary">
+
+<span class="material-symbols-outlined text-[28px]">qr_code_2</span>
+
+<span class="font-label-uppercase text-[8px] text-secondary leading-tight">Escaneo<br>en Puerta</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 6. Itinerario de la Noche -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="flex items-center justify-center gap-2 mb-space-md">
+
+<span class="material-symbols-outlined text-primary text-[20px]">schedule</span>
+
+<h3 class="font-headline-lg text-headline-lg text-primary-fixed font-display-gala text-center">
+
+        Itinerario de la Noche
+
+      </h3>
+
+</div>
+
+<div class="relative flex flex-col gap-space-md pl-4">
+
+<!-- Vertical hairline accent -->
+
+<div class="absolute top-4 bottom-4 left-[27px] w-0.5 bg-gradient-to-b from-primary via-primary-container to-surface-container-high"></div>
+
+<!-- Item 1 -->
+
+<div class="relative flex items-start gap-space-md">
+
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 z-10 shadow-[0_0_12px_rgba(242,202,80,0.4)]">
+
+<span class="material-symbols-outlined text-[16px]">local_bar</span>
+
+</div>
+
+<div class="flex-1 p-space-md rounded-xl bg-surface-container-high shadow-md">
+
+<div class="flex items-center justify-between mb-1">
+
+<span class="font-headline-sm text-headline-sm text-primary font-bold">20:00 hrs</span>
+
+<span class="font-label-uppercase text-[10px] text-secondary px-2 py-0.5 rounded bg-surface-container-lowest">Recepción</span>
+
+</div>
+
+<h4 class="font-headline-sm text-[15px] text-on-surface font-semibold mb-1">Alfombra Roja &amp; Cóctel de Autor</h4>
+
+<p class="font-body-sm text-body-sm text-secondary">Bienvenida de gala, fotografía social oficial y barra libre de autor con mixología nacional e internacional.</p>
+
+</div>
+
+</div>
+
+<!-- Item 2 -->
+
+<div class="relative flex items-start gap-space-md">
+
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 z-10 shadow-[0_0_12px_rgba(242,202,80,0.4)]">
+
+<span class="material-symbols-outlined text-[16px]">dinner_dining</span>
+
+</div>
+
+<div class="flex-1 p-space-md rounded-xl bg-surface-container-high shadow-md">
+
+<div class="flex items-center justify-between mb-1">
+
+<span class="font-headline-sm text-headline-sm text-primary font-bold">21:30 hrs</span>
+
+<span class="font-label-uppercase text-[10px] text-secondary px-2 py-0.5 rounded bg-surface-container-lowest">Protocolo</span>
+
+</div>
+
+<h4 class="font-headline-sm text-[15px] text-on-surface font-semibold mb-1">Brindis de Honor y Cena Gourmet</h4>
+
+<p class="font-body-sm text-body-sm text-secondary">Palabras emotivas de Rodrigo &amp; Marcela, brindis con champagne Moët &amp; Chandon y menú de tres tiempos.</p>
+
+</div>
+
+</div>
+
+<!-- Item 3 -->
+
+<div class="relative flex items-start gap-space-md">
+
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 z-10 shadow-[0_0_12px_rgba(242,202,80,0.4)]">
+
+<span class="material-symbols-outlined text-[16px]">nightlife</span>
+
+</div>
+
+<div class="flex-1 p-space-md rounded-xl bg-surface-container-high shadow-md">
+
+<div class="flex items-center justify-between mb-1">
+
+<span class="font-headline-sm text-headline-sm text-primary font-bold">22:30 hrs</span>
+
+<span class="font-label-uppercase text-[10px] text-secondary px-2 py-0.5 rounded bg-surface-container-lowest">Pista Abierta</span>
+
+</div>
+
+<h4 class="font-headline-sm text-[15px] text-on-surface font-semibold mb-1">Apertura Estelar &amp; Show Bailable en Vivo</h4>
+
+<p class="font-body-sm text-body-sm text-secondary">Vals de aniversario y arranque con las orquestas tropicales invitadas.</p>
+
+</div>
+
+</div>
+
+<!-- Item 4 -->
+
+<div class="relative flex items-start gap-space-md">
+
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0 z-10 shadow-[0_0_12px_rgba(255,149,154,0.4)]">
+
+<span class="material-symbols-outlined text-[16px]">theater_comedy</span>
+
+</div>
+
+<div class="flex-1 p-space-md rounded-xl bg-surface-container-high shadow-md">
+
+<div class="flex items-center justify-between mb-1">
+
+<span class="font-headline-sm text-headline-sm text-tertiary-container font-bold">01:30 hrs</span>
+
+<span class="font-label-uppercase text-[10px] text-tertiary-fixed px-2 py-0.5 rounded bg-on-tertiary">Imperdible</span>
+
+</div>
+
+<h4 class="font-headline-sm text-[15px] text-on-surface font-semibold mb-1">¡La Gran Hora Loca Boliviana!</h4>
+
+<p class="font-body-sm text-body-sm text-secondary">Cotillón flúor neón, espumas gigantes, chicha, banda de bronces en vivo y desfile de morenada y diablada.</p>
+
+</div>
+
+</div>
+
+<!-- Item 5 -->
+
+<div class="relative flex items-start gap-space-md">
+
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 z-10 shadow-[0_0_12px_rgba(242,202,80,0.4)]">
+
+<span class="material-symbols-outlined text-[16px]">soup_kitchen</span>
+
+</div>
+
+<div class="flex-1 p-space-md rounded-xl bg-surface-container-high shadow-md">
+
+<div class="flex items-center justify-between mb-1">
+
+<span class="font-headline-sm text-headline-sm text-primary font-bold">03:00 hrs</span>
+
+<span class="font-label-uppercase text-[10px] text-secondary px-2 py-0.5 rounded bg-surface-container-lowest">Tradición</span>
+
+</div>
+
+<h4 class="font-headline-sm text-[15px] text-on-surface font-semibold mb-1">Caldito Trasnochero &amp; Fricasé Paceño</h4>
+
+<p class="font-body-sm text-body-sm text-secondary">El clásico reanimador paceño servido con llajwa fresca y marraqueta crujiente.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 7. Gran Cartelera Artística Comercial -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="p-space-lg rounded-xl bg-surface-container shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+
+<div class="text-center mb-space-md">
+
+<span class="font-label-uppercase text-[10px] text-primary tracking-widest uppercase">Cartelera Exclusiva 2026</span>
+
+<h3 class="font-headline-lg text-headline-lg text-primary-fixed font-display-gala leading-tight">
+
+          ¡Gran Show Musical en Vivo!
+
+        </h3>
+
+<p class="font-body-sm text-body-sm text-secondary mt-1">
+
+          Una constelación de músicos y ritmo para bailar hasta el amanecer.
+
+        </p>
+
+</div>
+
+<!-- Lineup Banner Image -->
+
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden mb-space-md shadow-md">
+
+<img alt="Banda de bronces y concierto en vivo con luces y confeti" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Fk2jleKNI5e7qSBobyHgF7X9dJJH06zvQ_zWuKpd-kNGqdzn6Hp4EAy7hwnno2IdgakaXD0WRgfEBGwhqOAFdOmG71eAdQ0m1mq2rLjhf8tFau1Uznq-DDX6qbn0B0u_CYGmTYEL32ciUn58taS6PCJZZTib65NWbrRYA3JUKhCg5MtDfxFD7y1Vd-Yq3nIYAIj4Kih55xsNfKq2dSeY2E3fbRrBW-sgxSJmU6g">
+
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent"></div>
+
+<div class="absolute bottom-2 left-2 right-2 text-center">
+
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-uppercase text-[10px] font-bold shadow-md">
+
+            ¡100% MÚSICA EN VIVO • SONIDO &amp; PANTALLAS GIGANTES!
+
+          </span>
+
+</div>
+
+</div>
+
+<!-- Artist Cards Grid -->
+
+<div class="flex flex-col gap-2.5">
+
+<!-- Band 1 -->
+
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-high">
+
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+
+<span class="material-symbols-outlined text-[20px]">music_cast</span>
+
+</div>
+
+<div class="flex-1 min-w-0">
+
+<span class="font-label-uppercase text-[9px] text-primary uppercase font-bold">Banda de Bronces Imperial</span>
+
+<h5 class="font-headline-sm text-[15px] text-on-surface font-semibold truncate">Banda Continental de Oruro</h5>
+
+<p class="font-body-sm text-[12px] text-secondary truncate">Matracas, Morenada y Ritmos de Poder</p>
+
+</div>
+
+</div>
+
+<!-- Band 2 -->
+
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-high">
+
+<div class="w-10 h-10 rounded-full bg-surface-bright text-primary flex items-center justify-center shrink-0">
+
+<span class="material-symbols-outlined text-[20px]">piano</span>
+
+</div>
+
+<div class="flex-1 min-w-0">
+
+<span class="font-label-uppercase text-[9px] text-primary uppercase font-bold">Grupo Tropical Estelar</span>
+
+<h5 class="font-headline-sm text-[15px] text-on-surface font-semibold truncate">Orquesta Sabor Latino &amp; Cumbia Pop</h5>
+
+<p class="font-body-sm text-[12px] text-secondary truncate">Hits bailables del momento y clásicos de fiesta</p>
+
+</div>
+
+</div>
+
+<!-- Band 3 -->
+
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-high">
+
+<div class="w-10 h-10 rounded-full bg-surface-bright text-primary flex items-center justify-center shrink-0">
+
+<span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+
+</div>
+
+<div class="flex-1 min-w-0">
+
+<span class="font-label-uppercase text-[9px] text-primary uppercase font-bold">Show Rock Latino &amp; Fiesta</span>
+
+<h5 class="font-headline-sm text-[15px] text-on-surface font-semibold truncate">Grupo Identidad en Concierto</h5>
+
+<p class="font-body-sm text-[12px] text-secondary truncate">Clásicos para cantar a todo pulmón y saltar</p>
+
+</div>
+
+</div>
+
+<!-- Band 4 -->
+
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-high">
+
+<div class="w-10 h-10 rounded-full bg-surface-bright text-primary flex items-center justify-center shrink-0">
+
+<span class="material-symbols-outlined text-[20px]">speaker</span>
+
+</div>
+
+<div class="flex-1 min-w-0">
+
+<span class="font-label-uppercase text-[9px] text-primary uppercase font-bold">DJ Set de Gala</span>
+
+<h5 class="font-headline-sm text-[15px] text-on-surface font-semibold truncate">DJ Resident • Fiesta Hasta el Amanecer</h5>
+
+<p class="font-body-sm text-[12px] text-secondary truncate">Luces robóticas, efectos CO2 y animación continua</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 8. Código de Vestimenta -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="p-space-lg rounded-xl bg-surface-container-low shadow-md text-center">
+
+<div class="w-12 h-12 rounded-full bg-on-tertiary text-tertiary-fixed mx-auto mb-space-sm flex items-center justify-center shadow-md">
+
+<span class="material-symbols-outlined text-[24px]">styler</span>
+
+</div>
+
+<span class="font-label-uppercase text-label-uppercase text-tertiary-fixed font-bold tracking-widest uppercase">Dress Code Exclusivo</span>
+
+<h3 class="font-headline-md text-headline-md text-primary-fixed font-display-gala my-1">
+
+        Formal Elegante / Traje de Gala con Toque Brillante
+
+      </h3>
+
+<p class="font-body-md text-body-md text-on-surface font-light mt-1">
+
+<strong class="font-medium text-secondary-fixed">Damas:</strong> Vestido de fiesta / Cóctel de gala.<br>
+
+<strong class="font-medium text-secondary-fixed">Varones:</strong> Traje formal oscuro o smoking con corbata/humita.
+
+      </p>
+
+<div class="inline-flex items-center gap-1.5 mt-space-sm px-3 py-1 rounded-full bg-surface-container-highest text-secondary text-body-sm">
+
+<span class="material-symbols-outlined text-primary text-[16px]">arrow_back_ios_new</span>
+
+<span>¡Vístete para brillar y ser retratado en nuestra alfombra roja!</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 9. Salón & Coordenadas (Location & Venue) -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="p-space-lg rounded-xl bg-surface-container-high shadow-lg">
+
+<div class="flex items-center gap-space-sm mb-space-sm">
+
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+
+<span class="material-symbols-outlined text-[20px]">location_on</span>
+
+</div>
+
+<div>
+
+<span class="font-label-uppercase text-[10px] text-primary tracking-widest uppercase">Lugar del Evento</span>
+
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Salón de Eventos "El Campanario Real"</h4>
+
+</div>
+
+</div>
+
+<p class="font-body-md text-body-md text-secondary mb-space-md">
+
+        Av. Ballivián e/ Calles 18 y 19, Calacoto • Zona Sur, La Paz - Bolivia.
+
+      </p>
+
+<!-- Google Maps Static Pipeline Placeholder -->
+
+<div class="w-full h-44 rounded-lg bg-surface-container-lowest bg-cover bg-center mb-space-md shadow-inner flex items-end p-space-sm" data-location="Av. Ballivian 18 Calacoto La Paz Bolivia" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDqvV540UcCKNHxPT_iuj8aarkzlFffSU98FDK5xllaRcawBDbvL4GUfHA8tRt91oT2ORmfnt1GtTJej60XhWzr8sLeNQrPpsstlfgPVs_kSdFPegt3CLSzyLlsZiVHMSW_wS1R9EEWGUDwqt04OwGz0fY5FUvvbw16wUiYiqeP2gPXUUbgvzJyDSkliWZBJ8rFpVRQOZhYXd8UBo3eMkQ1jclS6eeDkQkNAfB2noU');">
+
+<div class="px-space-sm py-1 rounded bg-surface-dim/90 backdrop-blur-md text-primary font-label-uppercase text-[10px]"><span class="material-symbols-outlined text-[12px] inline-block align-middle mr-1">place</span>Calacoto, La Paz • Estacionamiento Privado VIP</div>
+
+</div>
+
+<div class="flex flex-col gap-2">
+
+<a class="w-full py-3 px-space-md rounded-lg bg-primary text-on-primary font-label-interactive text-label-interactive flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(242,202,80,0.3)] hover:bg-primary-fixed transition-transform active:scale-98" href="https://maps.google.com/?q=Salon+El+Campanario+Calacoto+La+Paz" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">navigation</span><span>Abrir Salón en Google Maps</span></a>
+
+<a class="w-full py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-bright text-primary font-label-interactive text-[13px] flex items-center justify-center gap-2 transition-colors" href="https://m.uber.com/ul/?action=setPickup&amp;pickup=my_location&amp;dropoff[formatted_address]=Salon%20El%20Campanario%20Real%20Calacoto" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">local_taxi</span><span>¿Cómo llegar en Taxi / Uber?</span></a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 10. Confirmación Inmediata de Asistencia (RSVP WhatsApp) -->
+
+<section class="px-margin mb-space-xl">
+
+<div class="p-space-lg rounded-xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-low shadow-[0_10px_32px_rgba(242,202,80,0.15)] text-center">
+
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center mx-auto mb-space-sm shadow-[0_0_20px_rgba(242,202,80,0.4)]">
+
+<span class="material-symbols-outlined text-[26px]">mark_email_read</span>
+
+</div>
+
+<span class="font-label-uppercase text-label-uppercase text-primary tracking-widest uppercase">Reserva Protocolar</span>
+
+<h3 class="font-headline-md text-headline-md text-on-surface font-display-gala my-1">
+
+        Confirmación Inmediata de Asistencia
+
+      </h3>
+
+<p class="font-body-md text-body-md text-secondary-fixed max-w-xs mx-auto mb-space-md">
+
+        Agradecemos confirmar hasta el <strong class="text-primary font-semibold">10 de Octubre</strong> para asignación final de mesa VIP, banquete gourmet y bienvenida personalizada.
+
+      </p>
+
+<a class="w-full py-4 px-space-lg rounded-lg bg-gradient-to-r from-primary via-primary-container to-surface-tint text-on-primary font-label-interactive text-[16px] font-bold flex items-center justify-center gap-2 shadow-[0_6px_24px_rgba(242,202,80,0.35)] hover:opacity-95 transition-transform active:scale-98" href="https://wa.me/59170000000?text=%C2%A1Hola!%20Confirmo%20con%20mucho%20gusto%20nuestra%20asistencia%20al%20Gran%20Fiest%C3%B3n%20de%20Gala%20de%20Rodrigo%20%26%20Marcela%20(Pase%20VIP-FIESTA-BOL-2026)." rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[22px]">send</span><span>Confirmar Asistencia vía WhatsApp</span></a>
+
+<p class="font-body-sm text-[11px] text-secondary mt-space-sm">
+
+        Respuesta directa al Comité de Recepción Protocolar
+
+      </p>
+
+</div>
+
+</section>
+
+<!-- 11. Celebratory Footer -->
+
+<footer class="px-margin pt-space-md pb-space-lg text-center flex flex-col items-center">
+
+<div class="w-12 h-1 bg-primary/40 rounded-full mb-space-md"></div>
+
+<div class="flex items-center gap-2 text-primary mb-1">
+
+<span class="material-symbols-outlined text-[18px]">verified</span>
+
+<span class="font-display-gala text-[20px] font-bold tracking-wider text-primary">RODRIGO &amp; MARCELA</span>
+
+<span class="material-symbols-outlined text-[18px]">verified</span>
+
+</div>
+
+<p class="font-label-uppercase text-[11px] tracking-widest text-secondary uppercase mb-space-sm">
+
+      GALA DE HONOR • LA PAZ 2026
+
+    </p>
+
+<p class="font-body-sm text-body-sm text-secondary-fixed/80 max-w-xs italic font-display-gala">
+
+      "Una noche inolvidable en La Paz, Bolivia • ¡Te esperamos con los brazos abiertos para brindar por la vida!"
+
+    </p>
+
+</footer>
+
+</div>
+
+<!-- Client-side Micro-Interactions -->
+
+<script>
+
+  // Dynamic Countdown Timer Script
+
+  (function initCountdown() {
+
+    let days = 42;
+
+    let hours = 14;
+
+    let minutes = 35;
+
+    let seconds = 20;
+
+
+
+    const elDays = document.getElementById('timer-days');
+
+    const elHours = document.getElementById('timer-hours');
+
+    const elMinutes = document.getElementById('timer-minutes');
+
+    const elSeconds = document.getElementById('timer-seconds');
+
+
+
+    if (elDays && elHours && elMinutes && elSeconds) {
+
+      setInterval(function() {
+
+        if (seconds > 0) {
+
+          seconds--;
+
+        } else {
+
+          seconds = 59;
+
+          if (minutes > 0) {
+
+            minutes--;
+
+          } else {
+
+            minutes = 59;
+
+            if (hours > 0) {
+
+              hours--;
+
+            } else {
+
+              hours = 23;
+
+              if (days > 0) days--;
+
+            }
+
+          }
+
+        }
+
+        elDays.textContent = String(days).padStart(2, '0');
+
+        elHours.textContent = String(hours).padStart(2, '0');
+
+        elMinutes.textContent = String(minutes).padStart(2, '0');
+
+        elSeconds.textContent = String(seconds).padStart(2, '0');
+
+      }, 1000);
+
+    }
+
+  })();
+
+
+
+  // Audio Play/Pause simulation state
+
+  var isAudioPlaying = true;
+
+  function toggleAudio() {
+
+    isAudioPlaying = !isAudioPlaying;
+
+    var icon = document.getElementById('audioIcon');
+
+    var text = document.getElementById('audioStateText');
+
+    if (isAudioPlaying) {
+
+      icon.textContent = 'volume_up';
+
+      text.textContent = 'SONANDO';
+
+    } else {
+
+      icon.textContent = 'volume_off';
+
+      text.textContent = 'PAUSA';
+
+    }
+
+  }
+
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_28px_rgba(5,13,37,0.7)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs transition-colors text-primary font-semibold" data-path="fiesta" href="#"><span class="material-symbols-outlined text-[22px]">celebration</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Fiesta</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="programa" href="#"><span class="material-symbols-outlined text-[22px]">auto_stories</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Programa</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="grupos" href="#"><span class="material-symbols-outlined text-[22px]">nightlife</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Grupos</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="ubicacion" href="#"><span class="material-symbols-outlined text-[22px]">location_on</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Ubicación</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="rsvp" href="#"><span class="material-symbols-outlined text-[22px]">mark_email_read</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">RSVP</span></a></div></nav>
+
+
+
+</body></html> te pase mas invitaciones quiero que vayan esto como ejemplos velo como se veria bien
+
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-16T16:19:56-04:00.
+</ADDITIONAL_METADATA>

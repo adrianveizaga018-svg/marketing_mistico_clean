@@ -4,9 +4,9 @@ import React from 'react';
 // agrega "demoUrl" a cada una y aparecerá el botón "Ver invitación en vivo".
 const examples = [
   { id: 'morenada', label: 'Festividad & Presterío', name: 'Morenada Sr. de la Exaltación', image: '/img/inv-boda.webp', alt: 'Invitación digital folclórica de gala morenada en celular', demoUrl: '/demo-morenada.html' },
-  { id: 'boda', label: 'Boda de Gala', name: 'Ana & Luis', image: '/img/inv-boda.webp', alt: 'Invitación digital de boda en celular, color crema con foto de los novios', demoUrl: '/i/demo-boda' },
-  { id: 'quince', label: 'Quinceañero', name: 'Valentina', image: '/img/inv-quince.webp', alt: 'Invitación digital de quinceañero en celular, morada con corona dorada', demoUrl: '/i/demo-quince' },
-  { id: 'cumple', label: 'Cumpleaños infantil', name: 'Mateo cumple 5', image: '/img/inv-cumple.webp', alt: 'Invitación digital de cumpleaños infantil en celular, con globos de colores', demoUrl: '/i/demo-cumple' },
+  { id: 'boda', label: 'Boda Imperial Paceña', name: 'Paola & Rodrigo', image: '/img/inv-boda.webp', alt: 'Invitación digital de boda imperial paceña con temática Illimani y oro', demoUrl: '/demo-boda-imperial.html' },
+  { id: 'quince', label: 'Quinceañero de Gala', name: 'Valeria Sofía Mendoza', image: '/img/inv-quince.webp', alt: 'Invitación digital de quinceañero esmeralda y oro con coronación', demoUrl: '/demo-quince-esmeralda.html' },
+  { id: 'fiesta', label: 'Fiesta de Gala & Aniversario', name: 'Rodrigo & Marcela', image: '/img/inv-cumple.webp', alt: 'Invitación digital de fiesta privada VIP con show en vivo', demoUrl: '/demo-fiesta-gala.html' },
 ];
 
 const InvitationExamples = () => (
