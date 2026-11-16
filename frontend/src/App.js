@@ -41,6 +41,7 @@ function App() {
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
             {/* Rutas INVITIX - Sistema de Invitaciones Digitales */}
             <Route path="/i/:slug" element={<PublicInvitation />} />
+            <Route path="/i/:slug/:token" element={<PublicInvitation />} />
             <Route path="/en-vivo/:slug" element={<LiveEventScreen />} />
             <Route path="/panel-invitaciones" element={<InvitixDashboard />} />
             <Route path="/scanner" element={<QRScanner />} />

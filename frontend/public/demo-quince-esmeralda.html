@@ -984,35 +984,25 @@
 
   // Audio Playback Visual Toggle
 
-  let isPlaying = false;
+  // Música de la demo: la reproduce /demo-kit.js (solo suena después de un toque del usuario).
+  const audioBtn = document.getElementById("audio-toggle-btn");
 
-  document.getElementById("audio-toggle-btn")?.addEventListener("click", function() {
-
-    isPlaying = !isPlaying;
-
-    const icon = this.querySelector(".material-symbols-outlined");
-
-    const label = this.querySelector("span:last-child");
-
-    if (isPlaying) {
-
-      if (icon) icon.innerText = "pause";
-
-      if (label) label.innerText = "Pausar";
-
-      this.classList.replace("bg-secondary", "bg-primary");
-
-    } else {
-
-      if (icon) icon.innerText = "play_arrow";
-
-      if (label) label.innerText = "Sonido";
-
-      this.classList.replace("bg-primary", "bg-secondary");
-
-    }
-
+  audioBtn?.addEventListener("click", function() {
+    if (window.MMDemoMusic) window.MMDemoMusic.toggle();
   });
 
-</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(13,77,61,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-gutter"><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="invitacion-principal" href="#"><span class="material-symbols-outlined text-[22px]">local_florist</span><span class="font-label-sm text-label-sm mt-0.5">Gala</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="itinerario-de-la-fiesta" href="#"><span class="material-symbols-outlined text-[22px]">schedule</span><span class="font-label-sm text-label-sm mt-0.5">Itinerario</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="ubicaciones-de-gala" href="#"><span class="material-symbols-outlined text-[22px]">location_on</span><span class="font-label-sm text-label-sm mt-0.5">Lugar</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="mesa-de-regalos" href="#"><span class="material-symbols-outlined text-[22px]">featured_seasonal_and_gifts</span><span class="font-label-sm text-label-sm mt-0.5">Regalos</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="confirmar-asistencia" href="#"><span class="material-symbols-outlined text-[22px]">mark_email_read</span><span class="font-label-sm text-label-sm mt-0.5">RSVP</span></a></div></nav></body>
+  document.addEventListener("mm-music", function(e) {
+    if (!audioBtn) return;
+    const playing = e.detail.playing;
+    const icon = audioBtn.querySelector(".material-symbols-outlined");
+    const label = audioBtn.querySelector("span:last-child");
+    if (icon) icon.innerText = playing ? "pause" : "play_arrow";
+    if (label) label.innerText = playing ? "Pausar" : "Sonido";
+    audioBtn.setAttribute("aria-pressed", playing ? "true" : "false");
+    if (playing) audioBtn.classList.replace("bg-secondary", "bg-primary");
+    else audioBtn.classList.replace("bg-primary", "bg-secondary");
+  });
+
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(13,77,61,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-gutter"><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="invitacion-principal" href="#"><span class="material-symbols-outlined text-[22px]">local_florist</span><span class="font-label-sm text-label-sm mt-0.5">Gala</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="itinerario-de-la-fiesta" href="#"><span class="material-symbols-outlined text-[22px]">schedule</span><span class="font-label-sm text-label-sm mt-0.5">Itinerario</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="ubicaciones-de-gala" href="#"><span class="material-symbols-outlined text-[22px]">location_on</span><span class="font-label-sm text-label-sm mt-0.5">Lugar</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="mesa-de-regalos" href="#"><span class="material-symbols-outlined text-[22px]">featured_seasonal_and_gifts</span><span class="font-label-sm text-label-sm mt-0.5">Regalos</span></a><a class="flex flex-col items-center justify-center w-14 h-14 text-on-surface-variant transition-colors" data-path="confirmar-asistencia" href="#"><span class="material-symbols-outlined text-[22px]">mark_email_read</span><span class="font-label-sm text-label-sm mt-0.5">RSVP</span></a></div></nav><script src="/demo-kit.js" data-demo="Quinceañero Esmeralda" defer></script>
+</body>
 </html>

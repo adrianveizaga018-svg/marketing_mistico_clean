@@ -1,9 +1,9 @@
 <?php
 // Panel: invitados de una invitación (lo usan tú y el cliente dueño del evento).
 //   GET ?invitation_id=N                          -> invitados con estado, link, WhatsApp y totales
-//   POST {action:"add", invitation_id, name, phone?, passes}
-//   POST {action:"import", invitation_id, csv}    -> columnas: nombre, teléfono, pases (separador , o ;)
-//   POST {action:"update", id, name?, phone?, passes?}
+//   POST {action:"add", invitation_id, name, phone?, passes, table?}
+//   POST {action:"import", invitation_id, csv}    -> columnas: nombre_completo, telefono, passes, mesa (separador , o ;)
+//   POST {action:"update", id, name?, phone?, passes?, table?}
 //   POST {action:"delete", id}
 //   POST {action:"mark_sent", id}                 -> al tocar "Enviar por WhatsApp"
 define('MM_APP', true);
@@ -26,9 +26,9 @@ $loadGuest = function (int $id) use ($db, $user): array {
     return $guest;
 };
 
-$addGuest = function (array $inv, string $name, ?string $phone, int $passes) use ($db, $now): void {
-    $db->prepare('INSERT INTO guests (invitation_id, name, phone, passes, token, created_at) VALUES (?, ?, ?, ?, ?, ?)')
-        ->execute([$inv['id'], $name, $phone ?: null, $passes, mm_token(10), $now]);
+$addGuest = function (array $inv, string $name, ?string $phone, int $passes, ?string $table = null) use ($db, $now): void {
+    $db->prepare('INSERT INTO guests (invitation_id, name, phone, passes, table_label, token, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+        ->execute([$inv['id'], $name, $phone ?: null, $passes, $table ?: null, mm_token(10), $now]);
 };
 
 if (mm_method() === 'GET') {
@@ -52,6 +52,7 @@ if (mm_method() === 'GET') {
             'name' => $row['name'],
             'phone' => $row['phone'],
             'passes' => (int) $row['passes'],
+            'table' => $row['table_label'],
             'status' => $status,
             'people' => $rsvp ? (int) $row['people'] : null,
             'message' => $rsvp ? $row['rsvp_message'] : null,
@@ -74,7 +75,7 @@ switch ($in['action'] ?? '') {
         if ($name === '') {
             mm_json(['status' => 'error', 'message' => 'Escribe el nombre del invitado'], 422);
         }
-        $addGuest($inv, $name, mm_text($in['phone'] ?? '', 30), mm_int($in['passes'] ?? 1, 1, 20, 1));
+        $addGuest($inv, $name, mm_text($in['phone'] ?? '', 30), mm_int($in['passes'] ?? 1, 1, 20, 1), mm_text($in['table'] ?? '', 40));
         mm_json(['status' => 'success'], 201);
 
     case 'import':
@@ -88,14 +89,14 @@ switch ($in['action'] ?? '') {
             }
             $cols = str_getcsv($line, substr_count($line, ';') > substr_count($line, ',') ? ';' : ',');
             $name = mm_text($cols[0] ?? '', 120);
-            if ($name === '' || ($n === 0 && preg_match('/^nombre$/i', $name))) {
+            if ($name === '' || ($n === 0 && preg_match('/^nombre/i', $name))) {
                 continue; // fila vacía o encabezado
             }
             if (count($lines) > 2000 || $added >= 1000) {
                 $skipped[] = $n + 1;
                 continue;
             }
-            $addGuest($inv, $name, mm_text($cols[1] ?? '', 30), mm_int($cols[2] ?? 1, 1, 20, 1));
+            $addGuest($inv, $name, mm_text($cols[1] ?? '', 30), mm_int($cols[2] ?? 1, 1, 20, 1), mm_text($cols[3] ?? '', 40));
             $added++;
         }
         mm_json(['status' => 'success', 'added' => $added, 'skipped_lines' => $skipped]);
@@ -105,8 +106,9 @@ switch ($in['action'] ?? '') {
         $name = array_key_exists('name', $in) ? mm_text($in['name'], 120) : $guest['name'];
         $phone = array_key_exists('phone', $in) ? (mm_text($in['phone'], 30) ?: null) : $guest['phone'];
         $passes = array_key_exists('passes', $in) ? mm_int($in['passes'], 1, 20, 1) : (int) $guest['passes'];
-        $db->prepare('UPDATE guests SET name = ?, phone = ?, passes = ? WHERE id = ?')
-            ->execute([$name ?: $guest['name'], $phone, $passes, $guest['id']]);
+        $table = array_key_exists('table', $in) ? (mm_text($in['table'], 40) ?: null) : $guest['table_label'];
+        $db->prepare('UPDATE guests SET name = ?, phone = ?, passes = ?, table_label = ? WHERE id = ?')
+            ->execute([$name ?: $guest['name'], $phone, $passes, $table, $guest['id']]);
         mm_json(['status' => 'success']);
 
     case 'delete':

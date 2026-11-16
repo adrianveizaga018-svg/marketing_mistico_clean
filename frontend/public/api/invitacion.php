@@ -18,8 +18,10 @@ $notFound = fn() => mm_json(['status' => 'error', 'message' => 'Invitación no e
 $stmt = mm_db()->prepare('SELECT * FROM invitations WHERE slug = ? AND active = 1');
 $stmt->execute([$slug]);
 $inv = $stmt->fetch();
+$isDemo = false;
 
 if (!$inv) {
+    $isDemo = true; // invitaciones de muestra de la web: no existen en la base
     if ($slug === 'demo-boda') {
         $inv = [
             'id' => 9991, 'slug' => 'demo-boda', 'template' => 'boda', 'event_type' => 'boda',
@@ -75,9 +77,9 @@ if (!$inv) {
     }
 }
 
-$response = ['invitation' => mm_public_invitation($inv), 'guest' => null];
+$response = ['invitation' => mm_public_invitation($inv) + ['is_demo' => $isDemo], 'guest' => null];
 
-if ($token !== '') {
+if ($token !== '' && !$isDemo) {
     $stmt = mm_db()->prepare('SELECT * FROM guests WHERE token = ? AND invitation_id = ?');
     $stmt->execute([$token, $inv['id']]);
     $guest = $stmt->fetch();
@@ -93,6 +95,7 @@ if ($token !== '') {
     $response['guest'] = [
         'name' => $guest['name'],
         'passes' => (int) $guest['passes'],
+        'table' => $guest['table_label'] ?? null,
         'rsvp' => $rsvp ? [
             'attending' => (bool) $rsvp['attending'],
             'people' => (int) $rsvp['people'],
@@ -100,7 +103,7 @@ if ($token !== '') {
             'pass_code' => (int) $rsvp['attending'] === 1 ? $rsvp['pass_code'] : null,
         ] : null,
     ];
-} elseif ((int) $inv['open_link'] !== 1) {
+} elseif ((int) $inv['open_link'] !== 1 && !mm_owner_can_view($inv)) {
     // Evento privado: sin código de invitado no se muestra nada.
     $notFound();
 }

@@ -18,6 +18,9 @@ const EventsBand = () => (
               </li>
             ))}
           </ul>
+          {eventsBand.priceFrom && (
+            <p className="text-[#c9a961] text-sm font-bold mb-5">{eventsBand.priceFrom}</p>
+          )}
           <div className="flex flex-wrap gap-3 items-center">
             <Link
               to={eventsBand.path}

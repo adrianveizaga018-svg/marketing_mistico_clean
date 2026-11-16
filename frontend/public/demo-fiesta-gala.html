@@ -844,40 +844,21 @@
 
 
 
-  // Audio Play/Pause simulation state
-
-  var isAudioPlaying = true;
-
-  function toggleAudio() {
-
-    isAudioPlaying = !isAudioPlaying;
-
+  // Música de la demo: la reproduce /demo-kit.js (solo suena después de un toque del usuario).
+  function paintAudio(playing) {
     var icon = document.getElementById('audioIcon');
-
     var text = document.getElementById('audioStateText');
-
-    if (isAudioPlaying) {
-
-      icon.textContent = 'volume_up';
-
-      text.textContent = 'SONANDO';
-
-    } else {
-
-      icon.textContent = 'volume_off';
-
-      text.textContent = 'PAUSA';
-
-    }
-
+    if (icon) icon.textContent = playing ? 'volume_up' : 'volume_off';
+    if (text) text.textContent = playing ? 'SONANDO' : 'PAUSA';
   }
 
-</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_28px_rgba(5,13,37,0.7)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs transition-colors text-primary font-semibold" data-path="fiesta" href="#"><span class="material-symbols-outlined text-[22px]">celebration</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Fiesta</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="programa" href="#"><span class="material-symbols-outlined text-[22px]">auto_stories</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Programa</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="grupos" href="#"><span class="material-symbols-outlined text-[22px]">nightlife</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Grupos</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="ubicacion" href="#"><span class="material-symbols-outlined text-[22px]">location_on</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">Ubicación</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-space-xs text-on-surface-variant hover:text-on-surface transition-colors" data-path="rsvp" href="#"><span class="material-symbols-outlined text-[22px]">mark_email_read</span><span class="font-label-uppercase text-[10px] tracking-wide mt-0.5">RSVP</span></a></div></nav>
+  function toggleAudio() {
+    if (window.MMDemoMusic) window.MMDemoMusic.toggle();
+  }
 
+  document.addEventListener('mm-music', function (e) { paintAudio(e.detail.playing); });
+  paintAudio(false);
 
-
-</body></html> te pase mas invitaciones quiero que vayan esto como ejemplos velo como se veria bien
-
-<ADDITIONAL_METADATA>
-The current local time is: 2026-11-16T16:19:56-04:00.
-</ADDITIONAL_METADATA>
+</script></main>
+<script src="/demo-kit.js" data-demo="Fiesta VIP de Gala" defer></script>
+</body></html>

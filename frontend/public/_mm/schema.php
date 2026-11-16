@@ -62,6 +62,7 @@ function mm_schema(string $driver): array
             name VARCHAR(120) NOT NULL,
             phone VARCHAR(30) NULL,
             passes TINYINT NOT NULL DEFAULT 1,
+            table_label VARCHAR(40) NULL,
             token VARCHAR(16) NOT NULL UNIQUE,
             sent_at DATETIME NULL,
             opened_at DATETIME NULL,

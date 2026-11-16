@@ -53,12 +53,39 @@ c=$(req -b $C $B/api/admin/invitaciones.php); check "cliente ve solo su evento" 
 grep -q 'Otro evento' "$T/out.json" && { fail=$((fail+1)); echo "FAIL cliente ve evento ajeno"; } || { pass=$((pass+1)); echo "OK   cliente NO ve el evento ajeno"; }
 c=$(req -b $C "$B/api/admin/invitados.php?invitation_id=$INV2"); check "cliente pide invitados ajenos -> 404" 404 $c
 c=$(req -b $C $J -d "{\"action\":\"add\",\"invitation_id\":$INV,\"name\":\"Invitado del cliente\",\"passes\":1}" $B/api/admin/invitados.php); check "cliente agrega a su evento" 201 $c
-c=$(req -b $C $J -d "{\"action\":\"update\",\"id\":$INV,\"title\":\"hack\"}" $B/api/admin/invitaciones.php); check "cliente edita invitacion -> 403" 403 $c
+c=$(req -b $C $J -d "{\"action\":\"update\",\"id\":$INV,\"title\":\"Boda de Ana editada\",\"owner_id\":999}" $B/api/admin/invitaciones.php); check "cliente edita SU invitacion" 200 $c "\"owner_id\":$CLI"
+c=$(req -b $C $J -d "{\"action\":\"update\",\"id\":$INV2,\"title\":\"hack\"}" $B/api/admin/invitaciones.php); check "cliente edita invitacion ajena -> 404" 404 $c
 c=$(req -b $C $B/api/admin/clientes.php); check "cliente lista clientes -> 403" 403 $c
 c=$(req -b $C $B/leads_api.php); check "cliente ve leads -> 401" 401 $c
 c=$(req $J -d "{\"slug\":\"$SLUG2\",\"name\":\"Ana Abierta\",\"attending\":true,\"people\":2}" $B/api/confirmar.php); check "link abierto confirma" 200 $c
 c=$(req -b $A $J -d "{\"action\":\"duplicate\",\"id\":$INV}" $B/api/admin/invitaciones.php); check "duplicar" 201 $c '"active":0'
 c=$(req $B/_mm/invitations.php); check "archivo privado -> 403" 403 $c
+
+# --- Plantilla CSV con mesa ---
+c=$(req -b $A $J -d "{\"action\":\"import\",\"invitation_id\":$INV,\"csv\":\"nombre_completo,telefono,passes,mesa\nRosa Mamani,72223344,2,Mesa 7\n\"}" $B/api/admin/invitados.php); check "importar plantilla con mesa (1)" 200 $c '"added":1'
+c=$(req -b $A "$B/api/admin/invitados.php?invitation_id=$INV"); check "mesa guardada" 200 $c '"table":"Mesa 7"'
+grep -q 'nombre_completo' "$T/out.json" && { fail=$((fail+1)); echo "FAIL encabezado importado como invitado"; } || { pass=$((pass+1)); echo "OK   encabezado de plantilla ignorado"; }
+TOK2=$($PHP -r "\$d=json_decode(file_get_contents('$T/out.json'),true); foreach(\$d['guests'] as \$g) if(\$g['name']==='Rosa Mamani'){ preg_match('#/([A-Za-z0-9]+)\$#',\$g['link'],\$m); echo \$m[1]; }")
+c=$(req "$B/api/invitacion.php?slug=$SLUG&t=$TOK2"); check "invitado ve su mesa" 200 $c '"table":"Mesa 7"'
+
+# --- Galeria y muro (por slug, no por id) ---
+PNG='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+c=$(req "$B/api/galeria.php?action=photos&slug=$SLUG"); check "galeria privada sin codigo -> 404" 404 $c
+c=$(req "$B/api/galeria.php?action=photos&invitation_id=$INV"); check "galeria por id numerico -> 404" 404 $c
+c=$(req "$B/api/galeria.php?action=photos&slug=$SLUG&t=$TOK2"); check "galeria privada con codigo" 200 $c
+c=$(req $J -d "{\"action\":\"upload_photo\",\"slug\":\"$SLUG\",\"t\":\"$TOK2\",\"image_base64\":\"$PNG\"}" $B/api/galeria.php); check "subir foto (se guarda como JPG)" 201 $c '.jpg"'
+FOTO=$(jq_ '$d["file_path"]')
+[ -f "$PUB$FOTO" ] && { pass=$((pass+1)); echo "OK   foto guardada en public/uploads"; } || { fail=$((fail+1)); echo "FAIL foto no encontrada en $PUB$FOTO"; }
+grep -q 'Rosa Mamani' "$T/out.json" && { pass=$((pass+1)); echo "OK   foto firmada con el nombre del invitado"; } || { fail=$((fail+1)); echo "FAIL nombre del invitado en la foto"; }
+c=$(req $J -d "{\"action\":\"upload_photo\",\"slug\":\"$SLUG\",\"t\":\"$TOK2\",\"image_base64\":\"data:image/png;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==\"}" $B/api/galeria.php); check "PHP disfrazado de imagen -> 422" 422 $c
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG\",\"author_name\":\"Colado\",\"message\":\"spam\"}" $B/api/galeria.php); check "muro privado sin codigo -> 404" 404 $c
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Prima Laura\",\"message\":\"Felicidades!\"}" $B/api/galeria.php); check "muro link abierto" 201 $c
+c=$(req "$B/api/galeria.php?action=wall&slug=$SLUG2"); check "leer muro" 200 $c 'Prima Laura'
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"demo-boda\",\"author_name\":\"x\",\"message\":\"y\"}" $B/api/galeria.php); check "demo no guarda mensajes -> 403" 403 $c
+c=$(req "$B/api/invitacion.php?slug=demo-boda"); check "demo marcada como demo" 200 $c '"is_demo":true'
+c=$(req -b $A "$B/api/invitacion.php?slug=$SLUG"); check "admin ve su evento privado (pantalla en vivo)" 200 $c
+c=$(req -b $A "$B/api/galeria.php?action=photos&slug=$SLUG"); check "admin ve galeria privada (pantalla en vivo)" 200 $c
+rm -rf "$PUB/uploads/eventos"
 
 kill $SRV 2>/dev/null
 # En Windows "kill" no cierra php.exe: lo cerramos por el puerto para no dejar servidores colgados.

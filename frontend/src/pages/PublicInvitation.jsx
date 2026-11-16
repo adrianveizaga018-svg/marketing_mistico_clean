@@ -9,10 +9,35 @@ import confetti from 'canvas-confetti';
 import QRCodeModal from '../components/QRCodeModal';
 import GiftQRModal from '../components/GiftQRModal';
 
+// Reduce la foto en el celular antes de subirla (máx. 1600px, JPG 80%): sube rápido y no llena el hosting.
+const compressImage = (file, maxSide = 1600, quality = 0.8) =>
+  new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('No se pudo leer la imagen'));
+    };
+    img.src = url;
+  });
+
 const PublicInvitation = () => {
-  const { slug } = useParams();
+  // Los links personales llegan como /i/slug/CODIGO (los genera el panel); también aceptamos ?t=CODIGO.
+  const { slug, token: pathToken } = useParams();
   const [searchParams] = useSearchParams();
-  const token = searchParams.get('t') || '';
+  const token = pathToken || searchParams.get('t') || '';
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,60 +73,78 @@ const PublicInvitation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, token]);
 
-  const loadGalleryAndWall = (invId) => {
-    if (!invId) return;
-    fetch(`/api/galeria.php?action=photos&invitation_id=${invId}`)
+  const isDemo = !!data?.invitation?.is_demo;
+  const guest = data?.guest || null;
+  const galleryQuery = `slug=${encodeURIComponent(slug)}${token ? `&t=${encodeURIComponent(token)}` : ''}`;
+
+  const loadGalleryAndWall = () => {
+    fetch(`/api/galeria.php?action=photos&${galleryQuery}`)
       .then((r) => r.json())
-      .then((data) => Array.isArray(data) && setPhotos(data))
+      .then((list) => Array.isArray(list) && setPhotos(list))
       .catch(() => {});
 
-    fetch(`/api/galeria.php?action=wall&invitation_id=${invId}`)
+    fetch(`/api/galeria.php?action=wall&${galleryQuery}`)
       .then((r) => r.json())
-      .then((data) => Array.isArray(data) && setWallMessages(data))
+      .then((list) => Array.isArray(list) && setWallMessages(list))
       .catch(() => {});
   };
 
-  const handlePhotoUpload = (e) => {
+  const handlePhotoUpload = async (e) => {
     const file = e.target.files?.[0];
-    if (!file || !data?.invitation?.id) return;
-    if (file.size > 5 * 1024 * 1024) {
-      alert('La foto debe ser menor a 5MB');
+    e.target.value = '';
+    if (!file || !data?.invitation) return;
+    if (!file.type.startsWith('image/')) {
+      alert('Elige una foto (JPG, PNG o WEBP)');
       return;
     }
-    const reader = new FileReader();
-    reader.onload = async () => {
-      setUploadingPhoto(true);
-      try {
-        const res = await fetch('/api/galeria.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'upload_photo',
-            invitation_id: data.invitation.id,
-            uploader_name: guest?.name || customName || 'Invitado',
-            image_base64: reader.result,
-          }),
-        });
-        const json = await res.json();
-        if (res.ok && json.status === 'ok') {
-          setPhotos((prev) => [json, ...prev]);
-          confetti({ particleCount: 60, spread: 60 });
-        } else {
-          alert(json.message || 'Error al subir foto');
-        }
-      } catch (err) {
-        alert('Error al subir imagen');
-      } finally {
-        setUploadingPhoto(false);
+    if (file.size > 25 * 1024 * 1024) {
+      alert('La foto es demasiado pesada');
+      return;
+    }
+    setUploadingPhoto(true);
+    try {
+      const imageBase64 = await compressImage(file);
+      const uploaderName = guest?.name || customName || 'Invitado';
+      if (isDemo) {
+        // Demo: la foto se ve solo en este celular, no se guarda en el servidor.
+        setPhotos((prev) => [{ id: `demo-${Date.now()}`, file_path: imageBase64, uploader_name: uploaderName }, ...prev]);
+        confetti({ particleCount: 60, spread: 60 });
+        return;
       }
-    };
-    reader.readAsDataURL(file);
+      const res = await fetch('/api/galeria.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'upload_photo',
+          slug,
+          t: token || undefined,
+          uploader_name: uploaderName,
+          image_base64: imageBase64,
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json.status === 'ok') {
+        setPhotos((prev) => [json, ...prev]);
+        confetti({ particleCount: 60, spread: 60 });
+      } else {
+        alert(json.message || 'No se pudo subir la foto, intenta de nuevo');
+      }
+    } catch (err) {
+      alert('No se pudo subir la foto, revisa tu conexión');
+    } finally {
+      setUploadingPhoto(false);
+    }
   };
 
   const handlePostWallMessage = async (e) => {
     e.preventDefault();
-    if (!wallText.trim() || !data?.invitation?.id) return;
+    if (!wallText.trim() || !data?.invitation) return;
     const author = wallAuthor.trim() || guest?.name || customName || 'Amigo';
+    if (isDemo) {
+      setWallMessages((prev) => [{ id: `demo-${Date.now()}`, author_name: author, message: wallText.trim(), created_at: new Date().toISOString() }, ...prev]);
+      setWallText('');
+      return;
+    }
     setPostingWall(true);
     try {
       const res = await fetch('/api/galeria.php', {
@@ -109,7 +152,8 @@ const PublicInvitation = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'post_message',
-          invitation_id: data.invitation.id,
+          slug,
+          t: token || undefined,
           author_name: author,
           message: wallText.trim(),
         }),
@@ -139,8 +183,8 @@ const PublicInvitation = () => {
         setError(json.message || 'Invitación no encontrada');
       } else {
         setData(json);
-        if (json.invitation?.id) {
-          loadGalleryAndWall(json.invitation.id);
+        if (!json.invitation?.is_demo) {
+          loadGalleryAndWall();
         }
         if (json.guest?.rsvp) {
           setRsvpDone(true);
@@ -181,6 +225,13 @@ const PublicInvitation = () => {
 
   const handleRSVP = async (e) => {
     e.preventDefault();
+    if (isDemo) {
+      // Demo: simulamos la confirmación para que el visitante vea el flujo completo.
+      setRsvpDone(true);
+      setPassCode(attending ? 'DEMO-PASE-QR' : null);
+      if (attending) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch('/api/confirmar.php', {
@@ -196,7 +247,7 @@ const PublicInvitation = () => {
         }),
       });
       const resData = await res.json();
-      if (res.ok && resData.status === 'ok') {
+      if (res.ok && resData.status === 'success') {
         setRsvpDone(true);
         setPassCode(resData.pass_code);
         if (attending) {
@@ -240,7 +291,7 @@ const PublicInvitation = () => {
     );
   }
 
-  const { invitation, guest } = data;
+  const { invitation } = data;
   const eventDate = invitation.event_at ? new Date(invitation.event_at) : null;
   const formattedDate = eventDate ? eventDate.toLocaleDateString('es-BO', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -257,6 +308,8 @@ const PublicInvitation = () => {
           onClick={toggleMusic}
           className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#c9a961] text-black flex items-center justify-center shadow-[0_0_20px_rgba(201,169,97,0.4)] hover:scale-110 transition-transform"
           title={isPlaying ? "Pausar música" : "Reproducir música"}
+          aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
+          aria-pressed={isPlaying}
         >
           {isPlaying ? <Volume2 size={22} /> : <VolumeX size={22} />}
         </button>
@@ -290,6 +343,7 @@ const PublicInvitation = () => {
               <p className="text-white font-black text-base">{guest.name}</p>
               <span className="text-[11px] text-[#c9a961] font-semibold">
                 Válido para {guest.passes} {guest.passes === 1 ? 'pase' : 'pases'}
+                {guest.table ? ` · Mesa ${guest.table}` : ''}
               </span>
             </div>
           )}

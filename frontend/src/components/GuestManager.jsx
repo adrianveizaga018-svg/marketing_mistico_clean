@@ -5,6 +5,27 @@ import {
 } from 'lucide-react';
 import QRCodeModal from '../components/QRCodeModal';
 
+// Plantilla modelo para Excel / Google Sheets (el separador "," lo entiende el importador).
+const CSV_TEMPLATE = [
+  'nombre_completo,telefono,passes,mesa',
+  'Juan Pérez Mamani,70012345,2,Mesa 1',
+  'Familia Quispe Rojas,71234567,4,Mesa 3',
+  'María Gómez,,1,',
+].join('\r\n');
+
+const downloadCsvTemplate = () => {
+  // BOM para que Excel muestre bien las tildes.
+  const blob = new Blob(['﻿' + CSV_TEMPLATE], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'plantilla_invitados.csv';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+};
+
 const GuestManager = ({ invitation, onBack }) => {
   const [guests, setGuests] = useState([]);
   const [totals, setTotals] = useState({ guests: 0, passes: 0, confirmed: 0, declined: 0, arrived: 0 });
@@ -17,13 +38,28 @@ const GuestManager = ({ invitation, onBack }) => {
   const [guestName, setGuestName] = useState('');
   const [guestPhone, setGuestPhone] = useState('');
   const [guestPasses, setGuestPasses] = useState(1);
+  const [guestTable, setGuestTable] = useState('');
   const [csvText, setCsvText] = useState('');
+
+  const loadCsvFile = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    if (file.size > 1024 * 1024) {
+      alert('El archivo es muy grande (máximo 1 MB)');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => setCsvText(String(reader.result).replace(/^﻿/, ''));
+    reader.readAsText(file, 'utf-8');
+  };
 
   // QR Modal
   const [qrModalData, setQrModalData] = useState(null);
 
   useEffect(() => {
     fetchGuests();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invitation.id]);
 
   const fetchGuests = async () => {
@@ -57,14 +93,19 @@ const GuestManager = ({ invitation, onBack }) => {
           name: guestName,
           phone: guestPhone,
           passes: guestPasses,
+          table: guestTable,
         }),
       });
       if (res.ok) {
         setGuestName('');
         setGuestPhone('');
         setGuestPasses(1);
+        setGuestTable('');
         setShowAddModal(false);
         fetchGuests();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        alert(data.message || 'No se pudo agregar el invitado');
       }
     } catch (err) {
       alert('Error al agregar invitado');
@@ -88,7 +129,8 @@ const GuestManager = ({ invitation, onBack }) => {
       if (res.ok) {
         setCsvText('');
         setShowImportModal(false);
-        alert(`Importados con éxito: ${data.imported} invitados`);
+        const skipped = data.skipped_lines?.length ? ` (${data.skipped_lines.length} filas omitidas por límite)` : '';
+        alert(`Importados con éxito: ${data.added ?? 0} invitados${skipped}`);
         fetchGuests();
       } else {
         alert(data.message || 'Error al importar');
@@ -143,7 +185,13 @@ const GuestManager = ({ invitation, onBack }) => {
           <p className="text-xs text-white/50">{invitation.honorees} · {invitation.event_at}</p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={downloadCsvTemplate}
+            className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-xs font-bold border border-white/10 transition-all"
+          >
+            <Download size={16} /> Descargar plantilla Excel/CSV
+          </button>
           <button
             onClick={() => setShowImportModal(true)}
             className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-xs font-bold border border-white/10 transition-all"
@@ -217,6 +265,7 @@ const GuestManager = ({ invitation, onBack }) => {
                   <th className="pb-3 px-4">Invitado</th>
                   <th className="pb-3 px-4">Teléfono</th>
                   <th className="pb-3 px-4 text-center">Pases</th>
+                  <th className="pb-3 px-4">Mesa</th>
                   <th className="pb-3 px-4">Estado</th>
                   <th className="pb-3 px-4 text-right">Acciones</th>
                 </tr>
@@ -234,6 +283,7 @@ const GuestManager = ({ invitation, onBack }) => {
                         {g.passes}
                       </span>
                     </td>
+                    <td className="py-3 px-4 text-white/70">{g.table || '-'}</td>
                     <td className="py-3 px-4">
                       {g.status === 'confirmo' && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-[10px]">
@@ -335,7 +385,18 @@ const GuestManager = ({ invitation, onBack }) => {
                   min="1"
                   max="10"
                   value={guestPasses}
-                  onChange={(e) => setGuestPasses(parseInt(e.target.value, 10))}
+                  onChange={(e) => setGuestPasses(parseInt(e.target.value, 10) || 1)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-[#c9a961]"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/70 mb-1">Mesa (opcional)</label>
+                <input
+                  type="text"
+                  maxLength={40}
+                  value={guestTable}
+                  onChange={(e) => setGuestTable(e.target.value)}
+                  placeholder="Ej. Mesa 5 / Familia"
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-[#c9a961]"
                 />
               </div>
@@ -365,15 +426,29 @@ const GuestManager = ({ invitation, onBack }) => {
           <div className="bg-[#0e0e12] border border-white/15 rounded-3xl p-6 max-w-md w-full">
             <h3 className="text-lg font-black text-white mb-2">Importar Invitados masivo</h3>
             <p className="text-xs text-white/60 mb-4">
-              Pega filas con el formato: <code className="text-[#c9a961]">Nombre, Teléfono, Pases</code> (separado por coma o punto y coma).
+              Columnas: <code className="text-[#c9a961]">nombre_completo, telefono, passes, mesa</code> (separado por coma o punto y coma).
+              Llena la plantilla en Excel, guárdala como CSV y súbela, o pega las filas aquí.
             </p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              <button
+                type="button"
+                onClick={downloadCsvTemplate}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold border border-white/10"
+              >
+                <Download size={14} /> Descargar plantilla
+              </button>
+              <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold border border-white/10 cursor-pointer">
+                <FileSpreadsheet size={14} /> Cargar archivo .csv
+                <input type="file" accept=".csv,text/csv,text/plain" onChange={loadCsvFile} className="hidden" />
+              </label>
+            </div>
             <form onSubmit={handleImportCSV} className="space-y-4">
               <textarea
                 rows="6"
                 required
                 value={csvText}
                 onChange={(e) => setCsvText(e.target.value)}
-                placeholder={"Juan Pérez, 70012345, 2\nMaría Gómez, 71234567, 1"}
+                placeholder={"Juan Pérez, 70012345, 2, Mesa 1\nMaría Gómez, 71234567, 1, Mesa 4"}
                 className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white text-xs font-mono focus:outline-none focus:border-[#c9a961]"
               ></textarea>
               <div className="grid grid-cols-2 gap-2">

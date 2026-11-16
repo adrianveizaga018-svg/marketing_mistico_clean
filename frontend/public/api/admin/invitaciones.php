@@ -2,10 +2,10 @@
 // Panel: invitaciones.
 //   GET                                   -> lista (admin: todas; cliente: las suyas) con totales
 //   GET ?id=N                             -> una invitación completa
-//   POST {action:"create", ...}           -> crear (solo admin)
-//   POST {action:"update", id, ...}       -> editar (solo admin)
-//   POST {action:"duplicate", id}         -> duplicar sin invitados (solo admin)
-//   POST {action:"toggle", id, active}    -> activar / desactivar (solo admin)
+//   POST {action:"create", ...}           -> crear (cliente: queda a su nombre)
+//   POST {action:"update", id, ...}       -> editar (cliente: solo las suyas y sin cambiar el dueño)
+//   POST {action:"duplicate", id}         -> duplicar sin invitados
+//   POST {action:"toggle", id, active}    -> activar / desactivar
 define('MM_APP', true);
 require dirname(__DIR__, 2) . '/_mm/bootstrap.php';
 require dirname(__DIR__, 2) . '/_mm/invitations.php';
@@ -74,6 +74,9 @@ switch ($action) {
     case 'update':
         $inv = mm_require_invitation($user, (int) ($in['id'] ?? 0));
         $data = mm_invitation_payload($in, true);
+        if (!$isAdmin) {
+            unset($data['owner_id']); // un cliente no puede pasar su evento a otra cuenta
+        }
         if ($data) {
             $data['updated_at'] = $now;
             $sets = implode(', ', array_map(fn($c) => "$c = ?", array_keys($data)));

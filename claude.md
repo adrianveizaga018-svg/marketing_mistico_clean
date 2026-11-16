@@ -1,7 +1,7 @@
 # 🌌 Marketing Místico — INVITIX: Sistema SaaS de Invitaciones Digitales
 
 > **Documento de proyecto activo.** Actualizar en cada sesión de trabajo.  
-> Última actualización: 2026-11-16
+> Última actualización: 2026-11-16 (sesión 6)
 
 ---
 
@@ -537,3 +537,14 @@ CREATE TABLE subscriptions (
 - **`InvitationExamples.jsx`**: Actualizado con los 4 demos reales (Morenada + Boda + Quince + Fiesta), todos con "Ver invitación en vivo".
 - **`EventsBand.jsx`**: Agregados 4 botones pill dorados de vista rápida para cada demo en la sección Home.
 - Build exitoso (exit code 0). Commit `72d3728`, pushed a GitHub.
+
+### 2026-11-16 — Sesión 6: PROMTULTIMO (comercial + pulido + seguridad + despliegue)
+- **Paquetes nuevos** (`data/landing.js`): Esencial Bs. 250 · Gala Premium Bs. 490 (Más popular) · Imperial & Fiesta En Vivo Bs. 850. Botones "Contratar este paquete" + "Consultar disponibilidad" con mensaje de WhatsApp prellenado. Precios también en la Home (`EventsBand`).
+- **`public/demo-kit.js`** en los 4 demos: banner flotante "¿Te gusta este diseño…?" → WhatsApp; música ambiental real (Web Audio, sin archivos) en los botones 🎵; los botones de confirmar de la demo ya no escriben a números de ejemplo.
+- Limpiado texto de chat y metadatos que se veían al final de `demo-fiesta-gala.html`.
+- **GuestManager**: botón "Descargar plantilla Excel/CSV" (`nombre_completo,telefono,passes,mesa`), cargar archivo .csv, columna **mesa** (nueva columna `guests.table_label`, migración `server/sql/migracion_2026-11-16_mesa.sql`). El invitado ve su mesa en su invitación.
+- **Bugs corregidos**: RSVP mostraba error aunque guardaba (`ok` vs `success`); links personales `/i/slug/CODIGO` daban pantalla en blanco (faltaba la ruta); galería y muro nunca cargaban (la API pública no devuelve `id`); `galeria.php` tenía rutas de `require` y de `uploads` rotas; la pantalla en vivo no se refrescaba (closure con estado viejo) y no abría eventos privados; el importador contaba `undefined`.
+- **Seguridad**: galería/muro por slug + código de invitado (eventos privados cerrados), límite de envíos por IP, validación real de imagen + re-compresión a JPG 1600px (borra GPS/EXIF), `uploads/.htaccess` sin ejecución de PHP, tope de 500 fotos por evento, cliente no puede cambiar `owner_id`, `.htaccess` con cabeceras de seguridad y bloqueo de archivos sensibles.
+- Fotos: compresión también en el celular antes de subir (máx. 1600px, JPG 80%).
+- Pruebas API: 52/52 OK (`server/tests/api_test.sh`). Build `CI=true` sin warnings.
+- Guía de despliegue: `DEPLOY_INVITIX.md`.

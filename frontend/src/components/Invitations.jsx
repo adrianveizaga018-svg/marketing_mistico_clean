@@ -7,7 +7,10 @@ import WhatsAppIcon from './WhatsAppIcon';
 import metaPixel from '../lib/metaPixel';
 
 const packageMessage = (pkg) =>
-  `Hola Marketing Místico 👋 Quiero la invitación digital ${pkg.name} (Bs ${pkg.price}). Mi evento es: `;
+  `Hola Marketing Místico 👋 Quiero contratar el ${pkg.name} (Bs. ${pkg.price}) para un evento [Boda / 15 Años / Presterío / Fiesta] el día [Fecha]. ¿Tienen disponibilidad?`;
+
+const availabilityMessage = (pkg) =>
+  `Hola Marketing Místico 👋 Quiero consultar disponibilidad para el ${pkg.name} (Bs. ${pkg.price}). Mi evento es el día [Fecha] en [Ciudad].`;
 
 const PackageCard = ({ pkg }) => (
   <article
@@ -19,13 +22,13 @@ const PackageCard = ({ pkg }) => (
   >
     {pkg.highlighted && (
       <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#c9a961] text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full whitespace-nowrap">
-        Recomendado
+        {pkg.badge || 'Recomendado'}
       </span>
     )}
     <h3 className="text-white text-xl font-black">{pkg.name}</h3>
     <p className="text-white/60 text-sm mt-1 mb-4">{pkg.tagline}</p>
     <p className="flex items-baseline gap-1.5 mb-1">
-      <span className="text-white/60 text-lg font-bold">Bs</span>
+      <span className="text-white/60 text-lg font-bold">Bs.</span>
       <span className="text-[#c9a961] text-5xl font-black tracking-tight tabular-nums">{pkg.price}</span>
     </p>
     <p className="text-white/55 text-[13px] mb-5">Pago único · {pkg.delivery}</p>
@@ -51,7 +54,16 @@ const PackageCard = ({ pkg }) => (
       }`}
     >
       <WhatsAppIcon size={17} />
-      Quiero la {pkg.name}
+      Contratar este paquete
+    </a>
+    <a
+      href={waLink(availabilityMessage(pkg))}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => metaPixel.trackWhatsAppClick()}
+      className="mt-3 text-center text-white/70 hover:text-[#c9a961] text-[13px] font-semibold underline underline-offset-4"
+    >
+      Consultar disponibilidad
     </a>
   </article>
 );

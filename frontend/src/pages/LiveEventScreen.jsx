@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { 
   Users, Sparkles, Heart, Camera, MessageSquare, 
   Maximize2, Volume2, VolumeX, Clock 
@@ -7,6 +7,8 @@ import {
 
 const LiveEventScreen = () => {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('t') || '';
   const [invitation, setInvitation] = useState(null);
   const [stats, setStats] = useState({ arrived: 0, confirmed: 0 });
   const [photos, setPhotos] = useState([]);
@@ -30,7 +32,8 @@ const LiveEventScreen = () => {
       clearInterval(clockInterval);
       clearInterval(liveInterval);
     };
-  }, [slug]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, token]);
 
   // Rotación suave del carrusel de fotos
   useEffect(() => {
@@ -50,30 +53,32 @@ const LiveEventScreen = () => {
     return () => clearInterval(msgTimer);
   }, [messages]);
 
+  // Eventos privados: abre /en-vivo/slug?t=CODIGO (cualquier código de invitado) o con la sesión del panel iniciada.
+  const query = `slug=${encodeURIComponent(slug)}${token ? `&t=${encodeURIComponent(token)}` : ''}`;
+
   const fetchData = async () => {
     try {
-      const res = await fetch(`/api/invitacion.php?slug=${encodeURIComponent(slug)}`);
+      const res = await fetch(`/api/invitacion.php?${query}`, { credentials: 'same-origin' });
       const json = await res.json();
       if (res.ok && json.invitation) {
         setInvitation(json.invitation);
-        fetchLiveUpdates(json.invitation.id);
+        fetchLiveUpdates();
       }
     } catch (e) {
       console.error(e);
     }
   };
 
-  const fetchLiveUpdates = async (invId) => {
-    const id = invId || invitation?.id;
-    if (!id) return;
+  // Usa el slug (no el estado), así el refresco cada 6 s siempre tiene con qué consultar.
+  const fetchLiveUpdates = async () => {
     try {
       // Fotos
-      const pRes = await fetch(`/api/galeria.php?action=photos&invitation_id=${id}`);
+      const pRes = await fetch(`/api/galeria.php?action=photos&${query}`, { credentials: 'same-origin' });
       const pData = await pRes.json();
       if (Array.isArray(pData) && pData.length > 0) setPhotos(pData);
 
       // Mensajes
-      const mRes = await fetch(`/api/galeria.php?action=wall&invitation_id=${id}`);
+      const mRes = await fetch(`/api/galeria.php?action=wall&${query}`, { credentials: 'same-origin' });
       const mData = await mRes.json();
       if (Array.isArray(mData) && mData.length > 0) setMessages(mData);
     } catch (e) {

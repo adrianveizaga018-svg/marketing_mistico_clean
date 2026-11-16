@@ -73,6 +73,16 @@ function mm_decode_json_fields(array $inv): array
     return $inv;
 }
 
+// El admin o el cliente dueño (con sesión del panel) pueden ver su evento privado, p. ej. en la pantalla /en-vivo.
+function mm_owner_can_view(array $inv): bool
+{
+    if (empty($_COOKIE['mm_admin'])) {
+        return false; // sin cookie de sesión no abrimos sesión de gusto
+    }
+    $user = mm_current_user();
+    return $user && ($user['role'] === 'admin' || (int) $inv['owner_id'] === (int) $user['id']);
+}
+
 function mm_deadline_passed(array $inv): bool
 {
     return !empty($inv['rsvp_deadline']) && strtotime($inv['rsvp_deadline']) < time();

@@ -53,6 +53,7 @@ export const eventsBand = {
   title: 'Invitaciones digitales con pase QR',
   text: 'Cada invitado recibe su invitación personal por WhatsApp, confirma con un toque y entra mostrando su pase QR. Tú controlas quién llegó desde el celular.',
   points: ['Invitación personal por invitado', 'Confirmación de asistencia', 'Control de ingreso en la puerta'],
+  priceFrom: 'Paquetes desde Bs. 250 · Gala Premium Bs. 490 · Imperial & Fiesta En Vivo Bs. 850',
   path: '/eventos',
 };
 
