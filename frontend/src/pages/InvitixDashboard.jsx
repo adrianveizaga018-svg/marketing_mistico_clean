@@ -348,9 +348,18 @@ const InvitixDashboard = () => {
                         rel="noopener noreferrer"
                         className="py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-all"
                       >
-                        <ExternalLink size={13} /> Ver en Vivo
+                        <ExternalLink size={13} /> Ver Invitación
                       </a>
                     </div>
+
+                    <a
+                      href={`/en-vivo/${inv.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2 px-3 rounded-xl bg-[#c9a961]/15 hover:bg-[#c9a961] hover:text-black text-[#c9a961] font-bold text-[11px] flex items-center justify-center gap-1.5 transition-all border border-[#c9a961]/30"
+                    >
+                      📺 Pantalla En Vivo (Proyector Salón)
+                    </a>
                   </div>
                 </div>
               );

@@ -15,6 +15,7 @@ const Mantenimiento = lazy(() => import("./pages/Mantenimiento"));
 const PublicInvitation = lazy(() => import("./pages/PublicInvitation"));
 const InvitixDashboard = lazy(() => import("./pages/InvitixDashboard"));
 const QRScanner = lazy(() => import("./pages/QRScanner"));
+const LiveEventScreen = lazy(() => import("./pages/LiveEventScreen"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
             {/* Rutas INVITIX - Sistema de Invitaciones Digitales */}
             <Route path="/i/:slug" element={<PublicInvitation />} />
+            <Route path="/en-vivo/:slug" element={<LiveEventScreen />} />
             <Route path="/panel-invitaciones" element={<InvitixDashboard />} />
             <Route path="/scanner" element={<QRScanner />} />
           </Routes>

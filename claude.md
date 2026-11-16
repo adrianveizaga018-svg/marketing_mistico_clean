@@ -455,9 +455,11 @@ CREATE TABLE subscriptions (
 - [x] Página pública: Escáner QR de portero para acceso y validación (`/scanner` en `QRScanner.jsx`)
 
 ### Sprint 2 — Features premium
-- [ ] Subida de fotos por invitados
-- [ ] Galería de fotos en tiempo real
-- [ ] Muro de mensajes
+- [x] Subida de fotos por invitados (`frontend/public/api/galeria.php`)
+- [x] Galería de fotos en tiempo real en la invitación (`PublicInvitation.jsx`)
+- [x] Muro interactivo de dedicatorias y buenos deseos (`PublicInvitation.jsx`)
+- [x] Enlace de acceso a portal de clientes en barra de navegación (`Navbar.jsx`)
+- [x] Demos en vivo integradas en la página web corporativa (`/i/demo-boda`, `/i/demo-quince`, `/i/demo-cumple` en `InvitationExamples.jsx`)
 - [ ] Analytics básico (vistas, RSVP rate)
 - [ ] Generación de links de WhatsApp masivo
 
