@@ -73,6 +73,12 @@ const Navbar = () => {
 
           <div className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => renderItem(item))}
+            <Link
+              to="/panel-invitaciones"
+              className="text-xs uppercase tracking-[0.14em] font-bold text-white/60 hover:text-[#c9a961] transition-colors py-2"
+            >
+              Acceso a mi evento
+            </Link>
             <a
               href={waLink(message)}
               target="_blank"
@@ -105,7 +111,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        {isOpen && <div className="lg:hidden border-t border-[#c9a961]/20 mt-3 py-2">{navItems.map((item) => renderItem(item, true))}</div>}
+        {isOpen && (
+          <div className="lg:hidden border-t border-[#c9a961]/20 mt-3 py-2">
+            {navItems.map((item) => renderItem(item, true))}
+            <Link
+              to="/panel-invitaciones"
+              onClick={() => setIsOpen(false)}
+              className="block text-[#c9a961] hover:text-white py-3.5 px-1 font-bold text-base border-b border-white/5"
+            >
+              🔐 Acceso a mi evento
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

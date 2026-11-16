@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { 
   Calendar, MapPin, Clock, Music, Volume2, VolumeX, QrCode, 
-  Gift, Heart, Send, CheckCircle2, XCircle, Share2, AlertCircle, Sparkles 
+  Gift, Heart, Send, CheckCircle2, XCircle, Share2, AlertCircle, Sparkles,
+  Camera, MessageSquare, Image as ImageIcon
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import QRCodeModal from '../components/QRCodeModal';
@@ -34,9 +35,98 @@ const PublicInvitation = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio, setAudio] = useState(null);
 
+  // Sprint 2: Galería colaborativa & Muro de dedicatorias
+  const [photos, setPhotos] = useState([]);
+  const [wallMessages, setWallMessages] = useState([]);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [wallAuthor, setWallAuthor] = useState('');
+  const [wallText, setWallText] = useState('');
+  const [postingWall, setPostingWall] = useState(false);
+
   useEffect(() => {
     fetchInvitation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, token]);
+
+  const loadGalleryAndWall = (invId) => {
+    if (!invId) return;
+    fetch(`/api/galeria.php?action=photos&invitation_id=${invId}`)
+      .then((r) => r.json())
+      .then((data) => Array.isArray(data) && setPhotos(data))
+      .catch(() => {});
+
+    fetch(`/api/galeria.php?action=wall&invitation_id=${invId}`)
+      .then((r) => r.json())
+      .then((data) => Array.isArray(data) && setWallMessages(data))
+      .catch(() => {});
+  };
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !data?.invitation?.id) return;
+    if (file.size > 5 * 1024 * 1024) {
+      alert('La foto debe ser menor a 5MB');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = async () => {
+      setUploadingPhoto(true);
+      try {
+        const res = await fetch('/api/galeria.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'upload_photo',
+            invitation_id: data.invitation.id,
+            uploader_name: guest?.name || customName || 'Invitado',
+            image_base64: reader.result,
+          }),
+        });
+        const json = await res.json();
+        if (res.ok && json.status === 'ok') {
+          setPhotos((prev) => [json, ...prev]);
+          confetti({ particleCount: 60, spread: 60 });
+        } else {
+          alert(json.message || 'Error al subir foto');
+        }
+      } catch (err) {
+        alert('Error al subir imagen');
+      } finally {
+        setUploadingPhoto(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handlePostWallMessage = async (e) => {
+    e.preventDefault();
+    if (!wallText.trim() || !data?.invitation?.id) return;
+    const author = wallAuthor.trim() || guest?.name || customName || 'Amigo';
+    setPostingWall(true);
+    try {
+      const res = await fetch('/api/galeria.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'post_message',
+          invitation_id: data.invitation.id,
+          author_name: author,
+          message: wallText.trim(),
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json.status === 'ok') {
+        setWallMessages((prev) => [json, ...prev]);
+        setWallText('');
+      } else {
+        alert(json.message || 'Error al enviar mensaje');
+      }
+    } catch (err) {
+      alert('Error de conexión');
+    } finally {
+      setPostingWall(false);
+    }
+  };
 
   const fetchInvitation = async () => {
     setLoading(true);
@@ -49,6 +139,9 @@ const PublicInvitation = () => {
         setError(json.message || 'Invitación no encontrada');
       } else {
         setData(json);
+        if (json.invitation?.id) {
+          loadGalleryAndWall(json.invitation.id);
+        }
         if (json.guest?.rsvp) {
           setRsvpDone(true);
           setAttending(json.guest.rsvp.attending);
@@ -408,6 +501,106 @@ const PublicInvitation = () => {
                 {submitting ? 'Enviando...' : 'Confirmar Asistencia'}
               </button>
             </form>
+          )}
+        </div>
+
+        {/* Sprint 2: 📸 Galería de Fotos Colaborativa en Vivo */}
+        <div className="bg-[#0e0e12] border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span className="text-[#c9a961] text-xs uppercase tracking-[0.2em] font-black">Álbum en Vivo</span>
+              <h3 className="text-2xl font-black text-white mt-0.5">Fotos de los Invitados</h3>
+              <p className="text-xs text-white/50">¡Comparte tus mejores momentos de la fiesta con los novios y todos los invitados!</p>
+            </div>
+            <label className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs uppercase tracking-wider cursor-pointer transition-all shadow-md shrink-0">
+              <Camera size={16} />
+              {uploadingPhoto ? 'Subiendo...' : 'Subir mi Foto'}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoUpload}
+                disabled={uploadingPhoto}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          {photos.length === 0 ? (
+            <div className="border border-dashed border-white/10 rounded-2xl p-8 text-center">
+              <ImageIcon size={32} className="mx-auto text-white/30 mb-2" />
+              <p className="text-xs text-white/40">Sé el primero en subir una foto a la galería de este evento.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {photos.map((p) => (
+                <div key={p.id} className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 aspect-square group">
+                  <img
+                    src={p.file_path}
+                    alt={p.uploader_name || 'Foto de invitado'}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    loading="lazy"
+                  />
+                  {p.uploader_name && (
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                      <p className="text-[10px] text-white/90 font-bold truncate">Por: {p.uploader_name}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Sprint 2: 💬 Muro de Mensajes & Dedicatorias */}
+        <div className="bg-[#0e0e12] border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6">
+          <div>
+            <span className="text-[#c9a961] text-xs uppercase tracking-[0.2em] font-black">Libro de Visitas Digital</span>
+            <h3 className="text-2xl font-black text-white mt-0.5">Muro de Dedicatorias</h3>
+            <p className="text-xs text-white/50">Deja tus palabras de felicitación para que queden guardadas para siempre.</p>
+          </div>
+
+          <form onSubmit={handlePostWallMessage} className="space-y-3">
+            {!guest && (
+              <input
+                type="text"
+                value={wallAuthor}
+                onChange={(e) => setWallAuthor(e.target.value)}
+                placeholder="Tu nombre (Ej. Prima Laura)"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-[#c9a961]"
+              />
+            )}
+            <div className="flex gap-2">
+              <input
+                type="text"
+                required
+                value={wallText}
+                onChange={(e) => setWallText(e.target.value)}
+                placeholder="Escribe tus mejores deseos aquí..."
+                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#c9a961]"
+              />
+              <button
+                type="submit"
+                disabled={postingWall}
+                className="px-5 rounded-xl bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs uppercase tracking-wider transition-all disabled:opacity-50 flex items-center justify-center gap-1.5"
+              >
+                <Send size={14} />
+                {postingWall ? '...' : 'Enviar'}
+              </button>
+            </div>
+          </form>
+
+          {wallMessages.length > 0 && (
+            <div className="space-y-3 pt-2">
+              {wallMessages.map((m) => (
+                <div key={m.id} className="bg-white/[0.02] border border-white/5 rounded-2xl p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-black text-[#c9a961]">{m.author_name}</p>
+                    <span className="text-[10px] text-white/30">{m.created_at ? new Date(m.created_at).toLocaleDateString('es-BO') : ''}</span>
+                  </div>
+                  <p className="text-xs text-white/80 leading-relaxed">{m.message}</p>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
