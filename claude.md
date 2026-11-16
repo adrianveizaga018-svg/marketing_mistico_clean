@@ -464,8 +464,8 @@ CREATE TABLE subscriptions (
 - [ ] Generación de links de WhatsApp masivo
 
 ### Sprint 3 — Viralidad y pulido
-- [ ] Música de fondo en invitación
-- [ ] Modo en vivo (proyector)
+- [x] Música de fondo en invitación
+- [x] Modo fiesta en vivo para proyector y Smart TV (`/en-vivo/:slug` en `LiveEventScreen.jsx`)
 - [ ] Recordatorios automáticos (cron jobs)
 - [ ] Exportar galería en ZIP
 - [ ] Integración IA para redacción de mensajes

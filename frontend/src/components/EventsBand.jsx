@@ -18,12 +18,22 @@ const EventsBand = () => (
               </li>
             ))}
           </ul>
-          <Link
-            to={eventsBand.path}
-            className="inline-flex items-center gap-2 bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-sm px-7 py-3.5 rounded-full transition-colors min-h-[48px]"
-          >
-            Ver invitaciones y paquetes <ArrowRight size={16} />
-          </Link>
+          <div className="flex flex-wrap gap-3 items-center">
+            <Link
+              to={eventsBand.path}
+              className="inline-flex items-center gap-2 bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-sm px-7 py-3.5 rounded-full transition-colors min-h-[48px]"
+            >
+              Ver invitaciones y paquetes <ArrowRight size={16} />
+            </Link>
+            <a
+              href="/demo-morenada.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-[#c9a961]/50 text-[#c9a961] hover:bg-[#c9a961] hover:text-black font-bold text-sm px-6 py-3.5 rounded-full transition-all min-h-[48px]"
+            >
+              👑 Ver Demo en Vivo (Morenada 2026)
+            </a>
+          </div>
         </div>
         <img
           src="/img/svc-invitaciones.webp"

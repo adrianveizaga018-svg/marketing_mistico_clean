@@ -3,8 +3,9 @@ import React from 'react';
 // Ejemplos de invitaciones (nombres ficticios). Cuando el sistema de invitaciones esté listo,
 // agrega "demoUrl" a cada una y aparecerá el botón "Ver invitación en vivo".
 const examples = [
+  { id: 'morenada', label: 'Festividad & Presterío', name: 'Morenada Sr. de la Exaltación', image: '/img/inv-boda.webp', alt: 'Invitación digital folclórica de gala morenada en celular', demoUrl: '/demo-morenada.html' },
+  { id: 'boda', label: 'Boda de Gala', name: 'Ana & Luis', image: '/img/inv-boda.webp', alt: 'Invitación digital de boda en celular, color crema con foto de los novios', demoUrl: '/i/demo-boda' },
   { id: 'quince', label: 'Quinceañero', name: 'Valentina', image: '/img/inv-quince.webp', alt: 'Invitación digital de quinceañero en celular, morada con corona dorada', demoUrl: '/i/demo-quince' },
-  { id: 'boda', label: 'Boda', name: 'Ana & Luis', image: '/img/inv-boda.webp', alt: 'Invitación digital de boda en celular, color crema con foto de los novios', demoUrl: '/i/demo-boda' },
   { id: 'cumple', label: 'Cumpleaños infantil', name: 'Mateo cumple 5', image: '/img/inv-cumple.webp', alt: 'Invitación digital de cumpleaños infantil en celular, con globos de colores', demoUrl: '/i/demo-cumple' },
 ];
 
@@ -29,9 +30,9 @@ const InvitationExamples = () => (
       />
 
       {/* Tablet y escritorio: cada ejemplo grande */}
-      <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-10 max-w-5xl mx-auto items-end">
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto items-end">
         {examples.map((ex, i) => (
-          <figure key={ex.id} className={`text-center ${i === 1 ? 'md:-translate-y-6' : ''}`}>
+          <figure key={ex.id} className="text-center">
             <img src={ex.image} alt={ex.alt} width="382" height="762" loading="lazy" decoding="async" className="w-full max-w-[280px] mx-auto drop-shadow-[0_25px_40px_rgba(0,0,0,0.6)]" />
             <figcaption className="mt-5">
               <p className="text-[#c9a961] text-xs uppercase tracking-[0.18em] font-black">{ex.label}</p>
