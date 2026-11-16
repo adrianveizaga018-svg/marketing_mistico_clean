@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS wall_messages (
   invitation_id INT UNSIGNED NOT NULL,
   author_name VARCHAR(120) NOT NULL,
   message TEXT NOT NULL,
-  approved TINYINT NOT NULL DEFAULT 1,
+  approved TINYINT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -6,6 +6,7 @@ import {
 import GuestManager from '../components/GuestManager';
 import InvitationEditor from '../components/InvitationEditor';
 import QRCodeModal from '../components/QRCodeModal';
+import { waLink } from '../data/contacto';
 
 const InvitixDashboard = () => {
   const [auth, setAuth] = useState({ loading: true, user: null });
@@ -225,12 +226,15 @@ const InvitixDashboard = () => {
             >
               <RefreshCw size={16} className={loadingInvs ? 'animate-spin' : ''} />
             </button>
-            <button
-              onClick={() => setIsCreating(true)}
-              className="flex items-center gap-2 py-2.5 px-4 rounded-xl bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs transition-all shadow-md"
-            >
-              <Plus size={16} /> Crear Invitación
-            </button>
+            {/* Cada evento es un paquete pagado: solo el administrador crea eventos nuevos. */}
+            {auth.user.role === 'admin' && (
+              <button
+                onClick={() => setIsCreating(true)}
+                className="flex items-center gap-2 py-2.5 px-4 rounded-xl bg-[#c9a961] hover:bg-[#d4af37] text-black font-black text-xs transition-all shadow-md"
+              >
+                <Plus size={16} /> Crear Invitación
+              </button>
+            )}
             <button
               onClick={handleLogout}
               className="p-2.5 rounded-xl bg-white/5 hover:bg-red-500/20 text-white/60 hover:text-red-400 transition-all"
@@ -255,15 +259,33 @@ const InvitixDashboard = () => {
           <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-12 text-center max-w-md mx-auto">
             <Sparkles size={40} className="mx-auto text-[#c9a961] mb-3" />
             <h3 className="text-lg font-black text-white">Aún no tienes invitaciones</h3>
-            <p className="text-xs text-white/60 mt-1 mb-6">
-              Crea tu primera invitación digital con enlace para invitados, pase QR y mesa de regalos.
-            </p>
-            <button
-              onClick={() => setIsCreating(true)}
-              className="py-3 px-6 rounded-xl bg-[#c9a961] text-black font-black text-xs uppercase tracking-wider"
-            >
-              Crear mi Primer Evento
-            </button>
+            {auth.user.role === 'admin' ? (
+              <>
+                <p className="text-xs text-white/60 mt-1 mb-6">
+                  Crea tu primera invitación digital con enlace para invitados, pase QR y mesa de regalos.
+                </p>
+                <button
+                  onClick={() => setIsCreating(true)}
+                  className="py-3 px-6 rounded-xl bg-[#c9a961] text-black font-black text-xs uppercase tracking-wider"
+                >
+                  Crear mi Primer Evento
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-xs text-white/60 mt-1 mb-6">
+                  Tu evento aparecerá aquí apenas Marketing Místico lo active. ¿Quieres contratar otro evento?
+                </p>
+                <a
+                  href={waLink('Hola Marketing Místico 👋 Ya tengo cuenta en el panel y quiero contratar un nuevo evento.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-3 px-6 rounded-xl bg-[#c9a961] text-black font-black text-xs uppercase tracking-wider"
+                >
+                  Escribir por WhatsApp
+                </a>
+              </>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

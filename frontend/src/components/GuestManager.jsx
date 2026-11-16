@@ -4,6 +4,7 @@ import {
   XCircle, Clock, Trash2, Edit2, ExternalLink, QrCode, Search, Download 
 } from 'lucide-react';
 import QRCodeModal from '../components/QRCodeModal';
+import WallModeration from './WallModeration';
 
 // Plantilla modelo para Excel / Google Sheets (el separador "," lo entiende el importador).
 const CSV_TEMPLATE = [
@@ -350,6 +351,8 @@ const GuestManager = ({ invitation, onBack }) => {
           </div>
         )}
       </div>
+
+      <WallModeration invitationId={invitation.id} />
 
       {/* Modal Agregar Invitado */}
       {showAddModal && (

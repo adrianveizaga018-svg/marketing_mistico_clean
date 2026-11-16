@@ -55,6 +55,8 @@ c=$(req -b $C "$B/api/admin/invitados.php?invitation_id=$INV2"); check "cliente 
 c=$(req -b $C $J -d "{\"action\":\"add\",\"invitation_id\":$INV,\"name\":\"Invitado del cliente\",\"passes\":1}" $B/api/admin/invitados.php); check "cliente agrega a su evento" 201 $c
 c=$(req -b $C $J -d "{\"action\":\"update\",\"id\":$INV,\"title\":\"Boda de Ana editada\",\"owner_id\":999}" $B/api/admin/invitaciones.php); check "cliente edita SU invitacion" 200 $c "\"owner_id\":$CLI"
 c=$(req -b $C $J -d "{\"action\":\"update\",\"id\":$INV2,\"title\":\"hack\"}" $B/api/admin/invitaciones.php); check "cliente edita invitacion ajena -> 404" 404 $c
+c=$(req -b $C $J -d '{"action":"create","title":"Evento gratis","honorees":"Yo","event_at":"2027-06-01 20:00"}' $B/api/admin/invitaciones.php); check "cliente NO crea eventos -> 403" 403 $c
+c=$(req -b $C $J -d "{\"action\":\"duplicate\",\"id\":$INV}" $B/api/admin/invitaciones.php); check "cliente NO duplica eventos -> 403" 403 $c
 c=$(req -b $C $B/api/admin/clientes.php); check "cliente lista clientes -> 403" 403 $c
 c=$(req -b $C $B/leads_api.php); check "cliente ve leads -> 401" 401 $c
 c=$(req $J -d "{\"slug\":\"$SLUG2\",\"name\":\"Ana Abierta\",\"attending\":true,\"people\":2}" $B/api/confirmar.php); check "link abierto confirma" 200 $c
@@ -79,8 +81,20 @@ FOTO=$(jq_ '$d["file_path"]')
 grep -q 'Rosa Mamani' "$T/out.json" && { pass=$((pass+1)); echo "OK   foto firmada con el nombre del invitado"; } || { fail=$((fail+1)); echo "FAIL nombre del invitado en la foto"; }
 c=$(req $J -d "{\"action\":\"upload_photo\",\"slug\":\"$SLUG\",\"t\":\"$TOK2\",\"image_base64\":\"data:image/png;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==\"}" $B/api/galeria.php); check "PHP disfrazado de imagen -> 422" 422 $c
 c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG\",\"author_name\":\"Colado\",\"message\":\"spam\"}" $B/api/galeria.php); check "muro privado sin codigo -> 404" 404 $c
-c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Prima Laura\",\"message\":\"Felicidades!\"}" $B/api/galeria.php); check "muro link abierto" 201 $c
-c=$(req "$B/api/galeria.php?action=wall&slug=$SLUG2"); check "leer muro" 200 $c 'Prima Laura'
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Prima Laura\",\"message\":\"Felicidades!\"}" $B/api/galeria.php); check "muro link abierto (queda pendiente)" 201 $c '"pending":true'
+MSG=$(jq_ '$d["id"]')
+c=$(req "$B/api/galeria.php?action=wall&slug=$SLUG2"); check "pendiente NO se ve en publico" 200 $c
+grep -q 'Prima Laura' "$T/out.json" && { fail=$((fail+1)); echo "FAIL mensaje sin aprobar visible"; } || { pass=$((pass+1)); echo "OK   mensaje sin aprobar oculto"; }
+c=$(req -b $C "$B/api/admin/muro.php?invitation_id=$INV2"); check "cliente NO modera muro ajeno -> 404" 404 $c
+c=$(req -b $C $J -d "{\"action\":\"approve\",\"id\":$MSG}" $B/api/admin/muro.php); check "cliente NO aprueba mensaje ajeno -> 404" 404 $c
+c=$(req -b $A "$B/api/admin/muro.php?invitation_id=$INV2"); check "admin ve pendientes" 200 $c '"pending":1'
+c=$(req -b $A $J -d "{\"action\":\"approve\",\"id\":$MSG}" $B/api/admin/muro.php); check "admin aprueba" 200 $c
+c=$(req "$B/api/galeria.php?action=wall&slug=$SLUG2"); check "aprobado se ve en publico" 200 $c 'Prima Laura'
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Troll\",\"message\":\"spam\"}" $B/api/galeria.php); MSG2=$(jq_ '$d["id"]')
+c=$(req -b $A $J -d "{\"action\":\"reject\",\"id\":$MSG2}" $B/api/admin/muro.php); check "admin rechaza (borra)" 200 $c
+c=$(req -b $A "$B/api/admin/muro.php?invitation_id=$INV2"); check "rechazado ya no existe" 200 $c '"pending":0'
+c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Tio Juan\",\"message\":\"Salud!\"}" $B/api/galeria.php)
+c=$(req -b $A $J -d "{\"action\":\"approve_all\",\"invitation_id\":$INV2}" $B/api/admin/muro.php); check "aprobar todos" 200 $c '"approved":1'
 c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"demo-boda\",\"author_name\":\"x\",\"message\":\"y\"}" $B/api/galeria.php); check "demo no guarda mensajes -> 403" 403 $c
 c=$(req "$B/api/invitacion.php?slug=demo-boda"); check "demo marcada como demo" 200 $c '"is_demo":true'
 c=$(req -b $A "$B/api/invitacion.php?slug=$SLUG"); check "admin ve su evento privado (pantalla en vivo)" 200 $c

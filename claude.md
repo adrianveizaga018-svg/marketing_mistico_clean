@@ -548,3 +548,5 @@ CREATE TABLE subscriptions (
 - Fotos: compresión también en el celular antes de subir (máx. 1600px, JPG 80%).
 - Pruebas API: 52/52 OK (`server/tests/api_test.sh`). Build `CI=true` sin warnings.
 - Guía de despliegue: `DEPLOY_INVITIX.md`.
+- **Solo el admin crea/duplica eventos** (cada evento = paquete pagado); el cliente edita los suyos. Panel del cliente sin botón "Crear", con enlace a WhatsApp.
+- **Moderación del muro**: los mensajes nuevos quedan pendientes; el anfitrión aprueba / borra / "Aprobar todos" desde el gestor de invitados (`WallModeration.jsx` + `api/admin/muro.php`). Pruebas API: 63/63 OK.

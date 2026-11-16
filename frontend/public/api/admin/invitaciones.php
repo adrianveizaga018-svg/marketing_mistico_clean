@@ -2,9 +2,9 @@
 // Panel: invitaciones.
 //   GET                                   -> lista (admin: todas; cliente: las suyas) con totales
 //   GET ?id=N                             -> una invitación completa
-//   POST {action:"create", ...}           -> crear (cliente: queda a su nombre)
+//   POST {action:"create", ...}           -> crear (solo admin: cada evento es un paquete pagado)
 //   POST {action:"update", id, ...}       -> editar (cliente: solo las suyas y sin cambiar el dueño)
-//   POST {action:"duplicate", id}         -> duplicar sin invitados
+//   POST {action:"duplicate", id}         -> duplicar sin invitados (solo admin)
 //   POST {action:"toggle", id, active}    -> activar / desactivar
 define('MM_APP', true);
 require dirname(__DIR__, 2) . '/_mm/bootstrap.php';
@@ -50,6 +50,11 @@ $in = mm_input();
 $action = $in['action'] ?? '';
 $now = mm_now();
 
+// Crear o duplicar = un evento nuevo = un paquete nuevo: solo lo hace Marketing Místico.
+if (!$isAdmin && in_array($action, ['create', 'duplicate'], true)) {
+    mm_json(['status' => 'error', 'message' => 'Para un evento nuevo escríbenos por WhatsApp y lo activamos en tu cuenta.'], 403);
+}
+
 $insert = function (array $data) use ($db, $now): int {
     $data['created_at'] = $now;
     $data['updated_at'] = $now;
@@ -62,10 +67,6 @@ $insert = function (array $data) use ($db, $now): int {
 switch ($action) {
     case 'create':
         $data = mm_invitation_payload($in, false);
-        // Si es cliente, el owner_id siempre es el suyo
-        if (!$isAdmin) {
-            $data['owner_id'] = (int) $user['id'];
-        }
         // El slug lleva un final aleatorio para que nadie pueda adivinar eventos ajenos.
         $data['slug'] = mm_slugify($in['slug'] ?? $data['honorees']) . '-' . strtolower(mm_token(4));
         $id = $insert($data);

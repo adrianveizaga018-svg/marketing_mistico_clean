@@ -81,10 +81,12 @@ if ($action === 'post_message') {
     if ($name === '' || $msg === '') {
         mm_json(['status' => 'error', 'message' => 'Nombre y mensaje son obligatorios'], 422);
     }
-    $db->prepare('INSERT INTO wall_messages (invitation_id, author_name, message, approved, created_at) VALUES (?, ?, ?, 1, ?)')
+    // Queda pendiente: el anfitrión lo aprueba desde el panel (Muro de dedicatorias) antes de que se vea.
+    $db->prepare('INSERT INTO wall_messages (invitation_id, author_name, message, approved, created_at) VALUES (?, ?, ?, 0, ?)')
         ->execute([$invId, $name, $msg, $now]);
     mm_json([
         'status' => 'ok',
+        'pending' => true,
         'id' => (int) $db->lastInsertId(),
         'author_name' => $name,
         'message' => $msg,

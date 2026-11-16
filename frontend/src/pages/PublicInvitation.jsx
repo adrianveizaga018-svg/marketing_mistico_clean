@@ -67,6 +67,7 @@ const PublicInvitation = () => {
   const [wallAuthor, setWallAuthor] = useState('');
   const [wallText, setWallText] = useState('');
   const [postingWall, setPostingWall] = useState(false);
+  const [wallNotice, setWallNotice] = useState('');
 
   useEffect(() => {
     fetchInvitation();
@@ -160,8 +161,9 @@ const PublicInvitation = () => {
       });
       const json = await res.json();
       if (res.ok && json.status === 'ok') {
-        setWallMessages((prev) => [json, ...prev]);
+        // Los mensajes pasan por la aprobación del anfitrión antes de mostrarse a todos.
         setWallText('');
+        setWallNotice('¡Gracias! Tu mensaje aparecerá en el muro cuando los anfitriones lo aprueben 💛');
       } else {
         alert(json.message || 'Error al enviar mensaje');
       }
@@ -642,6 +644,12 @@ const PublicInvitation = () => {
               </button>
             </div>
           </form>
+
+          {wallNotice && (
+            <p role="status" className="text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-4 py-3">
+              {wallNotice}
+            </p>
+          )}
 
           {wallMessages.length > 0 && (
             <div className="space-y-3 pt-2">
