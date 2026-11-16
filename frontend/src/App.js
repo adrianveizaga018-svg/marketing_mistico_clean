@@ -12,6 +12,9 @@ const PillarPage = lazy(() => import("./pages/PillarPage"));
 const Eventos = lazy(() => import("./pages/Eventos"));
 const Auditoria = lazy(() => import("./pages/Auditoria"));
 const Mantenimiento = lazy(() => import("./pages/Mantenimiento"));
+const PublicInvitation = lazy(() => import("./pages/PublicInvitation"));
+const InvitixDashboard = lazy(() => import("./pages/InvitixDashboard"));
+const QRScanner = lazy(() => import("./pages/QRScanner"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -35,6 +38,10 @@ function App() {
             <Route path="/mantenimiento" element={<Mantenimiento />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/gestion-leads" element={<LeadsDashboard />} />
+            {/* Rutas INVITIX - Sistema de Invitaciones Digitales */}
+            <Route path="/i/:slug" element={<PublicInvitation />} />
+            <Route path="/panel-invitaciones" element={<InvitixDashboard />} />
+            <Route path="/scanner" element={<QRScanner />} />
           </Routes>
         </Suspense>
         {/* Botón flotante de WhatsApp: visible desde el primer segundo en todas las páginas */}

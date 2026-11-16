@@ -45,9 +45,6 @@ if (mm_method() === 'GET') {
 if (mm_method() !== 'POST') {
     mm_json(['status' => 'error', 'message' => 'Método no permitido'], 405);
 }
-if (!$isAdmin) {
-    mm_json(['status' => 'error', 'message' => 'Solo el administrador puede editar invitaciones'], 403);
-}
 
 $in = mm_input();
 $action = $in['action'] ?? '';
@@ -65,6 +62,10 @@ $insert = function (array $data) use ($db, $now): int {
 switch ($action) {
     case 'create':
         $data = mm_invitation_payload($in, false);
+        // Si es cliente, el owner_id siempre es el suyo
+        if (!$isAdmin) {
+            $data['owner_id'] = (int) $user['id'];
+        }
         // El slug lleva un final aleatorio para que nadie pueda adivinar eventos ajenos.
         $data['slug'] = mm_slugify($in['slug'] ?? $data['honorees']) . '-' . strtolower(mm_token(4));
         $id = $insert($data);

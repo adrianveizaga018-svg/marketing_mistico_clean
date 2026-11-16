@@ -65,9 +65,43 @@ CREATE TABLE IF NOT EXISTS rsvps (
   updated_at DATETIME NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS guest_photos (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  invitation_id INT UNSIGNED NOT NULL,
+  guest_id INT UNSIGNED NULL,
+  uploader_name VARCHAR(120) NULL,
+  file_path VARCHAR(255) NOT NULL,
+  approved TINYINT NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS wall_messages (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  invitation_id INT UNSIGNED NOT NULL,
+  author_name VARCHAR(120) NOT NULL,
+  message TEXT NOT NULL,
+  approved TINYINT NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS invitation_views (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  invitation_id INT UNSIGNED NOT NULL,
+  guest_id INT UNSIGNED NULL,
+  ip VARCHAR(45) NULL,
+  user_agent VARCHAR(255) NULL,
+  viewed_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE INDEX idx_guests_inv ON guests (invitation_id);
 
 CREATE INDEX idx_rsvps_inv ON rsvps (invitation_id);
 
 CREATE INDEX idx_inv_owner ON invitations (owner_id);
+
+CREATE INDEX idx_photos_inv ON guest_photos (invitation_id);
+
+CREATE INDEX idx_wall_inv ON wall_messages (invitation_id);
+
+CREATE INDEX idx_views_inv ON invitation_views (invitation_id);
 

@@ -83,8 +83,42 @@ function mm_schema(string $driver): array
             updated_at DATETIME NOT NULL
         )$engine",
 
+        // Fotos subidas por los invitados (galería en vivo)
+        "CREATE TABLE IF NOT EXISTS guest_photos (
+            id $pk,
+            invitation_id $fk NOT NULL,
+            guest_id $fk NULL,
+            uploader_name VARCHAR(120) NULL,
+            file_path VARCHAR(255) NOT NULL,
+            approved TINYINT NOT NULL DEFAULT 1,
+            created_at DATETIME NOT NULL
+        )$engine",
+
+        // Muro de dedicatorias y mensajes
+        "CREATE TABLE IF NOT EXISTS wall_messages (
+            id $pk,
+            invitation_id $fk NOT NULL,
+            author_name VARCHAR(120) NOT NULL,
+            message TEXT NOT NULL,
+            approved TINYINT NOT NULL DEFAULT 1,
+            created_at DATETIME NOT NULL
+        )$engine",
+
+        // Analítica de visitas a la invitación
+        "CREATE TABLE IF NOT EXISTS invitation_views (
+            id $pk,
+            invitation_id $fk NOT NULL,
+            guest_id $fk NULL,
+            ip VARCHAR(45) NULL,
+            user_agent VARCHAR(255) NULL,
+            viewed_at DATETIME NOT NULL
+        )$engine",
+
         $mysql ? 'CREATE INDEX idx_guests_inv ON guests (invitation_id)' : 'CREATE INDEX IF NOT EXISTS idx_guests_inv ON guests (invitation_id)',
         $mysql ? 'CREATE INDEX idx_rsvps_inv ON rsvps (invitation_id)' : 'CREATE INDEX IF NOT EXISTS idx_rsvps_inv ON rsvps (invitation_id)',
         $mysql ? 'CREATE INDEX idx_inv_owner ON invitations (owner_id)' : 'CREATE INDEX IF NOT EXISTS idx_inv_owner ON invitations (owner_id)',
+        $mysql ? 'CREATE INDEX idx_photos_inv ON guest_photos (invitation_id)' : 'CREATE INDEX IF NOT EXISTS idx_photos_inv ON guest_photos (invitation_id)',
+        $mysql ? 'CREATE INDEX idx_wall_inv ON wall_messages (invitation_id)' : 'CREATE INDEX IF NOT EXISTS idx_wall_inv ON wall_messages (invitation_id)',
+        $mysql ? 'CREATE INDEX idx_views_inv ON invitation_views (invitation_id)' : 'CREATE INDEX IF NOT EXISTS idx_views_inv ON invitation_views (invitation_id)',
     ];
 }
