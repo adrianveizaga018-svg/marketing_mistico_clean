@@ -1,7 +1,7 @@
 # 🌌 Marketing Místico — INVITIX: Sistema SaaS de Invitaciones Digitales
 
 > **Documento de proyecto activo.** Actualizar en cada sesión de trabajo.  
-> Última actualización: 2026-11-12
+> Última actualización: 2026-11-16
 
 ---
 
@@ -528,3 +528,12 @@ CREATE TABLE subscriptions (
   - ¿Dominio propio o subdominio?
   - ¿Sistema de pago digital o manual al inicio?
   - ¿Clientes interesados ya identificados?
+
+### 2026-11-16 — Sesión 5: Catálogo completo de invitaciones de lujo
+- Extraído y limpiado 3 plantillas HTML de invitación de gala del HTML compuesto proporcionado por Adrián:
+  1. **`demo-boda-imperial.html`** — Boda Imperial Paceña (Paola & Rodrigo): tema Illimani/midnight blue & gold, ceremonia San Miguel Arcángel, recepción Castillo del Valle, vals imperial, Banda Oruro, banquete 4 tiempos, QR BNB regalo.
+  2. **`demo-quince-esmeralda.html`** — Quinceañero de Gala (Valeria Sofía Mendoza Alarcón): tema esmeralda & oro, coronación, padrinos bolivianos tradicionales (bautizo, corona/cetro, brindis, vestido), Grupo Euphoria + hora loca, BNB QR Simple.
+  3. **`demo-fiesta-gala.html`** — Gran Fiesta Privada & Aniversario VIP (Rodrigo & Marcela): Salón El Campanario Real, Banda Continental de Oruro + Orquesta Sabor Latino, fricasé trasnochero.
+- **`InvitationExamples.jsx`**: Actualizado con los 4 demos reales (Morenada + Boda + Quince + Fiesta), todos con "Ver invitación en vivo".
+- **`EventsBand.jsx`**: Agregados 4 botones pill dorados de vista rápida para cada demo en la sección Home.
+- Build exitoso (exit code 0). Commit `72d3728`, pushed a GitHub.
