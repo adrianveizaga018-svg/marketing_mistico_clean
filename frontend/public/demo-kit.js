@@ -10,7 +10,7 @@
 (function () {
   'use strict';
 
-  var WHATSAPP = '59169612395'; // mismo número que src/data/contacto.js
+  var WHATSAPP = '59162792626'; // mismo número que src/data/contacto.js
   var script = document.currentScript || document.querySelector('script[src*="demo-kit.js"]');
   var demoName = (script && script.getAttribute('data-demo')) || 'invitación de gala';
   var GOLD = '#c9a961';

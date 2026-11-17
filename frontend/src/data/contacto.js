@@ -1,6 +1,6 @@
 // Datos de contacto centralizados: cambia el número aquí y se actualiza en toda la página.
-export const WHATSAPP_NUMBER = '59169612395';
-export const WHATSAPP_DISPLAY = '+591 696 12395';
+export const WHATSAPP_NUMBER = '59162792626';
+export const WHATSAPP_DISPLAY = '+591 627 92626';
 
 export const whatsappMessages = {
   general: 'Hola Marketing Místico 👋 Quiero una cotización para mi negocio.',
