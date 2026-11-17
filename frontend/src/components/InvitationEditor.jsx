@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, Calendar, MapPin, Music, Image as ImageIcon, Gift, 
   ArrowLeft, Check, Plus, Trash2, Smartphone 
 } from 'lucide-react';
 
-const InvitationEditor = ({ invitation, onBack, onSaved }) => {
+const InvitationEditor = ({ invitation, onBack, onSaved, isAdmin = false }) => {
   const isEditing = !!invitation?.id;
+
+  // Solo el admin asigna el evento a la cuenta de un cliente.
+  const [ownerId, setOwnerId] = useState(invitation?.owner_id ? String(invitation.owner_id) : '');
+  const [clients, setClients] = useState([]);
+  useEffect(() => {
+    if (!isAdmin) return;
+    fetch('/api/admin/clientes.php', { credentials: 'same-origin' })
+      .then((r) => r.json())
+      .then((list) => Array.isArray(list) && setClients(list))
+      .catch(() => {});
+  }, [isAdmin]);
 
   const [title, setTitle] = useState(invitation?.title || '');
   const [honorees, setHonorees] = useState(invitation?.honorees || '');
@@ -80,6 +91,7 @@ const InvitationEditor = ({ invitation, onBack, onSaved }) => {
       cover_image: coverImage || null,
       music_url: musicUrl || null,
       open_link: openLink ? 1 : 0,
+      ...(isAdmin && { owner_id: ownerId ? parseInt(ownerId, 10) : null }),
       rsvp_deadline: rsvpDeadline ? rsvpDeadline.replace('T', ' ') + ':00' : null,
       gifts: giftsData,
     };
@@ -302,6 +314,30 @@ const InvitationEditor = ({ invitation, onBack, onSaved }) => {
               </span>
             </label>
           </div>
+
+          {isAdmin && (
+            <div className="pt-2">
+              <label htmlFor="owner-select" className="block text-xs font-bold text-white/70 mb-1.5">
+                Cliente dueño del evento
+              </label>
+              <select
+                id="owner-select"
+                value={ownerId}
+                onChange={(e) => setOwnerId(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-[#c9a961]"
+              >
+                <option value="" className="bg-[#0e0e12]">Sin asignar (solo lo ves tú)</option>
+                {clients.map((c) => (
+                  <option key={c.id} value={c.id} className="bg-[#0e0e12]">
+                    {c.name} · {c.email}{Number(c.active) === 1 ? '' : ' (desactivado)'}
+                  </option>
+                ))}
+              </select>
+              <p className="text-[11px] text-white/40 mt-1.5">
+                El cliente verá este evento al entrar al panel con su email. Crea cuentas en el botón "Clientes".
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Mesa de Regalos con QR de Dinero (Bolivia) */}

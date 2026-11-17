@@ -80,6 +80,21 @@ FOTO=$(jq_ '$d["file_path"]')
 [ -f "$PUB$FOTO" ] && { pass=$((pass+1)); echo "OK   foto guardada en public/uploads"; } || { fail=$((fail+1)); echo "FAIL foto no encontrada en $PUB$FOTO"; }
 grep -q 'Rosa Mamani' "$T/out.json" && { pass=$((pass+1)); echo "OK   foto firmada con el nombre del invitado"; } || { fail=$((fail+1)); echo "FAIL nombre del invitado en la foto"; }
 c=$(req $J -d "{\"action\":\"upload_photo\",\"slug\":\"$SLUG\",\"t\":\"$TOK2\",\"image_base64\":\"data:image/png;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==\"}" $B/api/galeria.php); check "PHP disfrazado de imagen -> 422" 422 $c
+
+# --- Moderacion de fotos ---
+c=$(req "$B/api/galeria.php?action=photos&slug=$SLUG&t=$TOK2"); check "foto pendiente NO se ve en publico" 200 $c '^\[\]$'
+c=$(req -b $A "$B/api/admin/fotos.php?invitation_id=$INV"); check "admin ve foto pendiente" 200 $c '"pending":1'
+PHOTO=$(jq_ '$d["photos"][0]["id"]')
+c=$(req -b $C "$B/api/admin/fotos.php?invitation_id=$INV2"); check "cliente NO modera fotos ajenas -> 404" 404 $c
+c=$(req -b $C $J -d "{\"action\":\"approve\",\"id\":$PHOTO}" $B/api/admin/fotos.php); check "cliente dueño aprueba su foto" 200 $c
+c=$(req "$B/api/galeria.php?action=photos&slug=$SLUG&t=$TOK2"); check "foto aprobada se ve en publico" 200 $c 'Rosa Mamani'
+c=$(req -b $A $J -d "{\"action\":\"reject\",\"id\":$PHOTO}" $B/api/admin/fotos.php); check "admin borra foto" 200 $c
+[ -f "$PUB$FOTO" ] && { fail=$((fail+1)); echo "FAIL archivo de foto borrada sigue en disco"; } || { pass=$((pass+1)); echo "OK   archivo de foto borrada eliminado"; }
+
+# --- Clientes y dueño del evento ---
+c=$(req -b $A $B/api/admin/clientes.php); check "lista clientes con conteo de eventos" 200 $c '"events":'
+c=$(req -b $A $J -d "{\"action\":\"update\",\"id\":$INV2,\"owner_id\":99999}" $B/api/admin/invitaciones.php); check "asignar cliente inexistente -> 422" 422 $c
+c=$(req -b $A $J -d "{\"action\":\"update\",\"id\":$INV2,\"owner_id\":null}" $B/api/admin/invitaciones.php); check "quitar dueño" 200 $c '"owner_id":null'
 c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG\",\"author_name\":\"Colado\",\"message\":\"spam\"}" $B/api/galeria.php); check "muro privado sin codigo -> 404" 404 $c
 c=$(req $J -d "{\"action\":\"post_message\",\"slug\":\"$SLUG2\",\"author_name\":\"Prima Laura\",\"message\":\"Felicidades!\"}" $B/api/galeria.php); check "muro link abierto (queda pendiente)" 201 $c '"pending":true'
 MSG=$(jq_ '$d["id"]')

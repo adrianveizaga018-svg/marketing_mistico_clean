@@ -16,7 +16,9 @@ if ($user['role'] !== 'admin') {
 $db = mm_db();
 
 if (mm_method() === 'GET') {
-    mm_json($db->query("SELECT id, name, email, active, created_at FROM users WHERE role = 'client' ORDER BY name")->fetchAll());
+    mm_json($db->query("SELECT u.id, u.name, u.email, u.active, u.created_at,
+                               (SELECT COUNT(*) FROM invitations i WHERE i.owner_id = u.id) AS events
+                        FROM users u WHERE u.role = 'client' ORDER BY u.name")->fetchAll());
 }
 
 $in = mm_input();

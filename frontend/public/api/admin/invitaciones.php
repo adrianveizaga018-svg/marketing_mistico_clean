@@ -50,6 +50,18 @@ $in = mm_input();
 $action = $in['action'] ?? '';
 $now = mm_now();
 
+// El dueño asignado tiene que ser una cuenta de cliente real.
+$checkOwner = function (array $data) use ($db): void {
+    if (empty($data['owner_id'])) {
+        return;
+    }
+    $stmt = $db->prepare("SELECT id FROM users WHERE id = ? AND role = 'client'");
+    $stmt->execute([$data['owner_id']]);
+    if (!$stmt->fetch()) {
+        mm_json(['status' => 'error', 'message' => 'El cliente elegido no existe'], 422);
+    }
+};
+
 // Crear o duplicar = un evento nuevo = un paquete nuevo: solo lo hace Marketing Místico.
 if (!$isAdmin && in_array($action, ['create', 'duplicate'], true)) {
     mm_json(['status' => 'error', 'message' => 'Para un evento nuevo escríbenos por WhatsApp y lo activamos en tu cuenta.'], 403);
@@ -67,6 +79,7 @@ $insert = function (array $data) use ($db, $now): int {
 switch ($action) {
     case 'create':
         $data = mm_invitation_payload($in, false);
+        $checkOwner($data);
         // El slug lleva un final aleatorio para que nadie pueda adivinar eventos ajenos.
         $data['slug'] = mm_slugify($in['slug'] ?? $data['honorees']) . '-' . strtolower(mm_token(4));
         $id = $insert($data);
@@ -78,6 +91,7 @@ switch ($action) {
         if (!$isAdmin) {
             unset($data['owner_id']); // un cliente no puede pasar su evento a otra cuenta
         }
+        $checkOwner($data);
         if ($data) {
             $data['updated_at'] = $now;
             $sets = implode(', ', array_map(fn($c) => "$c = ?", array_keys($data)));

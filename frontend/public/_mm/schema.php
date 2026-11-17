@@ -91,7 +91,7 @@ function mm_schema(string $driver): array
             guest_id $fk NULL,
             uploader_name VARCHAR(120) NULL,
             file_path VARCHAR(255) NOT NULL,
-            approved TINYINT NOT NULL DEFAULT 1,
+            approved TINYINT NOT NULL DEFAULT 0,
             created_at DATETIME NOT NULL
         )$engine",
 

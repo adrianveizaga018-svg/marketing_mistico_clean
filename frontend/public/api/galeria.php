@@ -143,11 +143,13 @@ if ($action === 'upload_photo') {
     }
     $webPath = '/uploads/eventos/' . $invId . '/' . $filename;
 
-    $db->prepare('INSERT INTO guest_photos (invitation_id, guest_id, uploader_name, file_path, approved, created_at) VALUES (?, ?, ?, ?, 1, ?)')
+    // Queda pendiente: el anfitrión la aprueba en el panel antes de que salga en la galería o en el proyector.
+    $db->prepare('INSERT INTO guest_photos (invitation_id, guest_id, uploader_name, file_path, approved, created_at) VALUES (?, ?, ?, ?, 0, ?)')
         ->execute([$invId, $guest ? $guest['id'] : null, $name, $webPath, $now]);
 
     mm_json([
         'status' => 'ok',
+        'pending' => true,
         'id' => (int) $db->lastInsertId(),
         'file_path' => $webPath,
         'uploader_name' => $name,

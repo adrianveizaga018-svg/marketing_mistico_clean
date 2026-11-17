@@ -550,3 +550,9 @@ CREATE TABLE subscriptions (
 - Guía de despliegue: `DEPLOY_INVITIX.md`.
 - **Solo el admin crea/duplica eventos** (cada evento = paquete pagado); el cliente edita los suyos. Panel del cliente sin botón "Crear", con enlace a WhatsApp.
 - **Moderación del muro**: los mensajes nuevos quedan pendientes; el anfitrión aprueba / borra / "Aprobar todos" desde el gestor de invitados (`WallModeration.jsx` + `api/admin/muro.php`). Pruebas API: 63/63 OK.
+
+### 2026-11-17 — Sesión 7: Clientes en el panel + aprobación de fotos
+- **Pantalla "Clientes"** (solo admin, `ClientManager.jsx`): crear cuenta con contraseña generada, nueva contraseña, activar/desactivar, conteo de eventos. Al crear o resetear muestra el mensaje de acceso listo para copiar o enviar por WhatsApp (la contraseña no se vuelve a mostrar).
+- **Editor de evento**: selector "Cliente dueño del evento" (solo admin). El servidor valida que el cliente exista.
+- **Fotos de invitados con aprobación**: se suben como pendientes; el anfitrión aprueba / borra / "Aprobar todas" en el gestor de invitados (`PhotoModeration.jsx` + `api/admin/fotos.php`). Al borrar se elimina también el archivo.
+- Pruebas API: 73/73 OK. Build `CI=true` limpio.

@@ -7,6 +7,7 @@ import GuestManager from '../components/GuestManager';
 import InvitationEditor from '../components/InvitationEditor';
 import QRCodeModal from '../components/QRCodeModal';
 import { waLink } from '../data/contacto';
+import ClientManager from '../components/ClientManager';
 
 const InvitixDashboard = () => {
   const [auth, setAuth] = useState({ loading: true, user: null });
@@ -20,6 +21,7 @@ const InvitixDashboard = () => {
   const [selectedInvForGuests, setSelectedInvForGuests] = useState(null);
   const [selectedInvForEdit, setSelectedInvForEdit] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [showClients, setShowClients] = useState(false);
 
   // QR Modal
   const [qrModalData, setQrModalData] = useState(null);
@@ -178,12 +180,29 @@ const InvitixDashboard = () => {
     );
   }
 
+  // Vista de cuentas de clientes (solo admin)
+  if (showClients && auth.user?.role === 'admin') {
+    return (
+      <div className="min-h-screen bg-[#070709] text-white p-4 sm:p-8">
+        <div className="max-w-6xl mx-auto">
+          <ClientManager
+            onBack={() => {
+              setShowClients(false);
+              fetchInvitations();
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
   // Vista de Editor de Invitación
   if (isCreating || selectedInvForEdit) {
     return (
       <div className="min-h-screen bg-[#070709] text-white p-4 sm:p-8">
         <div className="max-w-6xl mx-auto">
           <InvitationEditor
+            isAdmin={auth.user?.role === 'admin'}
             invitation={selectedInvForEdit}
             onBack={() => {
               setIsCreating(false);
@@ -227,6 +246,14 @@ const InvitixDashboard = () => {
               <RefreshCw size={16} className={loadingInvs ? 'animate-spin' : ''} />
             </button>
             {/* Cada evento es un paquete pagado: solo el administrador crea eventos nuevos. */}
+            {auth.user.role === 'admin' && (
+              <button
+                onClick={() => setShowClients(true)}
+                className="flex items-center gap-2 py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all"
+              >
+                <Users size={16} /> Clientes
+              </button>
+            )}
             {auth.user.role === 'admin' && (
               <button
                 onClick={() => setIsCreating(true)}

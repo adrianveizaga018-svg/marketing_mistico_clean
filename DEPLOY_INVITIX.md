@@ -127,5 +127,5 @@ Cualquier ruta que no sea un archivo real va a `index.html`. Lo que empieza con 
 ## 7. Pruebas locales (opcional, para desarrolladores)
 
 ```bash
-bash server/tests/api_test.sh     # levanta PHP + SQLite temporal y corre 63 pruebas de la API
+bash server/tests/api_test.sh     # levanta PHP + SQLite temporal y corre 73 pruebas de la API
 ```

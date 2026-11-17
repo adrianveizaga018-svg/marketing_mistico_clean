@@ -68,6 +68,7 @@ const PublicInvitation = () => {
   const [wallText, setWallText] = useState('');
   const [postingWall, setPostingWall] = useState(false);
   const [wallNotice, setWallNotice] = useState('');
+  const [photoNotice, setPhotoNotice] = useState('');
 
   useEffect(() => {
     fetchInvitation();
@@ -125,7 +126,8 @@ const PublicInvitation = () => {
       });
       const json = await res.json();
       if (res.ok && json.status === 'ok') {
-        setPhotos((prev) => [json, ...prev]);
+        // Las fotos pasan por la aprobación del anfitrión antes de verse en la galería y el proyector.
+        setPhotoNotice('¡Foto recibida! 📸 Aparecerá en la galería cuando los anfitriones la aprueben.');
         confetti({ particleCount: 60, spread: 60 });
       } else {
         alert(json.message || 'No se pudo subir la foto, intenta de nuevo');
@@ -580,6 +582,12 @@ const PublicInvitation = () => {
               />
             </label>
           </div>
+
+          {photoNotice && (
+            <p role="status" className="text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-4 py-3">
+              {photoNotice}
+            </p>
+          )}
 
           {photos.length === 0 ? (
             <div className="border border-dashed border-white/10 rounded-2xl p-8 text-center">
